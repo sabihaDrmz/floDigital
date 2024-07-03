@@ -1,0 +1,582 @@
+import {
+  AppButton,
+  AppColor,
+  AppText,
+  ColorType,
+  FontSizes,
+} from "@flomagazacilik/flo-digital-components";
+import { Observer } from "mobx-react-lite";
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Platform,
+  FlatList,
+} from "react-native";
+import { FloHeader } from "../../../../components/Header";
+import EasyReturnService from "../../../../core/services/EasyReturnService";
+import { AppCardColorizeSvg } from "./BrokenComplete";
+import * as exPrint from "expo-print";
+
+const LineText: React.FC<{
+  txt1?: string;
+  txt2?: string;
+  txt2CustomColor?: string;
+}> = (props) => (
+  <View
+    style={{
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginTop: 10,
+    }}
+  >
+    <AppText
+      selectable
+      style={{ fontFamily: "Poppins_600SemiBold" }}
+      size={FontSizes.M}
+    >
+      {props.txt1}
+    </AppText>
+    <AppText
+      selectable
+      style={[
+        { fontFamily: "Poppins_500Medium", fontSize: 12 },
+        props.txt2CustomColor ? { color: props.txt2CustomColor } : null,
+      ]}
+      size={FontSizes.M}
+    >
+      {props.txt2 &&
+        props.txt2 !== undefined &&
+        props.txt2 !== "" &&
+        props.txt2.substring(0, 1).toUpperCase() + props.txt2.substring(1)}
+    </AppText>
+  </View>
+);
+
+const GetStateColor = (state?: string) => {
+  let iState = Number(state);
+
+  switch (iState) {
+    case 1:
+    case 8:
+      return AppColor.FD.Functional.Error;
+    case 4:
+    case 2:
+    case 9:
+      return AppColor.OMS.Background.Success;
+    case 3:
+    case 5:
+    case 6:
+    case 7:
+    default:
+      return AppColor.FD.Brand.Solid;
+  }
+};
+const BrokenProductResult: React.FC = (props) => {
+  return (
+    <View style={styles.container}>
+      <FloHeader
+        headerType="standart"
+        headerTitle="İDES Durumu"
+        enableButtons={["back"]}
+      />
+      <Observer>
+        {() => {
+          let erl =
+            EasyReturnService.brokenProductFindResult?.easyReturnTransaction
+              .easyReturnTrasactionLine;
+
+          if (erl === undefined) return <BrSapResult />;
+          return (
+            <ScrollView
+              bounces={false}
+              style={{ paddingHorizontal: 20, paddingTop: 10 }}
+            >
+              <View
+                style={{
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+
+                  elevation: 5,
+                  borderRadius: 10,
+                  backgroundColor: "#fff",
+                  minHeight: 100,
+                  marginTop: 20,
+                }}
+              >
+                <View style={{ position: "absolute" }}>
+                  <AppCardColorizeSvg
+                    color={AppColor.OMS.Background.OpacityOrange}
+                  />
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    paddingVertical: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <View>
+                    <Image
+                      source={{
+                        uri: EasyReturnService.brokenProductFindResult?.images,
+                      }}
+                      style={{ width: 80, height: 80, resizeMode: "cover" }}
+                    />
+                  </View>
+                  <View>
+                    <AppText
+                      selectable
+                      style={{ fontFamily: "Poppins_600SemiBold" }}
+                    >
+                      {erl[0].productName}
+                    </AppText>
+                    <AppText
+                      selectable
+                      style={{ fontFamily: "Poppins_400Regular" }}
+                    >
+                      Beden : {erl[0].size} | Adet : {erl[0].quantity}
+                    </AppText>
+                    <AppText
+                      selectable
+                      style={{ fontFamily: "Poppins_400Regular" }}
+                    >
+                      {erl[0].barcode} / {erl[0].sku}
+                    </AppText>
+                    <AppText
+                      selectable
+                      style={{ fontFamily: "Poppins_600SemiBold" }}
+                      labelColorType={ColorType.Brand}
+                    >
+                      Satış Fiyatı : {erl[0].productPrice}
+                    </AppText>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  margin: 5,
+                  marginTop: 20,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    EasyReturnService.SendBrokenProductCompletedSms();
+                  }}
+                >
+                  <View
+                    style={{
+                      width: 135,
+                      backgroundColor: "#FF8600",
+                      borderRadius: 10,
+                      padding: 15,
+                      marginHorizontal: 5,
+                      minHeight: 80,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AppText
+                      labelColorType={ColorType.Light}
+                      style={{
+                        fontFamily: "Poppins_600SemiBold",
+                        fontSize: 11,
+                      }}
+                    >
+                      Tekrar ÜİB No SMS'i Gönder
+                    </AppText>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    EasyReturnService.GetBrokenProductDocumentWithTransactionId().then(
+                      async (res) => {
+                        if (res) {
+                          await exPrint.printAsync({
+                            html: EasyReturnService.brokenProductTemplate,
+                          });
+                        }
+                      }
+                    );
+                  }}
+                >
+                  <View
+                    style={{
+                      width: 135,
+                      backgroundColor: "#FF8600",
+                      borderRadius: 10,
+                      padding: 15,
+                      marginHorizontal: 5,
+                      minHeight: 80,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AppText
+                      labelColorType={ColorType.Light}
+                      style={{
+                        fontFamily: "Poppins_600SemiBold",
+                        fontSize: 11,
+                      }}
+                    >
+                      Belgeyi Yazdır
+                    </AppText>
+                  </View>
+                </TouchableOpacity>
+                {/* <TouchableOpacity>
+                  <View
+                    style={{
+                      width: 90,
+                      backgroundColor: "#FF8600",
+                      borderRadius: 10,
+                      padding: 15,
+                      marginHorizontal: 5,
+                      minHeight: 80,
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AppText style={{ color: Colors.white, fontSize: 11 }}>
+                      Belge İptali Talep Et
+                    </AppText>
+                  </View>
+                </TouchableOpacity> */}
+              </View>
+
+              <Evaluation
+                {...{
+                  customerName:
+                    EasyReturnService.brokenProductFindResult
+                      ?.easyReturnTransaction.customerName,
+                  customerPhone:
+                    EasyReturnService.brokenProductFindResult
+                      ?.easyReturnTransaction.customerGsm,
+                  ficheNumber:
+                    EasyReturnService.brokenProductFindResult
+                      ?.easyReturnTransaction.ficheNumber,
+                  uibNo:
+                    EasyReturnService.brokenProductFindResult?.sapResult
+                      .mgZ_UIB_NO,
+                  reviewReason:
+                    EasyReturnService.brokenProductFindResult?.sapResult
+                      .hatA_DETAYI,
+                  evaluation:
+                    EasyReturnService.brokenProductFindResult?.sapResult
+                      .karaR_TEXT,
+                  evaluationType:
+                    EasyReturnService.brokenProductFindResult?.sapResult.karar,
+                  station:
+                    EasyReturnService.brokenProductFindResult?.sapResult
+                      .istasyoN_TEXT,
+                  reason:
+                    EasyReturnService.brokenProductFindResult?.sapResult
+                      .iadE_SEBEBI,
+                }}
+              />
+              {/* //TODO: Bu kısım kolay iade ile birlikte açılacaktır. */}
+              {/* {EasyReturnService.brokenProductFindResult?.sapResult.karar ===
+                '4' && (
+                <AppButton
+                  title="Devam Et"
+                  style={{marginTop: 40}}
+                  buttonColorType={ColorType.Brand}
+                  onPress={() => Actions['erBrokenPaymetTypes']()}
+                />
+              )} */}
+            </ScrollView>
+          );
+        }}
+      </Observer>
+    </View>
+  );
+};
+
+const BrSapResult: React.FC = (props) => {
+  return (
+    <FlatList
+      style={{ padding: 20 }}
+      data={EasyReturnService.brokenProductSapFiches}
+      keyExtractor={(item) => item.mgZ_UIB_NO}
+      renderItem={({ item, index }) => {
+        return (
+          <React.Fragment>
+            <View
+              style={{
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+
+                elevation: 5,
+                borderRadius: 10,
+                backgroundColor: "#fff",
+                minHeight: 100,
+                marginTop: 20,
+              }}
+            >
+              <View style={{ position: "absolute" }}>
+                <AppCardColorizeSvg
+                  color={AppColor.OMS.Background.OpacityOrange}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingVertical: 20,
+                  paddingHorizontal: 20,
+                }}
+              >
+                <View>
+                  <Image
+                    source={{
+                      uri:
+                        "https://www.flo.com.tr/V1/product/image?sku=" +
+                        item.uruN_KODU
+                          .replace(/^0+/, "")
+                          .substring(
+                            0,
+                            item.uruN_KODU.replace(/^0+/, "").length - 3
+                          ),
+                    }}
+                    style={{ width: 80, height: 80, resizeMode: "cover" }}
+                  />
+                </View>
+                <View>
+                  <AppText
+                    selectable
+                    style={{ fontFamily: "Poppins_600SemiBold" }}
+                  >
+                    {item.uruN_ADI}
+                  </AppText>
+                  {/* <AppText
+                      selectable
+                      style={{ fontFamily: "Poppins_400Regular" }}
+                    >
+                      Beden : {erl[0].size} | Adet : {erl[0].quantity}
+                    </AppText> */}
+                  <AppText
+                    selectable
+                    style={{ fontFamily: "Poppins_400Regular" }}
+                  >
+                    {item.uruN_KODU}
+                  </AppText>
+                  {/* <AppText
+                      selectable
+                      style={{ fontFamily: "Poppins_600SemiBold" }}
+                      labelColorType={ColorType.Brand}
+                    >
+                      Satış Fiyatı : {erl[0].productPrice}
+                    </AppText> */}
+                </View>
+              </View>
+            </View>
+            {/* <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+                margin: 5,
+                marginTop: 20,
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  EasyReturnService.SendBrokenProductCompletedSms();
+                }}
+              >
+                <View
+                  style={{
+                    width: 135,
+                    backgroundColor: "#FF8600",
+                    borderRadius: 10,
+                    padding: 15,
+                    marginHorizontal: 5,
+                    minHeight: 80,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <AppText
+                    labelColorType={ColorType.Light}
+                    style={{
+                      fontFamily: "Poppins_600SemiBold",
+                      fontSize: 11,
+                    }}
+                  >
+                    Tekrar ÜİB No SMS'i Gönder
+                  </AppText>
+                </View>
+              </TouchableOpacity>
+            </View> */}
+            <Evaluation
+              {...{
+                customerName: item.mgZ_MUSTERI_ADI,
+                customerPhone: item.mgZ_MUSTERI_TEL,
+                uibNo: item.mgZ_UIB_NO,
+                evaluation: item.karaR_TEXT,
+                evaluationType: item.karar,
+                station: item.istasyoN_TEXT,
+                reason: item.istasyoN_TEXT,
+              }}
+            />
+          </React.Fragment>
+        );
+      }}
+    />
+  );
+};
+
+const Evaluation: React.FC<{
+  customerName?: string;
+  customerPhone?: string;
+  uibNo?: string;
+  evaluation?: string;
+  evaluationType?: string;
+  station?: string;
+  reason?: string;
+  ficheNumber?: string;
+  reviewReason?: string;
+}> = (props) => {
+  const {
+    customerName,
+    customerPhone,
+    ficheNumber,
+    uibNo,
+    evaluation,
+    evaluationType,
+    station,
+    reason,
+    reviewReason,
+  } = props;
+  return (
+    <View style={{ marginBottom: 20 }}>
+      <View style={styles.header}>
+        <AppText
+          labelColorType={ColorType.Light}
+          style={{ fontWeight: "bold" }}
+        >
+          Değerlendirme
+        </AppText>
+      </View>
+      <View style={styles.detail}>
+        {customerName && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>Müşteri Adı</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{customerName}</AppText>
+          </View>
+        )}
+        {customerPhone && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>Müşteri Tel</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{customerPhone}</AppText>
+          </View>
+        )}
+        {ficheNumber && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>Fiş No</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{ficheNumber}</AppText>
+          </View>
+        )}
+        {uibNo && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>ÜİB No</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{uibNo}</AppText>
+          </View>
+        )}
+        {reviewReason && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>İnceleme Nedeni</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{reviewReason}</AppText>
+          </View>
+        )}
+        {reason && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>İade Sebebi</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{reason}</AppText>
+          </View>
+        )}
+        {evaluation && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>Karar</AppText>
+            <AppText>:</AppText>
+            <AppText
+              style={[
+                styles.textDetail,
+                {
+                  color: GetStateColor(evaluationType),
+                  fontWeight: "600",
+                  fontFamily: "Poppins_600SemiBold",
+                },
+              ]}
+            >
+              {evaluation}
+            </AppText>
+          </View>
+        )}
+        {station && (
+          <View style={styles.textLine}>
+            <AppText style={styles.typeText}>İstasyon</AppText>
+            <AppText>:</AppText>
+            <AppText style={styles.textDetail}>{station}</AppText>
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
+export default BrokenProductResult;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    height: 35,
+    backgroundColor: AppColor.FD.Brand.Solid,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    marginTop: 10,
+  },
+  detail: {
+    padding: 10,
+    backgroundColor: "#fff",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  textLine: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  typeText: {
+    width: 120,
+    fontFamily: "Poppins_500Medium",
+    fontSize: 12,
+  },
+  textDetail: {
+    marginLeft: 7,
+    fontSize: 11,
+  },
+});

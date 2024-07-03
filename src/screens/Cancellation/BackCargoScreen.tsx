@@ -1,0 +1,490 @@
+import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import { BlurView } from "expo-blur";
+import {
+  AppButton,
+  AppCard,
+  AppCheckBox,
+  AppColor,
+  ColorType,
+  FontSizes,
+} from "@flomagazacilik/flo-digital-components";
+import { AppText } from "@flomagazacilik/flo-digital-components";
+import { Observer } from "mobx-react-lite";
+import moment from "moment";
+import React, { useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+} from "react-native";
+import { Actions } from "react-native-router-flux";
+import { SearchQR } from "../../components/CustomIcons/MainPageIcons";
+import { FloHeader } from "../../components/Header";
+import EasyReturnService, {
+  ErRejectModel,
+} from "../../core/services/EasyReturnService";
+import MessageBox, {
+  MessageBoxDetailType,
+  MessageBoxType,
+} from "../../core/services/MessageBox";
+import MessageBoxNew from "../../core/services/MessageBoxNew";
+import { translate } from "../../helper/localization/locaizationMain";
+
+const BackCargoScreen: React.FC = (props) => {
+  const FicheNumberInfo = () => {
+    return (
+      <Observer>
+        {() => (
+          <View style={{ marginTop: 30, paddingHorizontal: 20 }}>
+            <View style={{ flexDirection: "row" }}>
+              <AppText style={{ fontFamily: "Poppins_500Medium", width: 80 }}>
+                {translate("cancellationScreen.orderNo")}
+              </AppText>
+              <AppText style={{ fontFamily: "Poppins_500Medium" }}> : </AppText>
+              <AppText selectable style={{ fontFamily: "Poppins_700Bold" }}>
+                {EasyReturnService.omsRejectCargoRes?.order.orderId}
+              </AppText>
+            </View>
+            <View style={{ flexDirection: "row", marginTop: 15 }}>
+              <AppText style={{ fontFamily: "Poppins_500Medium", width: 80 }}>
+              {translate("cancellationScreen.billNo")}
+              </AppText>
+              <AppText style={{ fontFamily: "Poppins_500Medium" }}> : </AppText>
+              <AppText selectable style={{ fontFamily: "Poppins_700Bold" }}>
+                {EasyReturnService.omsRejectCargoRes?.order.ficheNumber}
+              </AppText>
+            </View>
+          </View>
+        )}
+      </Observer>
+    );
+  };
+
+  const CustomerInfo = () => {
+    return (
+      <Observer>
+        {() => (
+          <View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingHorizontal: 20,
+                marginTop: 40,
+              }}
+            >
+              <View>
+                <View style={{ flexDirection: "row" }}>
+                  <AppText
+                    style={{ fontFamily: "Poppins_600SemiBold", width: 100 }}
+                  >
+                    {translate("cancellationScreen.customerName")}:
+                  </AppText>
+                  <AppText selectable>
+                    {" "}
+                    {EasyReturnService.omsRejectCargoRes?.order.aliciAdi}{" "}
+                    {EasyReturnService.omsRejectCargoRes?.order.aliciSoyadi}
+                  </AppText>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <AppText
+                    style={{ fontFamily: "Poppins_600SemiBold", width: 100 }}
+                  >
+                    {translate("cancellationScreen.customerPhone")}{"  "}:
+                  </AppText>
+                  <AppText selectable>
+                    {" "}
+                    {EasyReturnService.omsRejectCargoRes?.order.telefon}
+                  </AppText>
+                </View>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: -20,
+                }}
+              >
+                <Image
+                  source={require("../../../assets/storeico.png")}
+                  style={{ width: 40, height: 40 }}
+                />
+                <AppText selectable>
+                  {EasyReturnService.omsRejectCargoRes?.order.storeId}
+                </AppText>
+              </View>
+            </View>
+            <View>
+              <View
+                style={{ flexDirection: "row", marginLeft: 20, marginTop: 20 }}
+              >
+                <AppText
+                  style={{ fontFamily: "Poppins_600SemiBold", width: 100 }}
+                >
+                  {translate("cancellationScreen.date")} :
+                </AppText>
+                <AppText selectable>
+                  {" "}
+                  {moment(
+                    EasyReturnService.omsRejectCargoRes?.order.createdDate
+                  ).format("DD/MM/yyyy")}
+                </AppText>
+              </View>
+            </View>
+          </View>
+        )}
+      </Observer>
+    );
+  };
+
+  const QrSearchBar: React.FC<any> = (props) => {
+    const [query, setQuery] = useState("");
+    const openCamera = () => {
+      const currentState = Actions.currentScene;
+      Actions["easyReturnCamera"]({
+        onReadComplete: (barcode: string) => {
+          Actions.popTo(currentState);
+          props.onSearch(barcode);
+        },
+        headerTitle: translate("OmsBarcodeSearchBar.barcodeScanning"),
+      });
+    };
+
+    return (
+      <View style={{ marginTop: 30, paddingHorizontal: 40 }}>
+        <View>
+          <View style={styles.txtContainer}>
+            {/* @ts-ignore */}
+            <View>
+              <TextInput
+                maxLength={30}
+                placeholder={"Barkod yazın veya taratın"}
+                onChangeText={setQuery}
+                value={query}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              position: "absolute",
+              top: -35,
+              right: -15,
+            }}
+          >
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                if (query) props.onSearch(query);
+                else openCamera();
+
+                setQuery("");
+              }}
+              style={[
+                styles.shadow,
+                {
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+
+                  elevation: 5,
+                },
+              ]}
+            >
+              <SearchQR />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const [selectedProducts, setSelectedProducts] = useState<ErRejectModel[]>([]);
+  const PushBarcode = (barcode: string) => {
+    //8682791042425
+
+    let totalQuantity = EasyReturnService.omsRejectCargoRes?.basketItems.filter(
+      (x) => x.barcode === barcode && x.isEasyReturn
+    ).length;
+
+    let currentQty = selectedProducts
+      .filter((x) => x.barcode === barcode)
+      .reduce((x, y) => x + y.qty, 0);
+    if (
+      totalQuantity !== undefined &&
+      currentQty < totalQuantity &&
+      EasyReturnService.omsRejectCargoRes?.basketItems.findIndex(
+        (x) => x.barcode === barcode
+      ) !== -1
+    ) {
+      if (
+        selectedProducts.findIndex((x) => x.barcode === barcode) === -1 &&
+        EasyReturnService.omsRejectCargoRes?.basketItems.findIndex(
+          (x) => x.barcode === barcode && x.isEasyReturn
+        ) === -1
+      ) {
+        MessageBoxNew.show("Ürünün mevcut durumu iadeye uygun\ndeğildir.", {
+          type: MessageBoxType.OrderNotFound,
+          customParameters: {
+            description: "*Kargo durumunun güncellenmesini\niçin bekleyiniz",
+            type: "3",
+            orderNumber: barcode,
+          },
+        });
+        return;
+      }
+
+      if (
+        selectedProducts.findIndex((x) => x.barcode === barcode) === -1 &&
+        EasyReturnService.omsRejectCargoRes?.basketItems.findIndex(
+          (x) =>
+            x.barcode === barcode && x.isEasyReturn && x.virmanStatusId === 3
+        ) === -1
+      ) {
+        MessageBoxNew.show(
+          "İadeye devam edebilmek için virman\nkaydının tamamlanması gerekmektedir.",
+          {
+            type: MessageBoxType.OrderNotFound,
+            customParameters: {
+              description:
+                "Size yardımcı olabilmemiz için\nbu uyarının ekran görüntüsünü alarak\nFİT üzerinden Ticket Oluşturunuz",
+              type: "2",
+              orderNumber: barcode,
+            },
+          }
+        );
+        return;
+      }
+
+      let temp = selectedProducts;
+
+      if (totalQuantity !== undefined && totalQuantity > 1) {
+        // virmanStatusId
+        MessageBoxNew.show(
+          "Bu Siparişte,\nAynı barkodtan " +
+          totalQuantity +
+          " adet ürün listelendi",
+          {
+            type: MessageBoxType.OrderNotFound,
+            customParameters: {
+              description: "İade alınacak ürün adedi seçiniz",
+              type: "4",
+              orderNumber: barcode,
+              maxQuantity: totalQuantity,
+            },
+            yesButtonEvent: (params) => {
+              temp.push({ barcode, qty: params.qty });
+              EasyReturnService.RemoveRejectCargo(temp);
+              setSelectedProducts(temp);
+            },
+          }
+        );
+        return;
+      } else {
+        temp.push({ barcode, qty: 1 });
+        EasyReturnService.RemoveRejectCargo(temp);
+        setSelectedProducts(temp);
+      }
+      // setSelectedProducts(temp);
+    } else {
+      MessageBoxNew.show("Ürün bulunamadı.", {
+        type: MessageBoxType.OrderNotFound,
+        customParameters: {
+          type: "1",
+          description:
+            "Lütfen barkod numaranızı kontrol edip,\ntekrar deneyiniz.",
+          orderNumber: barcode,
+        },
+      });
+    }
+  };
+
+  const [onReasonSelectedProduct, setReasonSelectedProduct] = useState("");
+  const [showReasonSelector, setShowReasonSelector] = useState(false);
+  const [selectedReasons, setSelectedReasons] = useState<
+    { barcode: string; reason: any }[]
+  >([]);
+  const RejectBarcode = (barcode: string) => {
+    EasyReturnService.RemoveRejectCargo(
+      selectedProducts.filter((y) => y.barcode != barcode)
+    );
+    setSelectedProducts(selectedProducts.filter((y) => y.barcode != barcode));
+
+    // setSelectedProducts([]);
+  };
+
+  const reasonSelect = (barcode: string) => {
+    let index = selectedReasons.findIndex((x) => x.barcode === barcode);
+
+    if (index === -1) {
+      // Yeni kayıt ekle
+    } else {
+      // Mevcut kaydı güncelle
+    }
+
+    setShowReasonSelector(false);
+  };
+
+  return (
+    <Observer>
+      {() => {
+        return (
+          <View style={styles.container}>
+            <FloHeader
+              enableButtons={["back"]}
+              headerType={"standart"}
+              headerTitle={"Oms Ret Kargo"}
+            />
+            <KeyboardAwareScrollView>
+              <FicheNumberInfo />
+              <CustomerInfo />
+              <QrSearchBar
+                onSearch={(barcode: string) => PushBarcode(barcode)}
+              />
+              <View style={{ marginTop: 30 }}>
+                <>
+                  {EasyReturnService.omsRejectCargoRes?.basketItems
+                    .filter((x) => {
+                      var res =
+                        EasyReturnService.selectedRejectCargos.findIndex(
+                          (y) => y.barcode === x.barcode
+                        );
+                      var r = selectedReasons.findIndex(
+                        (y) => y.barcode === x.barcode
+                      );
+                      return res !== -1;
+                    })
+                    .filter(
+                      (value, index, self) =>
+                        self.findIndex((x) => x.barcode === value.barcode) ===
+                        index
+                    )
+                    .map((x) => {
+                      return (
+                        <AppCard color={AppColor.OMS.Background.OpacityOrange}>
+                          <TouchableOpacity
+                            onPress={() => RejectBarcode(x.barcode)}
+                            style={{ flexDirection: "row", marginVertical: 15 }}
+                          >
+                            <View style={{ width: 50, height: 50 }}>
+                              <Image
+                                source={{
+                                  uri:
+                                    "https://floimages.mncdn.com/" +
+                                    x.productImage,
+                                }}
+                                style={{ width: 60, height: 60, marginTop: 20 }}
+                                resizeMode={"cover"}
+                              />
+                            </View>
+                            <View style={{ marginLeft: 15 }}>
+                              <AppText
+                                selectable
+                                labelColorType={ColorType.Dark}
+                                numberOfLines={1}
+                                style={{ fontWeight: "400", width: "100%" }}
+                              >
+                                {x.title}
+                              </AppText>
+                              <AppText selectable size={FontSizes.S}>
+                                Beden: {x.size}| Adet:{" "}
+                                {
+                                  EasyReturnService.selectedRejectCargos.find(
+                                    (y) => y.barcode === x.barcode
+                                  )?.qty
+                                }
+                              </AppText>
+                              <AppText selectable size={FontSizes.S}>
+                                {x.barcode} / {x.sku}
+                              </AppText>
+                              <AppText
+                                selectable
+                                labelColorType={ColorType.Brand}
+                                style={{ fontWeight: "500" }}
+                              >
+                                Satış Fiyatı : {Number(x.price)}
+                              </AppText>
+                            </View>
+                          </TouchableOpacity>
+                          <View
+                            style={{
+                              width: 25,
+                              position: "absolute",
+                              height: 25,
+                              left: 0,
+                              top: 0,
+                            }}
+                          >
+                            <AppCheckBox
+                              onSelect={(state) => {
+                                RejectBarcode(x.barcode);
+                              }}
+                              checked
+                            />
+                          </View>
+                        </AppCard>
+                      );
+                    })}
+                </>
+              </View>
+              <View style={{ marginHorizontal: 20 }}>
+                <AppButton
+                  buttonColorType={
+                    EasyReturnService.selectedRejectCargos.length > 0
+                      ? ColorType.Success
+                      : ColorType.Gray
+                  }
+                  loading={EasyReturnService.loadingCompleteReject}
+                  disabled={EasyReturnService.selectedRejectCargos.length === 0}
+                  onPress={EasyReturnService.CompleteRejectCargo}
+                  title={translate("easyReturnBrokenProductCompletePopup.completeTransaction")}
+                />
+              </View>
+              <View style={{ height: 4 }} />
+            </KeyboardAwareScrollView>
+          </View>
+        );
+      }}
+    </Observer>
+  );
+};
+export default BackCargoScreen;
+
+const { width, height } = Dimensions.get("window");
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  txtContainer: {
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    borderColor: "#b7b5b5",
+    borderWidth: 1,
+    marginLeft: 20,
+    marginRight: 20,
+    height: 45,
+    borderRadius: 30,
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+    zIndex: 5,
+  },
+});
