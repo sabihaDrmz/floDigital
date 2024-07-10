@@ -19,7 +19,7 @@ import CrmService from "../../core/services/CrmService";
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
 import { FloButton } from "../../components";
 import { Observer } from "mobx-react-lite";
-//TODO:EXPO expo-image-picker
+//TODO: EXPO expo-image-picker
 // import * as exImp from "expo-image-picker";
 import MessageBox, {
   MessageBoxDetailType,

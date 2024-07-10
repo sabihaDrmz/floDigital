@@ -10,7 +10,7 @@ import {
   NativeModules,
   Platform,
 } from "react-native";
-//TODO:EXPO pathFinder
+//TODO: EXPO pathFinder
 //import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import {

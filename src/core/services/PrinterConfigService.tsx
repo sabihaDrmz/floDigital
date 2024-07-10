@@ -19,7 +19,7 @@ import ProductService from "./ProductService";
 //@ts-ignore
 import base64 from "react-native-base64";
 
-//TODO:EXPO pathfinder
+//TODO: EXPO pathfinder
 // import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
 import moment from "moment";
 class PrinterConfigService {
