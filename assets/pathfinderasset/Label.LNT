@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<Job>
+  <Energy>Normal</Energy>
+  <Quantity>Normal</Quantity>
+  <LabelSize units="Inches" length="1.7" width="2" />
+  <Command>Print</Command>
+  <Image id="Sample" version="2">
+    <ImageSize units="Inches" height="1.57480315" width="1.8" x="0" y="0" origin="TopLeft" />
+    <Presentation>0</Presentation>
+    <Fields count="22">
+      <TextField id="label20">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="6" codepage="110" weight="600" wordwrap="1">Arial</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="1.1703422" height="0.2608365" width="1.6259818" />
+        <Data>121357, г.Москва, Вн.Тер.Г. Муниципальный Округ Можайский, ул. Верейская, д.29 стр.33, этаж 4 комнаты №4</Data>
+      </TextField>
+      <TextField id="label19">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial Bold</Font>
+        <BoundingBox units="Inches" x="0.5601208" y="0.9444867" height="0.095817484" width="0.20664652" />
+        <Data>Pуб.</Data>
+      </TextField>
+      <TextField id="label18">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="11" codepage="110" weight="600" wordwrap="0">Arial Bold</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.88288975" height="0.15437262" width="0.46223566" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label17">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="8" codepage="110" weight="600" wordwrap="0">Arial Bold</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.7665399" height="0.07984791" width="0.19033231" />
+        <Data>цена</Data>
+      </TextField>
+      <TextField id="label16">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial Bold</Font>
+        <BoundingBox units="Inches" x="1.2453171" y="0.7665399" height="0.07984791" width="0.44592142" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label15">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="8" codepage="110" weight="600" wordwrap="0">Arial Bold</Font>
+        <BoundingBox units="Inches" x="0.87009066" y="0.7665399" height="0.07984791" width="0.21752267" />
+        <Data>дата :</Data>
+      </TextField>
+      <TextField id="label14">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.87009066" y="0.6638783" height="0.07984791" width="0.39697883" />
+        <Data>размер:</Data>
+      </TextField>
+      <TextField id="label13">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.576435" y="0.574905" height="0.07984791" width="0.19033231" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label12">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.574905" height="0.07984791" width="0.39697883" />
+        <Data>Сделано в :</Data>
+      </TextField>
+      <TextField id="label11">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.576435" y="0.47224334" height="0.07984791" width="0.19033231" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label10">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.47224334" height="0.07984791" width="0.34803626" />
+        <Data>доп инфо:</Data>
+      </TextField>
+      <TextField id="label9">
+          <Volatile>1</Volatile>
+          <Font pointsizeheight="10" codepage="110" >Arial</Font>
+          <BoundingBox units="Inches" x="1.3465256" y="0.332" height="0.5352267" width="0.29399999" />
+          <BackgroundColor>Black</BackgroundColor>
+          <ForegroundColor>White</ForegroundColor>
+          <VerticalJustification>Center</VerticalJustification>
+          <DrawMode>XOR</DrawMode>
+          <Data min="0" max="30" />
+          <HorizontalJustification>Center</HorizontalJustification>
+      </TextField>
+      <TextField id="label7">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.556435" y="0.36958173" height="0.07984791" width="0.14033231" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label8">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.36958173" height="0.07984791" width="0.32628396" />
+        <Data>подошва:</Data>
+      </TextField>
+      <TextField id="label6">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.556435" y="0.26692015" height="0.07984791" width="0.15033231" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label5">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.26692015" height="0.07984791" width="0.3324169" />
+        <Data>подкладка: </Data>
+      </TextField>
+      <TextField id="label4">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.656435" y="0.16425855" height="0.07984791" width="0.2092447" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label3">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.16425855" height="0.07984791" width="0.46223566" />
+        <Data>состав верха: </Data>
+      </TextField>
+      <TextField id="label2">
+        <Volatile>1</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial</Font>
+        <BoundingBox units="Inches" x="0.476435" y="0.061596956" height="0.07452472" width="0.23172205" />
+        <Data min="0" max="30" />
+      </TextField>
+      <TextField id="label1">
+        <Volatile>0</Volatile>
+        <Font pointsizeheight="7" codepage="110" weight="600" wordwrap="0">Arial Bold</Font>
+        <BoundingBox units="Inches" x="0.06525679" y="0.061596956" height="0.07984791" width="0.3208459" />
+        <Data>артикул: </Data>
+      </TextField>
+      <GraphicField id="Image">
+        <Volatile>0</Volatile>
+        <Data>Eac Icon</Data>
+        <HorizontalJustification>Right</HorizontalJustification>
+        <BoundingBox units="Inches" x="1.5084592" y="0.04106464" width="0.30" height="0.40" />
+      </GraphicField>
+      <BarcodeField id="Barcode">
+        <Volatile>1</Volatile>
+        <Orientation>0</Orientation>
+        <Type>ean13</Type>
+        <Options density="12" humanreadable="1" />
+        <Data min="0" max="13" />
+        <BarHeight>0.20760457</BarHeight>
+        <Origin units="Inches" x="1.3109066" y="1.08288975" justification="Center" />
+      </BarcodeField>
+    </Fields>
+  </Image>
+</Job>
