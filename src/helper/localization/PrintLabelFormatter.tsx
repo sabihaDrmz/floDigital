@@ -120,7 +120,7 @@ function formatTags(content: any, data: any): string {
         );
 
         if (replacementData) {
-          let langTag = I18n.locale;
+          let langTag = 'tr';// TODO: EXPO cihaz dili secilecek .
 
           if (langTag === "tr") data = replacementData?.mensei_TR;
           else if (langTag === "en") data = replacementData?.mensei_EN;
