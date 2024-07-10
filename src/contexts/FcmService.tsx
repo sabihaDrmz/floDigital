@@ -1,6 +1,9 @@
 import { AppState, Platform } from "react-native";
-import * as Device from "expo-device";
-import * as exNotification from "expo-notifications";
+//TODO: EXPO Device
+// import * as Device from "expo-device";
+import DeviceInfo from "react-native-device-info";
+// TODO: EXPO exNotification
+// import * as exNotification from "expo-notifications";
 import { toOrganization } from "../core/Util";
 import {
     FloResultCode,
@@ -64,11 +67,12 @@ export const useFcmService = create<FcmServiceModel>((set, get) => ({
     notifications: [],
     getNoficationPermission: async (store: any) => {
         try {
+            /*
             const { isConfigured, registerFloDigitalByDevice, readBadgeCount } = get();
             if (isConfigured || Platform.OS === "web") return;
             let token = "";
 
-            if (Device.isDevice) {
+            if (!DeviceInfo.isEmulator()) {
                 const { status: existingStatus } =
                     await exNotification.getPermissionsAsync();
                 let finalStatus = existingStatus;
@@ -174,6 +178,7 @@ export const useFcmService = create<FcmServiceModel>((set, get) => ({
                     vibrationPattern: [0, 250, 250, 250],
                 });
             }
+            */
         } catch (err) { }
     },
     updateShowingList: async (messageId: string) => {
@@ -263,7 +268,7 @@ export const useFcmService = create<FcmServiceModel>((set, get) => ({
                 subBadgeCount: []
             }));
 
-        if (Platform.OS === "ios") exNotification.setBadgeCountAsync(localBadgeCnt);
+       // if (Platform.OS === "ios") exNotification.setBadgeCountAsync(localBadgeCnt);
     },
     readSingle: async (notificationId: string) => {
         const { readedNotificationIds, readBadgeCount } = get();
@@ -276,4 +281,4 @@ export const useFcmService = create<FcmServiceModel>((set, get) => ({
         SystemApi.get("Notification/NotificationReadById?id=" + notificationId);
         await readBadgeCount();
     },
-})); 
+}));

@@ -29,7 +29,7 @@ import { useAccountService } from "../../contexts/AccountService";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";
 import { useNavigation } from "@react-navigation/native";
-import { MessageBoxType } from "contexts/model/MessageBoxOptions";
+import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
 import { usePrinterConfigService } from "../../contexts/PrinterConfigService";
 
 
@@ -59,7 +59,7 @@ const Home: React.FC<TabMainProps> = (props) => {
     const store = allStore.find(
       (x) => x.werks === getUserStoreId()
     );
-    
+
     return (
         <View style={styles.hardContainer}>
             <FloHeaderNew
@@ -255,7 +255,7 @@ const Home: React.FC<TabMainProps> = (props) => {
                                              //@ts-ignore
                                     ) :  navigation.navigate("Printer", { screen: "PrinterScreen" })
 
-                                    
+
                             }
                             style={{
                                 width: (width - 60) / 2,

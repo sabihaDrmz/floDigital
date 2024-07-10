@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
 import { FloHeader } from "../../components/Header";
 import { colors } from "../../theme/colors";
-import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
+//TODO: EXPO BarCodeScanner
+// import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { translate } from "../../helper/localization/locaizationMain";
 import BarcodeMask from "react-native-barcode-mask";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
@@ -11,7 +12,7 @@ interface IsoKzCameraProps {
   onReadBarcode: (barcode: string) => void;
 }
 
-const allowedBarCodes = [BarCodeScanner.Constants.BarCodeType.datamatrix];
+//const allowedBarCodes = [BarCodeScanner.Constants.BarCodeType.datamatrix];
 class IsoKzCamera extends Component<IsoKzCameraProps> {
   state = {
     scanned: false,
@@ -42,7 +43,9 @@ class IsoKzCamera extends Component<IsoKzCameraProps> {
               width: Dimensions.get("window").width,
             }}
           >
-            {Platform.OS !== "web" && (
+            {
+              /*
+              Platform.OS !== "web" && (
               <BarCodeScanner
                 onBarCodeScanned={this.handleBarCodeScanned}
                 focusable={true}
@@ -51,14 +54,17 @@ class IsoKzCamera extends Component<IsoKzCameraProps> {
               >
                 <BarcodeMask showAnimatedLine={false} />
               </BarCodeScanner>
-            )}
+            )
+               */
+            }
+
           </View>
         </View>
       </React.Fragment>
     );
   }
 
-  handleBarCodeScanned = (barcode: BarCodeEvent) => {
+  handleBarCodeScanned = (barcode: any) => {
     if (!allowedBarCodes.includes(barcode.type)) {
       return;
     }

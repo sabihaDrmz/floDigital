@@ -1,4 +1,4 @@
-import { ParagraphText, ParagraphTextType } from "NewComponents";
+import { ParagraphText, ParagraphTextType } from "../../NewComponents";
 import React, { useEffect, useState } from "react";
 import {
   View,

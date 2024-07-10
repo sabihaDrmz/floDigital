@@ -5,7 +5,7 @@ import {
   ColorType,
   LabelType,
 } from "@flomagazacilik/flo-digital-components";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import * as React from "react";
 import {
   View,

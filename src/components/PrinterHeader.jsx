@@ -1,7 +1,7 @@
-import { PerfectFontSize } from 'helper/PerfectPixel';
+import { PerfectFontSize } from '../helper/PerfectPixel';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors } from 'theme/colors';
+import { colors } from '../theme/colors';
 // const Header1 = ({ isConnected, scaning, disabled, onPress, }) => {
 //     return (React.createElement(View, { style: styles.container },
 //         React.createElement(TouchableOpacity, { activeOpacity: 0.7, style: [styles.buttonView, { opacity: disabled ? 0.7 : 1 }], disabled: disabled, onPress: onPress },
@@ -10,7 +10,7 @@ import { colors } from 'theme/colors';
 // };
 
 const PrinterHeader = ({isConnected, scaning, disabled, onPress}) => {
-    
+
     return (
         <View style={styles.container}>
             <TouchableOpacity activeOpacity={0.7}  style= {[styles.buttonView, { opacity: disabled ? 0.7 : 1 }]}  disabled= {disabled} onPress={onPress}>
@@ -23,7 +23,7 @@ const PrinterHeader = ({isConnected, scaning, disabled, onPress}) => {
             <Text style={{marginLeft:10,marginTop:10}}>
                 {
                     isConnected ? 'Bağlı Cihaz' : 'Mevcut Cihazlar :'
-                } 
+                }
             </Text>
         </View>
     )

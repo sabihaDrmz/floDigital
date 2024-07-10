@@ -6,7 +6,9 @@ import PrinterZpl from "../../utils/PrinterHelperZpl";
 import util from '../../utils/util.js'
 import { usePrinterConfigService } from "./PrinterConfigService";
 import { Buffer } from 'buffer';
-import * as ExpoDevice from "expo-device"
+//TODO: EXPO Device
+//import * as ExpoDevice from "expo-device"
+import DeviceInfo from 'react-native-device-info';
 
 
 
@@ -22,7 +24,7 @@ interface BluetoothModuleServiceModel {
     nofityCharacteristicUUID: any[];
     peripheralId: string | undefined;
     fetchServicesAndCharacteristicsForDevice: (device:any) => Promise<any>;
-    getUUID: (services:any[]) => any; 
+    getUUID: (services:any[]) => any;
     connectDevice: (id: any) => Promise<any>;
     write: (value:any, index:number) => void;
     writeBLECharacteristicValue: (peripheralId: string | undefined, writeWithResponseServiceUUID: any, writeWithResponseCharacteristicUUID: any, data: string) => Promise<any>;
@@ -34,7 +36,7 @@ interface BluetoothModuleServiceModel {
 }
 
 export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((set, get) => ({
-    bleManager: Platform.OS === "web" ? null : ExpoDevice.isDevice ? new BleManager() : null,
+    bleManager: Platform.OS === "web" ? null : !DeviceInfo.isEmulator() ? new BleManager() : null,
     readServiceUUID: [],
     readCharacteristicUUID: [],
     writeWithResponseServiceUUID: [],
@@ -127,7 +129,7 @@ export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((se
             })
                 .then(device => {
                 console.log('charestristic success:', device);
-    
+
                 return fetchServicesAndCharacteristicsForDevice(device);
             })
                 .then(services => {
@@ -161,7 +163,7 @@ export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((se
             console.log('disconnect fail', err);
         });
         }
-        
+
     },
     write: (value:any, index:number) =>  {
         const { bleManager,peripheralId,writeBLECharacteristicValue,writeWithResponseServiceUUID,writeWithResponseCharacteristicUUID } = get();
@@ -179,8 +181,8 @@ export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((se
             // PrinterZpl.data = '~SD20 ^XA^LRN^CI0^XZ ^XA^CWZ,E:TT0003M_.TTF^FS^XZ  ^XA ^MMT ^PW320 ^LL0504 ^LS0 ^FT290,450^CI^AZN,40,40^FD^FS ^FT25,450^A@B,20,20,E:TT0003M_.TTF^FH^FDПРОИЗВДИТЕЛ^FS ^FT50,450^A@B,15,15,E:TT0003M_.TTF^FH^FDФЛО Магазаџилик ве А. Ш ул. Ташоџаги јоло бр. 24^FS ^FT75,450^A@B,15,15,E:TT0003M_.TTF^FH^FDБагџилар Истснбул^FS  ^FT100,450^A@B,20,20,E:TT0003M_.TTF^FH^FDУВОЗНИК^FS ^FT125,450^A@B,15,15,E:TT0003M_.TTF^FH^FDФЛО Магазаџилик С. Македонија ул. Дане Крапчев бр. 13^FS ^FT150,450^A@B,15,15,E:TT0003M_.TTF^FH^FDСкопје^FS  ^FT155,450^GB1,400,2^FS  ^FT175,450^A@B,20,20,E:TT0003M_.TTF^FH^FDPRODHUESI^FS ^FT200,450^A@B,15,15,E:TT0003M_.TTF^FH^FDFLO Magazacilik Shitje me pakicë A.S Tasocagi kad nr:24^FS ^FT225,450^A@B,15,15,E:TT0003M_.TTF^FH^FDBagcilar/ISTANBUL^FS  ^FT250,450^A@B,20,20,E:TT0003M_.TTF^FH^FDIMPORTUES^FS ^FT275,450^A@B,15,15,E:TT0003M_.TTF^FH^FDFLO Magazacilik Maqedonia e Veriut Dane krapcev nr :13^FS ^FT300,450^A@B,15,15,E:TT0003M_.TTF^FH^FDShkup^FS  ^PQ1,0,1,Y^XZ'
             //@ts-ignore
             PrinterZpl.SetEnd()
-          
-    
+
+
             let printData = value;
             var directiveTxt = util.hexStringToBuff(printData);
                 directiveTxt.map((item: string) => {
@@ -189,14 +191,14 @@ export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((se
                     formatValue = Buffer.from(data).toString('base64')
                     writeBLECharacteristicValue(peripheralId, writeWithResponseServiceUUID[index], writeWithResponseCharacteristicUUID[index], formatValue)
                 })
-    
+
         }
     },
     writeBLECharacteristicValue: async (peripheralId: string | undefined, writeWithResponseServiceUUID: any, writeWithResponseCharacteristicUUID: any, data: string) => {
         const { bleManager } = get();
         const id = usePrinterConfigService.getState().selectedPrinter.id
         const deviceUUID = usePrinterConfigService.getState().selectedPrinter.deviceUUID
-    
+
         // console.log("uuid",writeWithResponseServiceUUID,writeWithResponseCharacteristicUUID,peripheralId,id)
          console.log("uuid2",writeWithResponseServiceUUID,writeWithResponseCharacteristicUUID,peripheralId,id,deviceUUID)
          let deviceId:any;
@@ -244,13 +246,14 @@ export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((se
         return(
             bluetoothScanPermission === "granted" &&
             bluetoothConnectPermission === "granted" &&
-            bluetoothFineLocationPermission === "granted" 
+            bluetoothFineLocationPermission === "granted"
         )
     },
     requestPermissions: async () => {
         const { requestAndroid31Permissions } = get();
         if(Platform.OS === "android"){
-            if((ExpoDevice.platformApiLevel ?? -1) < 31){
+            //TODO: EXPO test edilmeli
+            if((DeviceInfo.getApiLevel() ?? -1) < 31){
                 const granted = await PermissionsAndroid.request(
                     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
                 {

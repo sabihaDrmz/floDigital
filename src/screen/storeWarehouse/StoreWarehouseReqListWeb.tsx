@@ -17,7 +17,8 @@ import { StoreWarehouseResModel } from "../../contexts/model/StoreWarehouseModal
 import FloLoading from "../../components/FloLoading";
 import { useAccountService } from "../../contexts/AccountService";
 import { AppButton, ColorType } from "@flomagazacilik/flo-digital-components";
-import { Audio } from 'expo-av';
+//TODO: EXPO AV
+// import { Audio } from 'expo-av';
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -56,10 +57,14 @@ const StoreWarehouseReqListWeb = ({ }: any) => {
     const [allData, setAllData] = useState<StoreWarehouseResModel[] | undefined>()
     const [currentIndex, setCurrentIndex] = useState<number | undefined>();
     const playNotificationSound = async () => {
+      /*
         const { sound } = await Audio.Sound.createAsync(
+
             require('../../../assets/newReqSound.mp3')
         );
         await sound.playAsync();
+
+       */
     };
 
     const checkStatusAndPlaySound = () => {

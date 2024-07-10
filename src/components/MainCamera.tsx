@@ -1,4 +1,5 @@
-import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
+//TODO: EXPO BarCodeScanner
+// import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
 import { Portal } from "react-native-portalize";
@@ -22,7 +23,7 @@ interface CameraProps {
 const MainCamera: React.FC<CameraProps> = (props) => {
   const [camPermission, setCamPermission] = useState<boolean>(false);
   const [isReading, setIsReading] = useState<boolean>(false);
-
+/*
   const allowedBarCodes = props.isKazakistan
     ? [BarCodeScanner.Constants.BarCodeType.datamatrix]
     : props.isSelfCheckOut
@@ -37,7 +38,9 @@ const MainCamera: React.FC<CameraProps> = (props) => {
         BarCodeScanner.Constants.BarCodeType.qr,
         BarCodeScanner.Constants.BarCodeType.upc_e,
       ];
-  const handleBarCodeScanned = (barcode: BarCodeEvent) => {
+
+ */
+  const handleBarCodeScanned = (barcode: any) => {
     if (!isReading) {
       setIsReading(true);
       if (props.onReadComplete) {
@@ -48,6 +51,7 @@ const MainCamera: React.FC<CameraProps> = (props) => {
   };
 
   useEffect(() => {
+    /*
     if (Platform.OS !== "web") {
       BarCodeScanner.getPermissionsAsync().then((permission) => {
         if (!permission.granted && permission.canAskAgain) {
@@ -57,6 +61,8 @@ const MainCamera: React.FC<CameraProps> = (props) => {
         } else if (permission.granted) setCamPermission(true);
       });
     }
+
+     */
   }, []);
 
   if (!props.isShow) return null;
@@ -148,7 +154,10 @@ const MainCamera: React.FC<CameraProps> = (props) => {
                 width: Dimensions.get("window").width,
               }}
             >
-              {Platform.OS !== "web" && (
+              {
+                /*
+                Platform.OS !== "web" && (
+
                 <BarCodeScanner
                   onBarCodeScanned={handleBarCodeScanned}
                   barCodeTypes={allowedBarCodes}
@@ -156,7 +165,9 @@ const MainCamera: React.FC<CameraProps> = (props) => {
                 >
                   <BarcodeMask showAnimatedLine={false} />
                 </BarCodeScanner>
-              )}
+              )
+                */
+              }
             </View>
           </View>
         ) : (

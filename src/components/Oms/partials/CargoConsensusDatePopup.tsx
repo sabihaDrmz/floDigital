@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../../BlurView";
 import { AppButton, ColorType } from "@flomagazacilik/flo-digital-components";
 import React from "react";
 import { View, StyleSheet, Dimensions } from "react-native";

@@ -1,4 +1,4 @@
-import { FontAwesome } from "components";
+import { FontAwesome } from "../../../components";
 import React from "react";
 import { View } from "react-native";
 

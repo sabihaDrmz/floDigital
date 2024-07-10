@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Animated, Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView, TouchableOpacity, View } from "react-native";
 import { PinchGestureHandler, State } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
-import { PerfectPixelSize } from "helper/PerfectPixel";
+import { PerfectPixelSize } from "../helper/PerfectPixel";
 
 const { width, height } = Dimensions.get("window"),
 

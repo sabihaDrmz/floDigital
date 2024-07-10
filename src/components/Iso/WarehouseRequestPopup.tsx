@@ -23,11 +23,11 @@ import { UserContextValue } from "contexts/UserContext";
 import { WarehouseContextValue } from "contexts/WarehouseContext";
 import { warehouseSelectedEmployeeKey } from "core/StorageKeys";
 import { useMessageBox } from "contexts/MessageBoxContext";
-import { translate } from "helper/localization/locaizationMain";
-import AppClosePopup from "components/AppClosePopup";
-import AppTextBox from "NewComponents/FormElements/AppTextBox";
-import { colors } from "theme/colors";
-import { PerfectFontSize } from "helper/PerfectPixel";
+import { translate } from "../../helper/localization/locaizationMain";
+import AppClosePopup from "../../components/AppClosePopup";
+import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
+import { colors } from "../../theme/colors";
+import { PerfectFontSize } from "../../helper/PerfectPixel";
 
 interface WarehouseRequestPopupProps {
   product: ProductModel;

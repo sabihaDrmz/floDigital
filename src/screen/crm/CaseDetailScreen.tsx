@@ -12,7 +12,8 @@ import {
 } from "react-native";
 import { Image } from "react-native";
 import moment from "moment";
-import { ImageInfo, MediaTypeOptions } from "expo-image-picker";
+//TODO: EXPO expo-image-picker
+// import { ImageInfo, MediaTypeOptions } from "expo-image-picker";
 import { AppColor } from "@flomagazacilik/flo-digital-components";
 import { PerfectFontSize } from "../../../src/helper/PerfectPixel";
 import { CRMCaseModel } from "../../../src/core/models/CrmCaseModel";
@@ -32,10 +33,11 @@ import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scr
 import { FloButton } from "../../../src/components";
 import FloLoading from "../../components/FloLoading";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";
-import * as ImageManipulator from "expo-image-manipulator";
-import * as FileSystem from "expo-file-system";
+//TODO: EXPO ImageManipulator
+// import * as ImageManipulator from "expo-image-manipulator";
+//TODO: EXPO FileSystem
+//import * as FileSystem from "expo-file-system";
 import { Portal } from "react-native-portalize";
-import * as MediaLibrary from "expo-media-library";
 import { useCrmService } from "../../contexts/CrmService";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 
@@ -43,7 +45,7 @@ const CaseDetailScreen: React.FC = (props) => {
   const { show } = useMessageBoxService();
   const { selectedCase, updateCase, crmTeams, crmAccountInfo, getAttachmentById, isLoading } = useCrmService();
   const [selectedTab, setSelectedTab] = useState(0);
-  const [selectedImages, setSelectedImages] = useState<ImageInfo[]>([]);
+  const [selectedImages, setSelectedImages] = useState<any>([]);
   const [solveText, setSolveText] = useState(
     selectedCase?.taskResolutionDescription ?? ""
   );
@@ -81,6 +83,7 @@ const CaseDetailScreen: React.FC = (props) => {
   const updateCaseProcess = async () => {
     let tmpMedias = [];
     // Fotoğrafları küçültmek için döngü
+    /*
     for (let index = 0; index < medias.length; index++) {
       // Webde farklı bir şekilde çalışıyor
       if (Platform.OS !== "web") {
@@ -145,6 +148,8 @@ const CaseDetailScreen: React.FC = (props) => {
             }
           }
         }
+
+
         // Video eki eklemek isterse uyarı çıkarılıyor
         else {
           show("Lütfen video ekini kaldırın.");
@@ -162,6 +167,10 @@ const CaseDetailScreen: React.FC = (props) => {
         tmpMedias.push(medias[index]);
       }
     }
+
+
+     */
+
     updateCase({
       activityId: selectedCase?.activityid,
       crmTaskStateId: crmTaskStateId,
@@ -389,11 +398,11 @@ const CaseDetailScreen: React.FC = (props) => {
 
   const Task: React.FC<{
     case: CRMCaseModel;
-    images: ImageInfo[];
+    images: any;
     crmTeamId?: string;
     crmTaskState?: number;
     reasonForHoldingID?: number;
-    onSelectImage: (images: ImageInfo[]) => void;
+    onSelectImage: (images: any) => void;
     onChangeTaskStateId: (state: number) => void;
     onChangeCrmTeamId: (state: string) => void;
     onChangeReasonForHolding: (state: number) => void;

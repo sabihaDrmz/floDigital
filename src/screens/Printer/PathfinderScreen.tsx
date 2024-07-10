@@ -10,7 +10,8 @@ import {
   NativeModules,
   Platform,
 } from "react-native";
-import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
+//TODO:EXPO pathFinder
+//import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import {
   AppButton,
@@ -49,7 +50,9 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
   const discoverDevices = async () => {
     console.log("Search device");
     try {
-      const foundDevices = await Pathfinder.discoverDevices();
+    //TODO:EXPO
+      //  const foundDevices = await Pathfinder.discoverDevices();
+      const foundDevices = [];
 
       if (
         foundDevices.length > 0 &&
@@ -86,12 +89,16 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
       if (Platform.OS === "android") {
         var dev = deviceKey.split("\n");
         console.log(dev);
+       /*
         const result = await NativeModules.FloPathfinder.connectDevice(
+
           dev[0],
           dev[1]
         );
+
+        */
       } else {
-        await Pathfinder.connectDevice(deviceKey);
+        //await Pathfinder.connectDevice(deviceKey);
       }
     } catch (err) {
       console.log("Connection err : ", err);

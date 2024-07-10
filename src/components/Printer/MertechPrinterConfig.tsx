@@ -20,7 +20,7 @@ import * as bleLib from "react-native-ble-plx";
 
 import { alert } from '../../../utils';
 //@ts-ignore
-import { useBluetoothModuleService } from 'contexts/BluetoothModuleService';
+import { useBluetoothModuleService } from '../../contexts/BluetoothModuleService';
 
 import PrinterImagePopup from "./PrinterImagePopup";
 import { useMessageBoxService } from '../../contexts/MessageBoxService';

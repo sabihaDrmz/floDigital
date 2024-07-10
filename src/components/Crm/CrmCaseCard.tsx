@@ -8,7 +8,7 @@ import { translate } from "../../helper/localization/locaizationMain";
 import moment from "moment-timezone";
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../LinearGradient";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 
 const CrmCaseCard: React.FC<{

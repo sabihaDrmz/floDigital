@@ -22,9 +22,10 @@ import FloLoadingModal from "../../components/Modal/FloLoadingModal";
 import { Feather } from '@expo/vector-icons';
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
-import { Audio } from 'expo-av';
+//TODO: EXPO AV
+// import { Audio } from 'expo-av';
 import { useNavigation } from "@react-navigation/native";
-import { colors } from "theme/colors";
+import { colors } from "../../theme/colors";
 import { translate } from "../../helper/localization/locaizationMain";
 
 const StoreWarehoseProductIdentification = ({ }: any) => {
@@ -153,10 +154,14 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
 
 
   const playNotificationSound = async () => {
+   /*
     const { sound } = await Audio.Sound.createAsync(
+
       require('../../../assets/ping.mp3')
     );
     await sound.playAsync();
+
+    */
   };
 
   const handleBlur = () => {

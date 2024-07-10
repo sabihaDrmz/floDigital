@@ -1,5 +1,6 @@
 import axios from "axios";
-import { CameraCapturedPicture } from "expo-camera";
+//TODO: EXPO expo-camera
+// import { CameraCapturedPicture } from "expo-camera";
 import {
   action,
   makeAutoObservable,
@@ -27,7 +28,8 @@ import { GetServiceUri, ServiceUrlType } from "../Settings";
 import { chekcAuthError } from "../Util";
 import AccountService from "./AccountService";
 import MessageBox, { MessageBoxDetailType, MessageBoxType } from "./MessageBox";
-import * as exPrint from "expo-print";
+//TODO: EXPO exPrint
+// import * as exPrint from "expo-print";
 import {
   BrokenProductSapResult,
   BrokenProductSearchModel,
@@ -43,8 +45,9 @@ import { ErFiche, ErOrder } from "../models/ErFindFicheItem";
 import { ErFindFicheResult } from "../models/ReturnedProduct/ErFindFicheResult";
 import { Platform } from "react-native";
 import ApplicationGlobalService from "./ApplicationGlobalService";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
-import * as MediaLibrary from "expo-media-library";
+//import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+//TODO: EXPO MediaLibrary
+// import * as MediaLibrary from "expo-media-library";
 
 class EasyReturnService {
   @observable isLoading: boolean = false;
@@ -659,7 +662,7 @@ class EasyReturnService {
   @action detailAddPicture = async (
     index: number,
     barcode: string,
-    picture: CameraCapturedPicture
+    picture: any
   ) => {
     try {
       let currentDetail = this.transactionLineDetails[0];
@@ -846,9 +849,11 @@ class EasyReturnService {
 
       if (result.data.state === FloResultCode.Successfully) {
         // let printer = await exPrint.selectPrinterAsync();
-        exPrint.printAsync({
+       /* exPrint.printAsync({
           html: result.data.model.expenseSlipUrl,
         });
+
+        */
 
         MessageBoxNew.show("Gider pusulası başarı ile oluşturuldu.");
         if (this.source === 2) Actions.popTo("erBrokenFindFiche");
@@ -1667,9 +1672,10 @@ class EasyReturnService {
         let localUri = images[i].Url;
         // telefondaki sabit dosyalardan seçili ise
         if (images[i].Url.startsWith("ph://")) {
-          var ml = await MediaLibrary.getAssetInfoAsync(images[i].Url.slice(5));
-          if (ml.localUri === undefined) continue;
-          localUri = ml.localUri;
+         // var ml = await MediaLibrary.getAssetInfoAsync(images[i].Url.slice(5));
+          var ml = null;
+          if (ml?.localUri === undefined) continue;
+          localUri = ml?.localUri;
         }
 
         let filename = localUri.split("/").pop();

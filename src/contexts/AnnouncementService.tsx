@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as FileSystem from "expo-file-system";
+//TODO: EXPO FileSystem
+// import * as FileSystem from "expo-file-system";
 import FileViewer from "react-native-file-viewer";
 import { Linking, Platform } from "react-native";
 import { SystemApi } from "./AccountService";
@@ -9,7 +10,8 @@ import { onlyUnique } from "../core/Util";
 import { asyncFileKey } from "../core/StorageKeys";
 import { useFcmService } from "./FcmService";
 
-const downloadedMediaDir = FileSystem.documentDirectory + "announceMedia/";
+//TODO: EXPO FileSystem
+const downloadedMediaDir = 'FileSystem.documentDirectory' + "announceMedia/";
 
 interface AnnouncementServiceModel {
     isLoading: boolean;
@@ -102,10 +104,12 @@ export const useAnnouncementService = create<AnnouncementServiceModel>((set, get
 
             const f = `${downloadedMediaDir}media_${fileId}${fileName}`;
 
-            let fileInfo = await FileSystem.getInfoAsync(f);
+            /*let fileInfo = await FileSystem.getInfoAsync(f);
             if (!fileInfo.exists) {
                 await FileSystem.downloadAsync(encodeURI(uri), f);
             }
+
+             */
 
             FileViewer.open(f);
         } catch (err) {
@@ -118,10 +122,12 @@ export const useAnnouncementService = create<AnnouncementServiceModel>((set, get
         }
     },
     ensureDirExists: async (fileDir: string) => {
-        const dirInfo = await FileSystem.getInfoAsync(fileDir);
+      /*  const dirInfo = await FileSystem.getInfoAsync(fileDir);
         if (!dirInfo.exists) {
             await FileSystem.makeDirectoryAsync(fileDir, { intermediates: true });
         }
+
+       */
     },
     addStoredFileList: async (fileId: number) => {
         let currentStore = await AsyncStorage.getItem(asyncFileKey);

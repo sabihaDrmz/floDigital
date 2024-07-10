@@ -1,9 +1,11 @@
 import { Linking, Platform } from "react-native";
-import * as FileSystem from "expo-file-system";
+//TODO: EXPO FileSystem
+// import * as FileSystem from "expo-file-system";
 import FileViewer from "react-native-file-viewer";
 import { create } from 'zustand';
 import { SystemApi } from "../contexts/AccountService";
-const downloadedMediaDir = FileSystem.documentDirectory + "announceMedia/";
+//TODO: EXPO
+const downloadedMediaDir = 'FileSystem.documentDirectory' + "announceMedia/";
 export interface Link {
     id: number;
     name: string;
@@ -83,11 +85,13 @@ export const useLinkService = create<LinkServiceModel>((set, get) => ({
             await ensureDirExists(downloadedMediaDir);
 
             const f = `${downloadedMediaDir}media_${fileId}${fileName}`;
-
+/*
             let fileInfo = await FileSystem.getInfoAsync(f);
             if (!fileInfo.exists) {
                 await FileSystem.downloadAsync(encodeURI(uri), f);
             }
+
+ */
 
             FileViewer.open(f);
         } catch (err) {
@@ -100,9 +104,11 @@ export const useLinkService = create<LinkServiceModel>((set, get) => ({
         }
     },
     ensureDirExists: async (fileDir: string) => {
-        const dirInfo = await FileSystem.getInfoAsync(fileDir);
+       /* const dirInfo = await FileSystem.getInfoAsync(fileDir);
         if (!dirInfo.exists) {
             await FileSystem.makeDirectoryAsync(fileDir, { intermediates: true });
         }
+
+        */
     }
 }));

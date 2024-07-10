@@ -8,7 +8,7 @@ import { useAccountService } from "../../contexts/AccountService";
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { PrinterType } from "screen/home";
+import { PrinterType } from "../../screen/home";
 
 interface PrinterScreenProps { }
 
@@ -19,7 +19,7 @@ const PrinterScreen: React.FC<PrinterScreenProps> = (props) => {
     (x) => x.werks === getUserStoreId()
   );
   const route = useRoute();
-  const [selectedPage, setselectedPage] = useState(-1)  
+  const [selectedPage, setselectedPage] = useState(-1)
   useEffect(() => {
     if (route.params) {
       //@ts-ignore
@@ -30,10 +30,10 @@ const PrinterScreen: React.FC<PrinterScreenProps> = (props) => {
   if (Platform.OS === "web") return null;
   return (
     <View style={styles.container}>
-      {getUserStoreId() === "8801" || store?.country === "RU" ? 
-      selectedPage === PrinterType.MERTECH ? 
-      (<MertechPrinterConfig />) : 
-      (<PathfinderScreen/>) : 
+      {getUserStoreId() === "8801" || store?.country === "RU" ?
+      selectedPage === PrinterType.MERTECH ?
+      (<MertechPrinterConfig />) :
+      (<PathfinderScreen/>) :
       Platform.OS === "ios" ? (
         <IosPrinterConfig />
       ) : (

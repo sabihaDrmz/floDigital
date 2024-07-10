@@ -1,4 +1,5 @@
-import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
+//TODO: EXPO pathfinder
+// import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
 import { create } from "zustand";
 
 interface PathfinderServiceModel {
@@ -9,7 +10,9 @@ interface PathfinderServiceModel {
 
 export const usePathFinderService = create<PathfinderServiceModel>((set, get) => ({
     loadDevices: async () => {
-        var devices = await Pathfinder.discoverDevices();
+        //TODO: EXPO
+        // var devices = await Pathfinder.discoverDevices();
+        var devices = [];
 
         if (
             devices &&
@@ -21,7 +24,7 @@ export const usePathFinderService = create<PathfinderServiceModel>((set, get) =>
         return devices;
     },
     connectDevice: async (deviceId: string) => {
-        var result = await Pathfinder.connectDevice(deviceId);
-        return result;
+       // var result = await Pathfinder.connectDevice(deviceId);
+        return null;
     }
 }));

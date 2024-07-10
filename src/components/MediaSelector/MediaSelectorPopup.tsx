@@ -9,7 +9,8 @@ import {
   Platform,
 } from "react-native";
 import { useMediaSelector } from "./MediaSelector";
-import { Camera, CameraCapturedPicture, CameraType } from "expo-camera";
+//TODO: expo-camera
+// import { Camera, CameraCapturedPicture, CameraType } from "expo-camera";
 import {
   AppColor,
   AppText,
@@ -24,7 +25,8 @@ import {
 } from "@expo/vector-icons";
 import { Portal } from "react-native-portalize";
 import { ifIphoneX } from "react-native-iphone-x-helper";
-import { Asset } from "expo-media-library";
+//TODO: EXPO expo-media-library
+// import { Asset } from "expo-media-library";
 import Animated, {
   Easing,
   interpolateColor,
@@ -35,10 +37,12 @@ import Animated, {
 } from "react-native-reanimated";
 import ImagePreview from "./ImagePreview";
 import { useStopwatch } from "react-timer-hook";
-import { Video, AVPlaybackStatus, ResizeMode } from "expo-av";
-import * as ImagePicker from "expo-image-picker";
+//TODO: EXPO AV
+// import { Video, AVPlaybackStatus, ResizeMode } from "expo-av";
+//TODO: EXPO ImagePicker
+// import * as ImagePicker from "expo-image-picker";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
-import { PerfectFontSize } from "helper/PerfectPixel";
+import { PerfectFontSize } from "../../helper/PerfectPixel";
 interface MediaSelectorPopupProps {
   alertMessage?: string;
   settings?: {
@@ -60,16 +64,16 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
     onAssetSelect,
   } = useMediaSelector();
   const [selectedVideo, setSelectedVideo] = useState("");
-  const [assets, setAssets] = useState<Asset[]>([]);
-  const [usingCamera, setUsingCamera] = useState<CameraType>(CameraType.back);
+  const [assets, setAssets] = useState<any>([]);
+  const [usingCamera, setUsingCamera] = useState<any>('CameraType.back');
   const [isVideoStarted, setIsVideoStarted] = useState(false);
   const color = useSharedValue(0);
   const [capturePicuture, setCameracapPicture] =
-    useState<CameraCapturedPicture>();
-  const camera = useRef<Camera>(null);
+    useState<any>();
+  const camera = useRef<any>(null);
   const [videoElapsedTime, setVideoElapsedTime] = useState(0);
   const timer = useStopwatch({ autoStart: false });
-  const videoRef = useRef<Video>(null);
+  //const videoRef = useRef<Video>(null);
   const [cameraPermission, setCameraPermission] = useState(true);
   const MessageBox = useMessageBoxService();
   useEffect(() => {
@@ -86,6 +90,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
     //   true
     // );
     // setIsShowData(false);
+    /*
     Camera.getMicrophonePermissionsAsync().then((permission) => {
       if (!permission.granted && permission.canAskAgain)
         Camera.requestMicrophonePermissionsAsync();
@@ -95,6 +100,8 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
       if (!permission.granted && permission.canAskAgain)
         setCameraPermission(false);
     });
+
+     */
   }, []);
 
   const cameraPermissionAlert = () => {
@@ -120,32 +127,41 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
     setIsVideoStarted(true);
     timer.reset();
     timer.start();
+   /*
     camera.current?.recordAsync().then((result) => {
+
       setSelectedVideo(result.uri);
       videoRef.current?.playAsync();
       // onAssetSelect({ Url: result.uri, MediaType: "video" });
     });
+
+    */
   };
 
   const stopVideoRecord = () => {
     setIsVideoStarted(false);
     timer.pause();
-    camera.current?.stopRecording();
+  //  camera.current?.stopRecording();
   };
   const takePicture = async () => {
-    var picture = await camera.current?.takePictureAsync();
+   /* var picture = await camera.current?.takePictureAsync();
     setCameracapPicture(picture);
+
+    */
   };
 
   const openMediaLibrary = async () => {
     try {
-      var result = await ImagePicker.launchImageLibraryAsync({
+     /* var result = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: false,
         quality: 1,
         videoQuality: 1,
       });
 
+
+      */
+      var result = null;
       if (result === null || result === undefined || result.canceled) return;
 
       setCameracapPicture({
@@ -257,11 +273,16 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                       backgroundColor: "#fff",
                     }}
                   >
-                    <Camera
+                    {
+                      /*
+                     <Camera
                       ref={camera}
                       style={StyleSheet.absoluteFillObject}
                       type={usingCamera}
                     />
+
+                       */
+                    }
                     {isVideoStarted && (
                       <View
                         style={{
@@ -373,12 +394,14 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                           ]}
                         ></AnimatedTouchableOpacity>
                         <TouchableOpacity
-                          onPress={() =>
-                            setUsingCamera((cam) =>
+                          onPress={() =>alert('TODO: EXPO')
+                           /* setUsingCamera((cam) =>
                               cam === CameraType.back
                                 ? CameraType.front
                                 : CameraType.back
                             )
+
+                            */
                           }
                           style={{
                             width: 70,
@@ -495,6 +518,8 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                   height,
                 }}
               >
+                {
+                  /*
                 <Video
                   onLoad={() => {
                     videoRef.current?.playAsync();
@@ -505,6 +530,9 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                   isLooping
                   resizeMode={ResizeMode.CONTAIN}
                 />
+
+                   */
+                }
                 <TouchableOpacity
                   style={{
                     width: 30,

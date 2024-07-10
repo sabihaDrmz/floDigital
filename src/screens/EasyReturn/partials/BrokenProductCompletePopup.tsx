@@ -26,7 +26,8 @@ import MessageBox, {
 } from "../../../core/services/MessageBox";
 import { GetServiceUri, ServiceUrlType } from "../../../core/Settings";
 import { toCensorText } from "../../../core/Util";
-import * as exPrint from "expo-print";
+//TODO: EXPO exPrint
+// import * as exPrint from "expo-print";
 import { useEffect } from "react";
 import { autorun } from "mobx";
 import { translate } from "../../../helper/localization/locaizationMain";
@@ -147,11 +148,13 @@ const BrokenProductCompletePopup = observer(
         }
 
         setHasPrint(true);
-        await exPrint.selectPrinterAsync();
+       /* await exPrint.selectPrinterAsync();
         await exPrint.printAsync({
           html: htmlDoc,
           orientation: exPrint.Orientation.portrait,
         });
+
+        */
       } catch (err) {}
     };
 

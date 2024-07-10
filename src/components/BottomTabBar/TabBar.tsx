@@ -25,7 +25,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Actions } from "react-native-router-flux";
-import { AntDesign } from "..";
+import { AntDesign } from "@expo/vector-icons";
 import { translate } from "../../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 import { BrokenProductIcon } from "../CustomIcons/BrokenProductIcon";

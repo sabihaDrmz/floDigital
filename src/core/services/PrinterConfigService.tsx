@@ -19,7 +19,8 @@ import ProductService from "./ProductService";
 //@ts-ignore
 import base64 from "react-native-base64";
 
-import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
+//TODO:EXPO pathfinder
+// import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
 import moment from "moment";
 class PrinterConfigService {
   @observable printerConfigList: PrinterConfigGroup[] = [];
@@ -260,13 +261,15 @@ class PrinterConfigService {
                     resData.matnr
                   )};${data.product.barcode}`;
                 }
-
+/*
                 Pathfinder.print(
                   printData,
                   //"STD;22.11.2022;5999;Турция;3999;BX;СИНТЕТИЧЕСКИЙ ТЕКСТИЛЬ;FiberPart2;FiberPart1;100000268;ЛЕГГИНСЫ;8683121136074",
                   parsedSaveData.alias,
                   1
                 );
+
+ */
               }
             });
           })

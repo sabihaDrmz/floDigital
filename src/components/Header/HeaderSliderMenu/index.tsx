@@ -111,7 +111,7 @@ const HeaderSliderMenu: React.FC<{
         ind === (props.currentTab !== -1 ? props.currentTab : currentSelected)
       ) {
         return (
-          <TouchableOpacity activeOpacity={1}>
+          <TouchableOpacity key={ind} activeOpacity={1}>
             <SelectedBgMaker width={x.customWidth ? x.customWidth : 80}>
               {x.selectedItem}
             </SelectedBgMaker>

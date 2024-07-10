@@ -5,11 +5,10 @@ import {
     ColorType,
 } from "@flomagazacilik/flo-digital-components";
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions, Platform } from "react-native";
+import { View, StyleSheet, Dimensions,Clipboard, Platform } from "react-native";
 import { useMessageBoxService } from "../../../contexts/MessageBoxService";
 import { MessageBoxOptions } from "../../../contexts/model/MessageBoxOptions";
 import { PerfectFontSize } from "../../../helper/PerfectPixel";
-import * as Clipboard from 'expo-clipboard';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const MbIsoReturn: React.FC<{
@@ -21,7 +20,7 @@ const MbIsoReturn: React.FC<{
     const [copyCode, setCopyCode] = useState<boolean>(false)
     const [textColor, setTextColor] = useState<string>("#000");
     const copyToClipboard = async () => {
-        await Clipboard.setStringAsync(basketTicketId);
+        await Clipboard.setString(basketTicketId);
         setCopyCode(true)
         setTextColor("#00FF00");
         setTimeout(() => {

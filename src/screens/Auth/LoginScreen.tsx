@@ -1,5 +1,5 @@
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../../components/LinearGradient";
 import { Observer } from "mobx-react";
 import React, { useRef, useState } from "react";
 import {

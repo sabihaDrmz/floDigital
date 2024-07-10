@@ -5,7 +5,7 @@ import { colors } from "../../theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { PerfectFontSize } from "../../../src/helper/PerfectPixel";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { AppColor } from "theme/AppColor";
+import { AppColor } from "../../theme/AppColor";
 
 interface DateTimePickerProps {
   defaultDate?: string;

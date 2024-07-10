@@ -1,5 +1,5 @@
-import MbIsoReturn from "components/Modal/MessageBoxs/MbIsoReturn";
-import { BlurView } from "expo-blur";
+import MbIsoReturn from "../../components/Modal/MessageBoxs/MbIsoReturn";
+import BlurView from "../../components/BlurView";
 import React from "react";
 import {
     View,
@@ -101,7 +101,7 @@ const MessageBox: React.FC<MessageBoxProps> = (props) => {
                     options.type === MessageBoxType.StockOutValidation && (
                         <MbStockOutValidation options={options} message={message} />
                     )}
-                
+
                 {options &&
                     options.type !== undefined &&
                     options.type === MessageBoxType.IsoReturnCode && (

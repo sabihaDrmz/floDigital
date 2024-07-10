@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   Dimensions,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../components/LinearGradient";
 import { PerfectFontSize } from "../helper/PerfectPixel";
 import { colors } from "../theme/colors";
 

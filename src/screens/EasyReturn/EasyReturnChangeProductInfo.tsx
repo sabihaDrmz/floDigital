@@ -1,4 +1,5 @@
-import { CameraCapturedPicture } from "expo-camera";
+//TODO: EXPO expo-camera
+// import { CameraCapturedPicture } from "expo-camera";
 import { observer } from "mobx-react";
 import React, { Component } from "react";
 import {
@@ -204,7 +205,7 @@ class EasyReturnChangeProductInfo extends Component<any> {
                 }}
                 onPress={() => {
                   Actions["easyReturnTakePicture"]({
-                    onSavePicture: (picture: CameraCapturedPicture) => {
+                    onSavePicture: (picture: any) => {
                       if (Actions.currentScene === "easyReturnTakePicture")
                         Actions.pop();
 

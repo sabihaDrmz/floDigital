@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { MessageBoxOptions, MessageBoxType } from "./model/MessageBoxOptions";
-import { BlurView } from "expo-blur";
+import BlurView from "../components/BlurView";
 import { View, useWindowDimensions } from "react-native";
 import ErOrderNotFound from "../components/Modal/MessageBoxs/ErOrderNotFound";
 import ErNotComplete from "../components/Modal/MessageBoxs/ErNotComplete";

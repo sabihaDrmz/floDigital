@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRef } from "react";
 import {
@@ -10,7 +10,7 @@ import {
     Platform,
     SafeAreaView
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../../components/LinearGradient";
 import Animated, {
     useSharedValue,
     useAnimatedScrollHandler,
@@ -65,6 +65,9 @@ const Intro = () => {
     });
 
     const scrollViewRef = useRef<Animated.ScrollView>(null);
+    useEffect(() => {
+        onComplete();
+    }, []);
 
     const onComplete = () => {
         completeIntro();
@@ -117,79 +120,7 @@ const Intro = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.wrapper}>
-                <Image
-                    source={require("../../../assets/flodigitallogo.png")}
-                    style={{ marginTop: 40, marginBottom: 10 }}
-                />
-                <Animated.ScrollView
-                    ref={scrollViewRef}
-                    scrollEventThrottle={16}
-                    onScroll={scrollAnimatedEvent}
-                    pagingEnabled
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                >
-                    {INTRO.map((item, index) => {
-                        return (
-                            <Animated.View
-                                style={[
-                                    { width, alignItems: "center" },
-                                    useAnimatedStyle(() => {
-                                        let opacity = interpolate(
-                                            scrollPos.value,
-                                            [(index - 1) * width, index * width, width * (index + 1)],
-                                            [-1, 1, -1]
-                                        );
-                                        return { opacity };
-                                    }),
-                                ]}
-                            >
-                                <Image
-                                    source={item.image}
-                                    style={[
-                                        {
-                                            width: PerfectPixelSize(
-                                                Platform.OS === "android" ? 250 : 350
-                                            ),
-                                            height: PerfectPixelSize(
-                                                Platform.OS === "android" ? 240 : 340
-                                            ),
-                                            marginBottom: PerfectPixelSize(10),
-                                            resizeMode: "contain",
-                                        },
-                                    ]}
-                                />
-                                <LabelText
-                                    type={LabelTextType.L}
-                                    style={{
-                                        color: "#FF8600",
-                                    }}
-                                >
-                                    {item.title1}
-                                </LabelText>
-                                <LabelText
-                                    type={LabelTextType.L}
-                                    style={{
-                                        color: "#7D7E81",
-                                        marginBottom: PerfectPixelSize(15),
-                                    }}
-                                >
-                                    {item.title2}
-                                </LabelText>
-                                <ParagraphText
-                                    style={{
-                                        color: "#7D7E81",
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    {item.description}
-                                </ParagraphText>
-                            </Animated.View>
-                        );
-                    })}
-                </Animated.ScrollView>
-            </View>
+
             <View style={styles.buttonContainer}>
                 <View style={styles.circleContainer}>
                     <View style={styles.circle} />

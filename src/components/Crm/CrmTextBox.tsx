@@ -14,9 +14,9 @@ import {
 import { Feather } from "@expo/vector-icons";
 import { TextInputMask } from "react-native-masked-text";
 import { Keyboard } from "react-native";
-import { colors } from "theme/colors";
-import { PerfectFontSize } from "helper/PerfectPixel";
-import { paddings } from "theme/paddingConst";
+import { colors } from "../../theme/colors";
+import { PerfectFontSize } from "../../helper/PerfectPixel";
+import { paddings } from "../../theme/paddingConst";
 
 interface FloTextBoxProps extends TextInputProps {
   floatingLabel?: boolean;
@@ -67,7 +67,7 @@ class FloTextBox extends Component<FloTextBoxProps> {
     if (this.props.onlyNumber)
       input = FloTextBox.clearNonNumericCharacters(input);
     this.setState({ curText: input });
-   //Tarih maskelemesi yapar / 
+   //Tarih maskelemesi yapar /
     if(this.props.maskedDate){
     const numericInput = input.replace(/[^\d]/g, '');
 
@@ -207,16 +207,7 @@ class FloTextBox extends Component<FloTextBoxProps> {
                 alignItems: "flex-end",
               }}
             >
-              <Feather
-                name={this.state.overrideTextEntry ? "eye" : "eye-off"}
-                size={20}
-                // @ts-ignore
-                color={
-                  this.props.placeholderTextColor
-                    ? this.props.placeholderTextColor
-                    : colors.darkGrey
-                }
-              />
+              npm install @expo/vector-icons
             </TouchableOpacity>
           </View>
         ) : null}

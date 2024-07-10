@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
-import { colors } from 'theme/colors';
+import { colors } from '../theme/colors';
 const Characteristic = props => {
     const { label, action, characteristics, onPress, content, input } = props;
     if (characteristics.length === 0) {

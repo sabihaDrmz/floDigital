@@ -1,11 +1,11 @@
-import { FloButton, FloTextBox } from "components";
-import { useMessageBoxService } from "contexts/MessageBoxService";
-import { MessageBoxType } from "contexts/model/MessageBoxOptions";
-import { translate } from "helper/localization/locaizationMain";
-import { PerfectFontSize } from "helper/PerfectPixel";
+import { FloButton, FloTextBox } from "../../../components";
+import { useMessageBoxService } from "../../../contexts/MessageBoxService";
+import { MessageBoxType } from "../../../contexts/model/MessageBoxOptions";
+import { translate } from "../../../helper/localization/locaizationMain";
+import { PerfectFontSize } from "../../../helper/PerfectPixel";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
-import { colors } from "theme/colors";
+import { colors } from "../../../theme/colors";
 
 interface MbSmsValidationProps { }
 

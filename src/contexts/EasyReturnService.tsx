@@ -1,4 +1,5 @@
-import { CameraCapturedPicture } from "expo-camera";
+//TODO: EXPO expo-camera
+// import { CameraCapturedPicture } from "expo-camera";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ErFiche, ErOrder } from "../core/models/ErFindFicheItem";
 import { OmcRejectCargoFindResult } from "../core/models/OmcRejectCargoFindResult";
@@ -29,8 +30,8 @@ import { GeniusFicheRequestDetailModel } from "./model/GeniusFicheRequestDetailM
 import { MessageBoxType } from "./model/MessageBoxOptions";
 import { PaymentTypeDetailModel } from "./model/PaymentTypeDetailModel";
 import { TransactionLineDetailModel } from "./model/TransactionLineDetailModel";
-import * as MediaLibrary from "expo-media-library";
-import * as exPrint from "expo-print";
+//TODO: EXPO exPrint
+// import * as exPrint from "expo-print";
 import { useMessageBoxService } from "./MessageBoxService";
 import { SystemApi, useAccountService } from "./AccountService";
 import { useApplicationGlobalService } from "./ApplicationGlobalService";
@@ -99,7 +100,7 @@ interface EasyReturnServiceModel {
     detailAddPicture: (
         index: number,
         barcode: string,
-        picture: CameraCapturedPicture
+        picture: any
     ) => Promise<void>;
     detailDeletePicture: (
         index: number,
@@ -774,7 +775,7 @@ export const useEasyReturnService = create<EasyReturnServiceModel>((set, get) =>
     detailAddPicture: async (
         index: number,
         barcode: string,
-        picture: CameraCapturedPicture
+        picture: any
     ) => {
         const { transactionLineDetails } = get();
         try {
@@ -948,9 +949,13 @@ export const useEasyReturnService = create<EasyReturnServiceModel>((set, get) =>
             let result = await SystemApi.post(saveUri);
 
             if (result.data.state === FloResultCode.Successfully) {
+                /*
                 exPrint.printAsync({
+
                     html: result.data.model.expenseSlipUrl,
                 });
+
+                 */
 
                 MessageBoxService.show("Gider pusulası başarı ile oluşturuldu.");
                 RootNavigation.goBack()
@@ -1757,7 +1762,7 @@ export const useEasyReturnService = create<EasyReturnServiceModel>((set, get) =>
                     if (pathName !== "BrokenProductResult")
                         RootNavigation.navigate('Ides', { screen: 'BrokenProductResult' })
 
-                    
+
                     return;
                 } else if (phone !== "" && phone !== "0") {
                     set((state) => ({

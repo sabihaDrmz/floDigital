@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, ViewProps, StyleSheet, TouchableOpacity } from "react-native";
-import { AppColor } from "theme/AppColor";
+import { AppColor } from "../../theme/AppColor";
 
 interface CheckBoxsalesProps extends ViewProps {
   checked?: boolean;
@@ -26,7 +26,7 @@ const CheckBoxSales = (props: CheckBoxsalesProps) => {
     }
     return null
   }
-  
+
   return (
     <View style={props.style}>
       <TouchableOpacity disabled={props.disabled}

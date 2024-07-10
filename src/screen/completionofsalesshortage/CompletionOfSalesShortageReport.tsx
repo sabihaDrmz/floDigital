@@ -15,8 +15,8 @@ import { useMessageBoxService } from '../../contexts/MessageBoxService';
 import { useCompletionOfSalesShortageService } from '../../../src/contexts/CompletionOfSalesShortageService'
 import { translate } from '../../helper/localization/locaizationMain'
 import { isEqualDates } from "../../helper/";
-import FloLoading from "components/FloLoading";
-import { PerfectFontSize } from 'helper/PerfectPixel';
+import FloLoading from "../../components/FloLoading";
+import { PerfectFontSize } from '../../helper/PerfectPixel';
 import { AppButton, AppColor, ColorType } from '@flomagazacilik/flo-digital-components';
 import { useAccountService } from '../../contexts/AccountService'
 import { useNavigation } from '@react-navigation/native';

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
-import { PerfectFontSize } from 'helper/PerfectPixel'
-import { translate } from 'helper/localization/locaizationMain';
+import { PerfectFontSize } from '../../helper/PerfectPixel'
+import { translate } from '../../helper/localization/locaizationMain';
 
 interface Props{
     onSelect(day:number):any;
@@ -14,7 +14,7 @@ const DaysOfWeek = ({onSelect, initialDay, selectedDay}:Props) => {
         onSelect(initialDay)
        }
     }, [initialDay])
-    
+
     const Days = [
         translate("completionOfSalesShortageAlarmScreen.mondayShort"),
         translate("completionOfSalesShortageAlarmScreen.tuesdayShort"),

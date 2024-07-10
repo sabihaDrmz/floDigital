@@ -21,13 +21,15 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native-gesture-handler";
-import * as exImp from "expo-image-picker";
+//TODO: EXPO expo-image-picker
+// import * as exImp from "expo-image-picker";
 import MessageBox, {
   MessageBoxDetailType,
   MessageBoxType,
 } from "../../core/services/MessageBox";
 import { translate } from "../../helper/localization/locaizationMain";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+//TODO: EXPO expo-image-picker
+// import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import AppButton from "../../NewComponents/FormElements/AppButton";
 import AppComboBox from "../../NewComponents/FormElements/AppComboBox";
 import {
@@ -66,7 +68,7 @@ const CrmCreateCustomerComplatint: React.FC<any> = (props) => {
   const [fisrtName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState<ImageInfo[]>([]);
+  const [images, setImages] = useState<any>([]);
   const [remoteImages, setRemoteImages] = useState<string[]>([]);
   const [stateCode, setStateCode] = useState(0);
   const [taskId, setTaskId] = useState("");
@@ -123,7 +125,7 @@ const CrmCreateCustomerComplatint: React.FC<any> = (props) => {
   }, []);
 
   const PickImage = async () => {
-    let permState = await exImp.getMediaLibraryPermissionsAsync();
+ /*   let permState = await exImp.getMediaLibraryPermissionsAsync();
 
     if (!permState.granted && permState.canAskAgain) {
       await exImp.requestMediaLibraryPermissionsAsync();
@@ -156,11 +158,13 @@ const CrmCreateCustomerComplatint: React.FC<any> = (props) => {
       })
       .then((pickImageResult) => {
         if (pickImageResult.cancelled) return;
-        let image: ImageInfo = {
+        let image: any = {
           ...pickImageResult,
         };
         setImages([...images, image]);
       });
+
+  */
   };
 
   const removePicture = (uri: string) => {

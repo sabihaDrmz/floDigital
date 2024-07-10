@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import {
   AppButton,
   AppCheckBox,
@@ -22,7 +22,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../../components/LinearGradient";
 import { Portal } from "react-native-portalize";
 import { Actions } from "react-native-router-flux";
 import Svg, { Defs, G, Rect, Path } from "react-native-svg";

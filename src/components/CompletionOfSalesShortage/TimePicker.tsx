@@ -1,16 +1,16 @@
 import { Platform, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { AppColor } from '@flomagazacilik/flo-digital-components'
-import { PerfectFontSize } from 'helper/PerfectPixel'
+import { PerfectFontSize } from '../../helper/PerfectPixel'
 import ComboboxSales from './ComboboxSales';
-import { translate } from 'helper/localization/locaizationMain';
+import { translate } from '../../helper/localization/locaizationMain';
 
 interface Props{
     onSelectChange(data:string):void;
 }
 
 const TimePicker = ({onSelectChange}:Props) => {
-    
+
     const [selectedHour, setSelectedHour] = useState<string>('00')
     const [selectedMinute, setSelectedMinute] = useState<string>('00')
     const [selectedTime, setSelectedTime] = useState<string>(`${selectedHour}:${selectedMinute}`)
@@ -27,7 +27,7 @@ const TimePicker = ({onSelectChange}:Props) => {
     useEffect(() => {
         selectedTime && onSelectChange(selectedTime)
     }, [selectedTime])
-    
+
     return (
         <View style={styles.timeContainer} >
             <ComboboxSales
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     comboBoxes: {
       height: 31,
       backgroundColor: Platform.OS === "web" ? undefined : AppColor.OMS.Background.Light,
-     
+
       borderRadius: Platform.OS === "web" ? 12 : 10,
       alignItems: "center",
       justifyContent: Platform.OS === "web" ? "space-between" : "center",

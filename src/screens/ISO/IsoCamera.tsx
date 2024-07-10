@@ -9,10 +9,12 @@ import {
 } from "react-native";
 import { FloHeader } from "../../components/Header";
 import { colors } from "../../theme/colors";
-import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
+//TODO: EXPO BarCodeScanner
+// import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import { translate } from "../../helper/localization/locaizationMain";
 import BarcodeMask from "react-native-barcode-mask";
-import * as exCamera from "expo-camera";
+//TODO: EXPO expo-camera
+// import * as exCamera from "expo-camera";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 
 interface IsoCameraProps {
@@ -30,7 +32,7 @@ class IsoCamera extends Component<IsoCameraProps> {
   }
 
   getPermissionsAsync = async () => {
-    const permission = await exCamera.getCameraPermissionsAsync();
+   /* const permission = await exCamera.getCameraPermissionsAsync();
 
     console.log(permission);
 
@@ -42,6 +44,8 @@ class IsoCamera extends Component<IsoCameraProps> {
     } else {
       this.setState({ hasCameraPermission: permission.granted ? 1 : 2 });
     }
+
+    */
   };
 
   render() {
@@ -75,7 +79,9 @@ class IsoCamera extends Component<IsoCameraProps> {
                 width: Dimensions.get("window").width,
               }}
             >
-              {Platform.OS !== "web" && (
+              {
+                /*
+                Platform.OS !== "web" && (
                 <BarCodeScanner
                   onBarCodeScanned={this.handleBarCodeScanned}
                   focusable={true}
@@ -90,7 +96,9 @@ class IsoCamera extends Component<IsoCameraProps> {
                 >
                   <BarcodeMask showAnimatedLine={false} />
                 </BarCodeScanner>
-              )}
+              )
+                 */
+              }
             </View>
           </View>
         )}
@@ -98,7 +106,7 @@ class IsoCamera extends Component<IsoCameraProps> {
     );
   }
 
-  handleBarCodeScanned = (barcode: BarCodeEvent) => {
+  handleBarCodeScanned = (barcode: any) => {
     this.props.onReadBarcode(barcode.data);
   };
 }

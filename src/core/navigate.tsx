@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { NavigationType } from '../../StackNavigator';
+import { NavigationType } from '../StackNavigator';
 
 export const useCustomNavigation = () => {
     const navigation = useNavigation<NavigationType>();

@@ -1,5 +1,5 @@
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import {
   AppButton,
   AppColor,

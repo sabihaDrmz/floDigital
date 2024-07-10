@@ -21,7 +21,7 @@ import {
   AntDesign,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import { ToImageCdnUri } from "../../helper/ImageCdnExtensions";
 import MessageBoxNew from "../../core/services/MessageBoxNew";
 import { MessageBoxType } from "../../core/services/MessageBox";

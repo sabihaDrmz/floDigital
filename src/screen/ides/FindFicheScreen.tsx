@@ -1,5 +1,5 @@
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import {
   AppButton,
   AppColor,
@@ -20,11 +20,11 @@ import Svg, { Defs, G, Path } from "react-native-svg";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
 import { Portal } from "react-native-portalize";
-import { getLocale, translate } from "helper/localization/locaizationMain";
-import AppTextBox from "NewComponents/FormElements/AppTextBox";
-import FloHeaderNew from "components/Header/FloHeaderNew";
-import { FloTextBox } from "components";
-import { SearchQR } from "components/CustomIcons/MainPageIcons";
+import { getLocale, translate } from "../../helper/localization/locaizationMain";
+import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
+import FloHeaderNew from "../../components/Header/FloHeaderNew";
+import { FloTextBox } from "../../components";
+import { SearchQR } from "../../components/CustomIcons/MainPageIcons";
 import MainCamera from "../../components/MainCamera";
 import { useApplicationGlobalService } from '../../contexts/ApplicationGlobalService';
 import { useAccountService } from '../../contexts/AccountService';

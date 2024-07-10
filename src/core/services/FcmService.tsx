@@ -9,9 +9,14 @@ import {
   ServiceResponseBase,
 } from "../models/ServiceResponseBase";
 import ApplicationGlobalService from "./ApplicationGlobalService";
-import { notificationEvent } from "../libraries/FcmFroground";
-import * as exNotification from "expo-notifications";
-import * as Device from "expo-device";
+//TODO: EXPO Test
+// import { notificationEvent } from "../libraries/FcmFroground";
+//TODO: EXPO exNotification
+// import * as exNotification from "expo-notifications";
+//TODO: EXPO Device
+// import * as Device from "expo-device";
+import DeviceInfo from 'react-native-device-info';
+
 import { FloDigitalErrorParse } from "../HttpModule";
 class FcmService {
   constructor() {
@@ -30,10 +35,11 @@ class FcmService {
   @observable subBadgeCount: any[] = [];
   @action getNoficationPermission = async () => {
     try {
+      /*
       if (this.isConfigured || Platform.OS === "web") return;
 
       let token = "";
-      if (Device.isDevice) {
+      if (!DeviceInfo.isEmulator()) {
         const { status: existingStatus } =
           await exNotification.getPermissionsAsync();
         let finalStatus = existingStatus;
@@ -125,6 +131,7 @@ class FcmService {
           vibrationPattern: [0, 250, 250, 250],
         });
       }
+      */
     } catch (err) {
       if (ApplicationGlobalService.testMode) {
         alert(err);
@@ -149,7 +156,7 @@ class FcmService {
       return;
     }
 
-    notificationEvent(remoteMessage.data);
+   // notificationEvent(remoteMessage.data);
   };
 
   @action registerFloDigitalByDevice = async (token: string) => {
@@ -225,8 +232,8 @@ class FcmService {
 
       if (this.subBadgeCount === undefined) this.subBadgeCount = [];
 
-      if (Platform.OS === "ios")
-        exNotification.setBadgeCountAsync(this.badgeCnt);
+     // if (Platform.OS === "ios")
+       // exNotification.setBadgeCountAsync(this.badgeCnt);
     } catch (err: any) {
       this.badgeCnt = 0;
       FloDigitalErrorParse(err);

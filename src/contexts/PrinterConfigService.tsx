@@ -9,7 +9,8 @@ import {
     formatLabelRussia,
 } from "../helper/localization/PrintLabelFormatter";
 import { PrinterConfigGroupModel } from "./model/PrinterConfigGroupModel";
-import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
+//TODO: EXPO pathfinder
+// import * as Pathfinder from "@flomagazacilik/flo-pathfinder";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 //@ts-ignore
 import { Base64 } from "js-base64";
@@ -156,7 +157,7 @@ export const usePrinterConfigService = create<PrinterConfigServiceModel>((set, g
                         await print(selectedPrinter.address, printerConfig.config);
                     }
                 }
-               
+
 
                 MessageBoxService.show(translate("errorMsgs.completeLabelConfig"));
             }
@@ -343,13 +344,17 @@ export const usePrinterConfigService = create<PrinterConfigServiceModel>((set, g
                                                 )};${data.product.barcode}`;
                                         }
 
+                                      /* TODO: EXPO pathfinder
                                         await Pathfinder.reconnectDevice();
+
                                         await Pathfinder.print(
                                             printData,
                                             //"STD;22.11.2022;5999;Турция;3999;BX;СИНТЕТИЧЕСКИЙ ТЕКСТИЛЬ;FiberPart2;FiberPart1;100000268;ЛЕГГИНСЫ;8683121136074",
                                             parsedSaveData.alias,
                                             1
                                         );
+
+                                       */
                                     }
                                 }
                             );
@@ -672,7 +677,7 @@ export const usePrinterConfigService = create<PrinterConfigServiceModel>((set, g
             console.log("tagvalue",tagValue)
             if (tagValue) {
                 let qrCode = "";
-                if( item.tagValueList.qrCode) 
+                if( item.tagValueList.qrCode)
                 qrCode = item.tagValueList.qrCode
 
                 if (tagValue.find((x: any) => x.tag === "QRCODE")) {
@@ -754,5 +759,5 @@ export const usePrinterConfigService = create<PrinterConfigServiceModel>((set, g
             MessageBoxService.show("Etiket basarken hata oluştu");
         }
     },
-    
+
 }));

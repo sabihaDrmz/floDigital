@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../BlurView";
 import { observer } from "mobx-react";
 import React, { Component } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";

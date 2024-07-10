@@ -1,4 +1,5 @@
-import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
+//TODO: EXPO BarCodeScanner
+// import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
 import BarcodeMask from "react-native-barcode-mask";
@@ -17,13 +18,17 @@ class EasyReturnCameraScreen extends Component<EasyReturnCameraScreenProps> {
 
   state = { camPermission: false };
   componentDidMount() {
+   /* TODO: EXPO test
     BarCodeScanner.getPermissionsAsync().then((permission) => {
+
       if (!permission.granted && permission.canAskAgain) {
         BarCodeScanner.requestPermissionsAsync().then((perm) => {
           if (perm.granted) this.setState({ camPermission: true });
         });
       } else if (permission.granted) this.setState({ camPermission: true });
     });
+
+    */
   }
 
   onBarCodeRead(scanResult: any) {
@@ -68,7 +73,8 @@ class EasyReturnCameraScreen extends Component<EasyReturnCameraScreenProps> {
                 width: Dimensions.get("window").width,
               }}
             >
-              {Platform.OS !== "web" && (
+              {/*
+                Platform.OS !== "web" && (
                 <BarCodeScanner
                   onBarCodeScanned={this.handleBarCodeScanned}
                   barCodeTypes={[
@@ -82,7 +88,9 @@ class EasyReturnCameraScreen extends Component<EasyReturnCameraScreenProps> {
                 >
                   <BarcodeMask showAnimatedLine={false} />
                 </BarCodeScanner>
-              )}
+              )
+              */
+              }
             </View>
           </View>
         ) : (
@@ -96,7 +104,7 @@ class EasyReturnCameraScreen extends Component<EasyReturnCameraScreenProps> {
     );
   }
 
-  handleBarCodeScanned = (barcode: BarCodeEvent) => {
+  handleBarCodeScanned = (barcode: any) => {
     // this.props.onReadBarcode(barcode.data);
     this.props.onReadComplete(barcode.data);
   };

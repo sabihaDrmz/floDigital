@@ -8,23 +8,24 @@ import {
   TouchableOpacityProps,
   Image,
 } from "react-native";
-import * as exImp from "expo-image-picker";
-import {
-  ImageInfo,
-  ImagePickerAsset,
-} from "expo-image-picker/build/ImagePicker.types";
-import { useMessageBoxService } from "contexts/MessageBoxService";
-import { MessageBoxType } from "contexts/model/MessageBoxOptions";
+//TODO: EXPO exImp
+// import * as exImp from "expo-image-picker";
+//TODO: EXPO expo-image-picker
+// import { ImageInfo, ImagePickerAsset, } from "expo-image-picker/build/ImagePicker.types";
+import { useMessageBoxService } from "../../contexts/MessageBoxService";
+import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
 
 const CARD_WIDH = 80;
 const CARD_HEIGHT = 114;
-
+/*
 const imagePickerSettings: exImp.ImagePickerOptions = {
   mediaTypes: exImp.MediaTypeOptions.All,
   allowsEditing: false,
   aspect: [18, 9],
   quality: 0.3,
 };
+
+ */
 const FloMediaButton: React.FC<FloMediaButtonProps> = (props) => {
   return (
     <TouchableOpacity
@@ -35,7 +36,7 @@ const FloMediaButton: React.FC<FloMediaButtonProps> = (props) => {
   );
 };
 const FloMediaSelector: React.FC = (props) => {
-  const [images, setImages] = useState<ImageInfo[]>([]);
+  const [images, setImages] = useState<any>([]);
   const MessageBox = useMessageBoxService();
   const questionMediaLibrary = () => {
     MessageBox.show("Medya nereden kullanılsın", {
@@ -45,13 +46,16 @@ const FloMediaSelector: React.FC = (props) => {
       noButtonColorType: ColorType.Brand,
       yesButtonColorType: ColorType.Brand,
       yesButtonEvent: async () => {
+        /*
         let permission = await exImp.getMediaLibraryPermissionsAsync();
         if (!permission.granted && permission.canAskAgain) {
           permission = await exImp.requestMediaLibraryPermissionsAsync();
         }
 
+         */
+
         if (permission.granted)
-          exImp
+         /* exImp
             .launchImageLibraryAsync(imagePickerSettings)
             .then((selectedItem) => {
               if (selectedItem.canceled) return;
@@ -62,12 +66,14 @@ const FloMediaSelector: React.FC = (props) => {
 
               setImages([...images, image]);
             });
+
+          */
         else {
           MessageBox.show("Dosya sistemine erişim yetkisi bulunmuyor");
         }
       },
       noButtonEvent: async () => {
-        let permission = await exImp.getCameraPermissionsAsync();
+       /* let permission = await exImp.getCameraPermissionsAsync();
         if (!permission.granted && permission.canAskAgain) {
           permission = await exImp.requestCameraPermissionsAsync();
         }
@@ -82,14 +88,18 @@ const FloMediaSelector: React.FC = (props) => {
 
             setImages([...images, image]);
           });
+
+
         else {
           MessageBox.show("Kamera Yetkiniz Bulunmuyor");
         }
+
+        */
       },
     });
   };
 
-  const removeImage = (image: ImageInfo) => {
+  const removeImage = (image: any) => {
     setImages(images.filter((x) => x !== image));
   };
 

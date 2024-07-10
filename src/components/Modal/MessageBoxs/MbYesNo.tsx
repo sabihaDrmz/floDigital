@@ -9,7 +9,7 @@ import { View, Text, StyleSheet, Dimensions, Platform } from "react-native";
 import { PerfectFontSize } from "../../../helper/PerfectPixel";
 import { useMessageBoxService } from "../../../contexts/MessageBoxService";
 import { MessageBoxOptions } from "../../../contexts/model/MessageBoxOptions";
-import { translate } from "helper/localization/locaizationMain";
+import { translate } from "../../../helper/localization/locaizationMain";
 
 const MbYesNo: React.FC<{ message: string; options?: MessageBoxOptions }> = (
   props

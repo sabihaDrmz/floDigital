@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
 import AppCardColorizeSVG from "../../components/AppColorizeSvg";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import {
   AppButton,
   AppColor,

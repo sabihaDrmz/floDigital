@@ -7,20 +7,21 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import { Camera, CameraCapturedPicture } from "expo-camera";
+//TODO: EXPO expo-camera
+// import { Camera, CameraCapturedPicture } from "expo-camera";
 import { AntDesign } from "@expo/vector-icons";
 
 interface EasyReturnTakeCameraProps {
-  onSavePicture: (picture: CameraCapturedPicture) => void;
+  onSavePicture: (picture: any) => void;
 }
 
 const TAKE_BUTTON_SIZE = 70;
 const { width, height } = Dimensions.get("window");
 const EasyReturnTakeCamera = (props: EasyReturnTakeCameraProps) => {
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-  const [picture, setPicture] = useState<CameraCapturedPicture>();
-  const camera = useRef<Camera>(null);
+  const [type, setType] = useState('Camera.Constants.Type.back');
+  const [picture, setPicture] = useState<any>();
+  const camera = useRef<any>(null);
 
   const takePicture = () => {
     camera.current?.takePictureAsync().then((res) => {
@@ -29,10 +30,12 @@ const EasyReturnTakeCamera = (props: EasyReturnTakeCameraProps) => {
   };
 
   useEffect(() => {
-    Camera.requestPermissionsAsync().then((status) => {
+   /* Camera.requestPermissionsAsync().then((status) => {
       // @ts-expect-error
       setHasPermission(status.status === "granted");
     });
+
+    */
   }, []);
 
   if (hasPermission === null)
@@ -102,6 +105,7 @@ const EasyReturnTakeCamera = (props: EasyReturnTakeCameraProps) => {
           </TouchableOpacity>
         </View>
       ) : (
+        /*
         <Camera style={StyleSheet.absoluteFill} type={type} ref={camera}>
           <TouchableOpacity
             onPress={takePicture}
@@ -120,6 +124,8 @@ const EasyReturnTakeCamera = (props: EasyReturnTakeCameraProps) => {
             <AntDesign name={"camera"} size={37} />
           </TouchableOpacity>
         </Camera>
+
+         */
       )}
     </View>
   );

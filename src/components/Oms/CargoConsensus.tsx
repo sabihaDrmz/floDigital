@@ -16,7 +16,7 @@ import {
   ActivityIndicator,
   Image,
   TouchableOpacity,
-  ScrollView,
+  ScrollView,Clipboard,
   Platform,
   KeyboardAvoidingView,
   Pressable,
@@ -36,10 +36,8 @@ import { useOmsService } from "../../contexts/OmsService";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";
 import CargoConsensusDatePopup from "./partials/CargoConsensusDatePopup";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
-import { BlurView } from "expo-blur";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../LinearGradient";
 import MainCamera from "../../components/MainCamera";
-import * as Clipboard from 'expo-clipboard';
 
 const CargoConsensus: React.FC = (props) => {
   const OmsService = useOmsService();
@@ -83,7 +81,7 @@ const CargoConsensus: React.FC = (props) => {
   }, [isInitialize, OmsService.cargoConsensusRes]);
 
   const copyToClipboard = async (code: string) => {
-    await Clipboard.setStringAsync(code);
+    await Clipboard.setString(code);
     setCopyText(code)
     setTextColor("#00FF00");
     setTimeout(() => {

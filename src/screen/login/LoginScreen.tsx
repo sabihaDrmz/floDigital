@@ -3,7 +3,7 @@ import axios from "axios";
 import { VersionInfo } from "../../constant/ApplicationVersionInfo";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { useVersionService } from "../../contexts/VersionService";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../../components/LinearGradient";
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet, Dimensions, Image, Platform, AppState, TextInput, TouchableOpacity, ScrollView, Linking } from "react-native";
 import { FloButton, FloTextBox } from "../../components";
@@ -542,7 +542,9 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
     </LinearGradient>
   );
 };
+
 export default LoginScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

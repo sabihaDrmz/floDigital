@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../BlurView";
 import {
   AppButton,
   AppText,

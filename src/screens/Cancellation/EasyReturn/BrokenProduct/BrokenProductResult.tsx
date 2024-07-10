@@ -20,7 +20,8 @@ import {
 import { FloHeader } from "../../../../components/Header";
 import EasyReturnService from "../../../../core/services/EasyReturnService";
 import { AppCardColorizeSvg } from "./BrokenComplete";
-import * as exPrint from "expo-print";
+//TODO: EXPO exPrint
+// import * as exPrint from "expo-print";
 
 const LineText: React.FC<{
   txt1?: string;
@@ -204,9 +205,11 @@ const BrokenProductResult: React.FC = (props) => {
                     EasyReturnService.GetBrokenProductDocumentWithTransactionId().then(
                       async (res) => {
                         if (res) {
-                          await exPrint.printAsync({
+                       /*   await exPrint.printAsync({
                             html: EasyReturnService.brokenProductTemplate,
                           });
+
+                        */
                         }
                       }
                     );

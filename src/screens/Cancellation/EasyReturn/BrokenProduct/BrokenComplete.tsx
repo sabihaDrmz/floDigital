@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../../../../components/BlurView";
 import {
   AppButton,
   AppColor,
@@ -28,12 +28,15 @@ import ApplicationGlobalService from "../../../../core/services/ApplicationGloba
 import EasyReturnService from "../../../../core/services/EasyReturnService";
 import AppTextBox from "../../../../NewComponents/FormElements/AppTextBox";
 import { MenuIcon } from "../../../OMS/Partials/OmsReasonRadios";
-import * as exImp from "expo-image-picker";
+//TODO: EXPO expo-image-picker
+// import * as exImp from "expo-image-picker";
 import MessageBoxNew from "../../../../core/services/MessageBoxNew";
 import { translate } from "../../../../helper/localization/locaizationMain";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+//TODO: EXPO expo-image-picker
+// import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import FloLoading from "../../../../components/FloLoading";
-import * as exPrint from "expo-print";
+//TODO: EXPO exPrint
+// import * as exPrint from "expo-print";
 import MessageBox, {
   MessageBoxDetailType,
   MessageBoxType,
@@ -52,7 +55,7 @@ const BrokenComplete: React.FC = (props) => {
   const [description, setDescription] = useState("");
   const [productGroup, setProductGroup] = useState<any>();
   const [productSubGroup, setProductSubGroup] = useState<any>();
-  const [images, setImages] = useState<ImageInfo[]>([]);
+  const [images, setImages] = useState<any>([]);
   const [loadingStart, setLoadingStart] = useState(false);
   const [showCompletePopup, setShowCompletePopup] = useState(false);
   const [storeChiefChk, setStoreChiefChk] = useState<boolean>();
@@ -105,6 +108,7 @@ const BrokenComplete: React.FC = (props) => {
   };
 
   const PickImage = async () => {
+    /*
     let permState = await exImp.getMediaLibraryPermissionsAsync();
 
     if (!permState.granted && permState.canAskAgain) {
@@ -137,6 +141,8 @@ const BrokenComplete: React.FC = (props) => {
         };
         setImages([...images, image]);
       });
+
+     */
   };
 
   const [loadingImages, setLoadingImages] = useState(0);
@@ -997,11 +1003,13 @@ const BrokenComplete: React.FC = (props) => {
                     // transparent
                     buttonColorType={ColorType.Brand}
                     onPress={async () => {
-                      Platform.OS === "web"
+                      /*Platform.OS === "web"
                         ? openDocument(EasyReturnService.brokenProductTemplate)
                         : await exPrint.printAsync({
                             html: EasyReturnService.brokenProductTemplate,
                           });
+
+                       */
                     }}
                   >
                     <AntDesign name="printer" size={20} color={"white"} />

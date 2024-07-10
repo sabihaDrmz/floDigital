@@ -1,10 +1,12 @@
+// @ts-nocheck
 import React, { createContext, useContext, useEffect, useState } from "react";
-import * as MediaLibrary from "expo-media-library";
+// TODO: EXPO MediaLibrary
+//import * as MediaLibrary from "expo-media-library";
 import linq from "linq";
-import * as VideoThumbnails from "expo-video-thumbnails";
-import * as ImagePicker from "expo-image-picker";
-import * as FileSystem from "expo-file-system";
-import { Camera } from "expo-camera";
+// TODO: EXPO VideoThumbnails
+//import * as VideoThumbnails from "expo-video-thumbnails";
+// TODO: EXPO Camera
+//import { Camera } from "expo-camera";
 import { PermissionsAndroid, Platform } from "react-native";
 type MediaSelectorProviderProps = {};
 
@@ -29,7 +31,9 @@ type MediaSelector = {
   openMediaLibrary: () => void;
   openCamera: () => void;
   setIsShowData: (visiblity: boolean) => void;
-  getMediaLibraryPreviewData: () => Promise<MediaLibrary.Asset[]>;
+  // TODO: EXPO MediaLibrary
+  // getMediaLibraryPreviewData: () => Promise<MediaLibrary.Asset[]>;
+  getMediaLibraryPreviewData: () => Promise<any>;
   onAssetSelect: (media: Media) => void;
   removeMedia: (media: Media) => void;
   setMediasData: (medias: Media[]) => void;
@@ -50,41 +54,42 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
   const openCamera = () => { };
 
   const getMediaLibraryPreviewData = async (): Promise<
-    MediaLibrary.Asset[]
+    any
   > => {
-    const assets = await MediaLibrary.getAssetsAsync({ mediaType: "photo" });
+    //  const assets = await MediaLibrary.getAssetsAsync({ mediaType: "photo" });
+    const assets = {assets: []};
 
     return linq.from(assets.assets).take(10).toArray();
   };
 
   useEffect(() => {
     const cameraPermission = async () => {
-      const permission = await Camera.getCameraPermissionsAsync();
+      const permission = {}//await Camera.getCameraPermissionsAsync();
 
       console.log(permission);
 
       if (!permission?.granted) {
         if (Platform.OS === "android" || permission?.canAskAgain) {
-          const last = await Camera.requestCameraPermissionsAsync();
+          const last = {} // await Camera.requestCameraPermissionsAsync();
         }
       }
     };
     const microphonePermission = async () => {
       console.log('microphonePermission:')
-      const permission = await Camera.getMicrophonePermissionsAsync();
+      const permission = {}//await Camera.getMicrophonePermissionsAsync();
       console.log('permission:', permission)
       if (!permission?.granted) {
         if (Platform.OS === "android" || permission?.canAskAgain) {
-          const last = await Camera.requestMicrophonePermissionsAsync();
+          const last = {}//await Camera.requestMicrophonePermissionsAsync();
         }
       }
     };
 
     const mediaLibPermission = async () => {
-      const permission = await MediaLibrary.getPermissionsAsync();
+      const permission ={granted:true}// await MediaLibrary.getPermissionsAsync();
       if (!permission?.granted) {
         if (Platform.OS === "android" || permission?.canAskAgain) {
-          const last = await MediaLibrary.requestPermissionsAsync();
+         // const last = await MediaLibrary.requestPermissionsAsync();
         }
       }
     };
@@ -133,10 +138,12 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
 
   const generateThumbnail = async (videoUri: string, time: number) => {
     try {
+     /* TODO: EXPO VideoThumbnails
       const { uri } = await VideoThumbnails.getThumbnailAsync(videoUri, {
         time,
       });
-      return uri;
+     */
+      return '';
     } catch (e) {
       console.warn(e);
     }

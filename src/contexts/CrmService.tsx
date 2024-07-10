@@ -1,5 +1,6 @@
 import { translate } from "../helper/localization/locaizationMain";
-import * as MediaLibrary from "expo-media-library";
+//TODO:EXPO MediaLibrary
+// import * as MediaLibrary from "expo-media-library";
 import { CRMCaseModel } from "../../src/core/models/CrmCaseModel";
 import { GeniusFicheModel } from "./model/GeniusFicheModel";
 import { create } from "zustand";
@@ -172,11 +173,13 @@ export const useCrmService = create<CrmServiceModel>((set, get) => ({
                     let localUri = model.pickImages[i].Url;
                     // telefondaki sabit dosyalardan seçili ise
                     if (model.pickImages[i].Url.startsWith("ph://")) {
-                        var ml = await MediaLibrary.getAssetInfoAsync(
+                       /* var ml = await MediaLibrary.getAssetInfoAsync(
                             model.pickImages[i].Url.slice(5)
                         );
                         if (ml.localUri === undefined) continue;
                         localUri = ml.localUri;
+
+                        */
                     }
 
                     let filename = localUri.split("/").pop();
@@ -353,11 +356,13 @@ export const useCrmService = create<CrmServiceModel>((set, get) => ({
                 let localUri = model.medias[i].Url;
                 // telefondaki sabit dosyalardan seçili ise
                 if (model.medias[i].Url.startsWith("ph://")) {
-                    var ml = await MediaLibrary.getAssetInfoAsync(
+                  /*  var ml = await MediaLibrary.getAssetInfoAsync(
                         model.medias[i].Url.slice(5)
                     );
                     if (ml.localUri === undefined) continue;
                     localUri = ml.localUri;
+
+                   */
                 }
 
                 let filename = localUri.split("/").pop();

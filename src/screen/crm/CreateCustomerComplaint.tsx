@@ -7,8 +7,8 @@ import {
   Dimensions,
 } from "react-native";
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
-import * as exImp from "expo-image-picker";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+//import * as exImp from "expo-image-picker";
+//import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import {
   Media,
   useMediaSelector,
@@ -50,7 +50,7 @@ const CrmCreateCustomerComplatint: React.FC<any> = ({ route }) => {
   const [fisrtName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState<ImageInfo[]>([]);
+  const [images, setImages] = useState<any>([]);
   const [remoteImages, setRemoteImages] = useState<string[]>([]);
   const [stateCode, setStateCode] = useState(0);
   const [taskId, setTaskId] = useState("");

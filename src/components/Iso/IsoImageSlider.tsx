@@ -1,5 +1,5 @@
-import { AntDesign } from "components";
-import { PerfectPixelSize } from "helper/PerfectPixel";
+import { AntDesign } from "@expo/vector-icons";
+import { PerfectPixelSize } from "../../helper/PerfectPixel";
 import React, { useState } from "react";
 import {
   View,

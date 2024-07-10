@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useRef} from "react";
 import {
   View,
   StyleSheet,
@@ -10,7 +9,7 @@ import {
   Image,
   Platform,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../../components/LinearGradient";
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,

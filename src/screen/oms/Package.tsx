@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import {
   AppButton,
   AppCheckBox,
@@ -23,7 +23,7 @@ import {
   TextInput,
   Platform
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import LinearGradient from "../../components/LinearGradient";
 import { Portal } from "react-native-portalize";
 import {
   AntDesign,

@@ -26,7 +26,7 @@ import {
 import { FloHeader } from "../../components/Header";
 import { PerfectPixelSize } from "../../helper/PerfectPixel";
 import { colors } from "../../theme/colors";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
 import NotFoundIcon from "../../components/IdesComponents/SVG/NotFoundIcon";
 import MainCamera from "../../components/MainCamera";
@@ -350,7 +350,7 @@ const { width, height } = Dimensions.get("window"),
                       onPress={() => navigation.navigate("Crm", { screen: "CrmFindFiche" })}
                       buttonColorType={ColorType.Gray}
                       loading={isRejectCargoLoading}
-                    
+
                     />
                   </View>
                 )}

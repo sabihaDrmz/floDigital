@@ -17,7 +17,7 @@ import {
   AntDesign,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import { useProductService } from "../../contexts/ProductService";
 import { usePrinterConfigService } from "../../contexts/PrinterConfigService";
 import {

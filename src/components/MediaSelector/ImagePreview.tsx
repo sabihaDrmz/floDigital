@@ -3,7 +3,8 @@ import {
   AppText,
   ColorType,
 } from "@flomagazacilik/flo-digital-components";
-import { CameraCapturedPicture } from "expo-camera";
+//TODO: EXPO expo-camera
+// import { CameraCapturedPicture } from "expo-camera";
 import React from "react";
 import {
   View,
@@ -17,7 +18,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { useMediaSelector } from "./MediaSelector";
 
-interface ImagePreviewProps extends CameraCapturedPicture {
+interface ImagePreviewProps  {
   onCancel: () => void;
 }
 

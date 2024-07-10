@@ -1,4 +1,4 @@
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import {
   AppButton,
   AppColor,
@@ -19,10 +19,12 @@ import {
   Platform,
 } from "react-native";
 import Svg, { Path, SvgXml } from "react-native-svg";
-import * as exPrint from "expo-print";
+//TODO: EXPO exPrint
+// import * as exPrint from "expo-print";
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
 import { useMediaSelector } from "../../components/MediaSelector/MediaSelector";
-import { ImageInfo } from "expo-image-picker";
+//TODO: EXPO expo-image-picker
+// import { ImageInfo } from "expo-image-picker";
 import { translate } from "../../helper/localization/locaizationMain";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import FloLoading from "../../components/FloLoading";
@@ -49,7 +51,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
   const [description, setDescription] = useState("");
   const [productGroup, setProductGroup] = useState<any>();
   const [productSubGroup, setProductSubGroup] = useState<any>();
-  const [images, setImages] = useState<ImageInfo[]>([]);
+  const [images, setImages] = useState<any>([]);
   const [loadingStart, setLoadingStart] = useState(false);
   const [showCompletePopup, setShowCompletePopup] = useState(false);
   const [showGeniusResult, setShowGeniusResult] = useState(false);
@@ -964,11 +966,13 @@ const BrokenComplete: React.FC = ({ }: any) => {
                 // transparent
                 buttonColorType={ColorType.Brand}
                 onPress={async () => {
-                  Platform.OS === "web"
+                /*  Platform.OS === "web"
                     ? openDocument(brokenProductTemplate)
                     : await exPrint.printAsync({
                       html: brokenProductTemplate,
                     });
+
+                 */
                 }}
               >
                 <AntDesign name="printer" size={20} color={"white"} />

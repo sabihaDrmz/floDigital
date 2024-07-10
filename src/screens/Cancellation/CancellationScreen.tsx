@@ -27,7 +27,7 @@ import { FloHeader } from "../../components/Header";
 import { PerfectPixelSize } from "../../helper/PerfectPixel";
 import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
 import { colors } from "../../theme/colors";
-import { BlurView } from "expo-blur";
+import BlurView from "../../components/BlurView";
 import Svg, { Circle, Defs, G, Path, TSpan } from "react-native-svg";
 import EasyReturnService from "../../core/services/EasyReturnService";
 import { Observer } from "mobx-react-lite";

@@ -19,13 +19,16 @@ import CrmService from "../../core/services/CrmService";
 import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
 import { FloButton } from "../../components";
 import { Observer } from "mobx-react-lite";
-import * as exImp from "expo-image-picker";
+//TODO:EXPO expo-image-picker
+// import * as exImp from "expo-image-picker";
 import MessageBox, {
   MessageBoxDetailType,
   MessageBoxType,
 } from "../../core/services/MessageBox";
-import { MediaTypeOptions } from "expo-image-picker";
-import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
+//TODO: EXPO
+// import { MediaTypeOptions } from "expo-image-picker";
+//TODO: EXPO expo-image-picker
+// import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import FloComboBox from "../../components/FloComobox";
 import {
   CrmTaskStateArray,
@@ -226,23 +229,25 @@ const TaskDetail: React.FC<{ case: CRMCaseModel }> = (props) => {
 
 const Task: React.FC<{
   case: CRMCaseModel;
-  images: ImageInfo[];
+  images: any;
   crmTeamId?: string;
   crmTaskState?: number;
   reasonForHoldingID?: number;
-  onSelectImage: (images: ImageInfo[]) => void;
+  onSelectImage: (images: any) => void;
   onSolvedTextChange: (text: string) => void;
   onChangeTaskStateId: (state: number) => void;
   onChangeCrmTeamId: (state: string) => void;
   onChangeReasonForHolding: (state: number) => void;
 }> = (props) => {
   const PickImage = async () => {
-    let permState = await exImp.getMediaLibraryPermissionsAsync();
+   /* let permState = await exImp.getMediaLibraryPermissionsAsync();
 
     if (!permState.granted && permState.canAskAgain) {
       await exImp.requestMediaLibraryPermissionsAsync();
       permState = await exImp.getMediaLibraryPermissionsAsync();
     }
+
+
 
     if (!permState.granted) {
       MessageBox.Show(
@@ -265,11 +270,13 @@ const Task: React.FC<{
       })
       .then((pickImageResult) => {
         if (pickImageResult.cancelled) return;
-        let image: ImageInfo = {
+        let image: any = {
           ...pickImageResult,
         };
         props.onSelectImage([...props.images, image]);
       });
+
+    */
   };
 
   const RemovePicture = async (uri: string) => {
@@ -438,7 +445,7 @@ const Task: React.FC<{
 
 const CaseDetailScreen: React.FC<{ item: CRMCaseModel }> = (props) => {
   const [selectedTab, setSelectedTab] = useState(0);
-  const [selectedImages, setSelectedImages] = useState<ImageInfo[]>([]);
+  const [selectedImages, setSelectedImages] = useState<any>([]);
   const [solveText, setSolveText] = useState("");
   const { medias, setMedias } = useMediaSelector();
 

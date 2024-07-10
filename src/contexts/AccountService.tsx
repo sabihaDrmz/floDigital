@@ -6,7 +6,9 @@ import { accountInfoKey, accountUserNameKey, accountUserRememberNameKey, appIntr
 import { Platform } from "react-native";
 import { AccountLoginResult } from "./model/AccountLoginResult";
 import axios from "axios";
-import * as Device from "expo-device";
+//TODO: EXPO expo-device
+// import * as Device from "expo-device";
+import DeviceInfo from 'react-native-device-info';
 import RNExitApp from "react-native-exit-app";
 import { create } from "zustand";
 import * as RootNavigation from "../core/RootNavigation"
@@ -104,7 +106,7 @@ export const useAccountService = create<AccountServiceModel>((set, get) => ({
             userExtensionInfo === null ||
             userExtensionInfo === undefined ||
             !Array.isArray(userExtensionInfo) ||
-            userExtensionInfo.length === 0 || 
+            userExtensionInfo.length === 0 ||
             !userExtensionInfo.every(item => item.StoreWarehouseId !== null && item.StoreWarehouseId !== undefined)
         )
             return undefined;
@@ -175,7 +177,6 @@ export const useAccountService = create<AccountServiceModel>((set, get) => ({
                 `User/LoginNew`,
                 model
             );
-
             if (result.data && result.data.isValid) {
                 await updateUserInfo(result);
                 await restore();
@@ -246,7 +247,7 @@ export const useAccountService = create<AccountServiceModel>((set, get) => ({
             userRoles: rr,
         }));
 
-        let orgCode = result?.data?.organizationCode ? JSON.parse(result.data.organizationCode).toString() : ""     
+        let orgCode = result?.data?.organizationCode ? JSON.parse(result.data.organizationCode).toString() : ""
         await AsyncStorage.setItem("organizationCode", orgCode)
         set((state) => ({
             ...state,
@@ -306,20 +307,28 @@ export const useAccountService = create<AccountServiceModel>((set, get) => ({
         );
     },
     LogDevice: async (employeeInfo: any) => {
-        var rooted = await Device.isRootedExperimentalAsync();
+        //TODO: EXPO test edilmeli
+
+        const checkRootStatus = async () => {
+            const isRooted = await DeviceInfo.isRooted();
+            return isRooted;
+        };
+
         let deviceBrokenModel = {
             employeeId: employeeInfo.EfficiencyRecord || "",
             employeeName: employeeInfo?.FirstName,
-            rooted,
-            brand: Device.brand || "",
-            designName: Device.designName || "",
-            deviceName: Device.deviceName || "",
-            isEmulator: !Device.isDevice,
-            yearClass: Device.deviceYearClass || "",
-            manufacturer: Device.manufacturer || "",
-            modelName: Device.modelName || "",
-            osName: Device.osName || "",
-            osVersion: Device.osVersion || "",
+            rooted: checkRootStatus(),
+            brand: DeviceInfo.getBrand() || "",
+            // TODO: EXPO add designName
+            designName: "",
+            deviceName: DeviceInfo.getDeviceName() || "",
+            isEmulator: DeviceInfo.isEmulator(),
+            //TODO: EXPO add yearClass
+            yearClass:  "",
+            manufacturer: DeviceInfo.getManufacturer() || "",
+            model: DeviceInfo.getModel() || "",
+            osName: DeviceInfo.getSystemName() || "",
+            osVersion: DeviceInfo.getSystemVersion() || "",
         };
 
         SystemApi.post("App/LogDevice", deviceBrokenModel);

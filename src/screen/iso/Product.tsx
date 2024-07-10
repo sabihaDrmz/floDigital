@@ -50,7 +50,7 @@ import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
 import NewWarehouseRequestPopup from "../../components/Iso/NewWarehouseRequestPopup";
 import BottomSheet from "../../components/BottomSheet";
 import { useNavigation } from "@react-navigation/native";
-import { colors } from "theme/colors";
+import { colors } from "../../theme/colors";
 
 const { width, height } = Dimensions.get("window");
 const PRODUCT_IMAGE_WIDTH = 81;

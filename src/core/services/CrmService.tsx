@@ -14,6 +14,7 @@ import { GetServiceUri, ServiceUrlType } from "../Settings";
 import { chekcAuthError } from "../Util";
 import AccountService from "./AccountService";
 import MessageBox, { MessageBoxDetailType, MessageBoxType } from "./MessageBox";
+// TODO: EXPO MediaLibrary
 import * as MediaLibrary from "expo-media-library";
 import { FloDigitalErrorParse } from "../HttpModule";
 class CrmService {
@@ -157,11 +158,14 @@ class CrmService {
         let localUri = model.pickImages[i].Url;
         // telefondaki sabit dosyalardan seçili ise
         if (model.pickImages[i].Url.startsWith("ph://")) {
-          var ml = await MediaLibrary.getAssetInfoAsync(
+        /*  var ml = await MediaLibrary.getAssetInfoAsync(
             model.pickImages[i].Url.slice(5)
           );
-          if (ml.localUri === undefined) continue;
-          localUri = ml.localUri;
+
+         */
+          var ml= {};
+          if (ml?.localUri === undefined) continue;
+          localUri = ml?.localUri;
         }
 
         let filename = localUri.split("/").pop();
@@ -362,11 +366,14 @@ class CrmService {
         let localUri = model.medias[i].Url;
         // telefondaki sabit dosyalardan seçili ise
         if (model.medias[i].Url.startsWith("ph://")) {
-          var ml = await MediaLibrary.getAssetInfoAsync(
+         /* var ml = await MediaLibrary.getAssetInfoAsync(
             model.medias[i].Url.slice(5)
           );
-          if (ml.localUri === undefined) continue;
-          localUri = ml.localUri;
+
+          */
+          var ml= {};
+          if (ml?.localUri === undefined) continue;
+          localUri = ml?.localUri;
         }
 
         let filename = localUri.split("/").pop();

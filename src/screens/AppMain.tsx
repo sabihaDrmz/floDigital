@@ -15,22 +15,28 @@ import ApplicationGlobalService from "../core/services/ApplicationGlobalService"
 import { FloButton } from "../components";
 import { PerfectFontSize } from "../helper/PerfectPixel";
 import { translate } from "../helper/localization/locaizationMain";
-import * as Device from "expo-device";
+//TODO: EXPO expo-device
+// import * as Device from "expo-device";
+import DeviceInfo from 'react-native-device-info';
 import { GetServiceUri, ServiceUrlType } from "../core/Settings";
 import axios from "axios";
 import RNExitApp from "react-native-exit-app";
 import FcmService from "../core/services/FcmService";
 import { notificationEvent } from "../core/libraries/FcmFroground";
-import FileSystem from "expo-file-system";
 @observer
 class AppMain extends Component<any> {
   state = { isJailBroken: false };
   async componentDidMount() {
     await ApplicationGlobalService.restoreTestMode();
     console.log("1");
+    const checkRootStatus = async () => {
+      const isRooted = await DeviceInfo.isRooted();
+      return isRooted;
+    };
     if (!__DEV__) {
-      let res = await Device.isRootedExperimentalAsync();
-      if (res || !Device.isDevice) this.setState({ isJailBroken: true });
+
+      let res = checkRootStatus();
+      if (res || DeviceInfo.isEmulator()) this.setState({ isJailBroken: true });
 
       console.log("2");
       if (this.state.isJailBroken) return;
@@ -46,30 +52,32 @@ class AppMain extends Component<any> {
           console.log("4");
 
           if (!__DEV__) {
-            var rooted = await Device.isRootedExperimentalAsync();
+            var rooted = checkRootStatus;
 
-            if (rooted || !Device.isDevice) return;
+            if (rooted || DeviceInfo.isEmulator()) return;
           }
           console.log("5");
 
           AccountService.restore()
             .then(async (x) => {
               console.log("6");
+//TODO: EXPO test edilmeli
 
-              var rooted = await Device.isRootedExperimentalAsync();
               let deviceBrokenModel = {
                 employeeId: AccountService.employeeInfo.EfficiencyRecord || "",
                 employeeName: AccountService.employeeInfo?.FirstName,
-                rooted,
-                brand: Device.brand || "",
-                designName: Device.designName || "",
-                deviceName: Device.deviceName || "",
-                isEmulator: !Device.isDevice,
-                yearClass: Device.deviceYearClass || "",
-                manufacturer: Device.manufacturer || "",
-                modelName: Device.modelName || "",
-                osName: Device.osName || "",
-                osVersion: Device.osVersion || "",
+                rooted: checkRootStatus(),
+                brand: DeviceInfo.getBrand() || "",
+                // TODO: EXPO add designName
+                designName: "",
+                deviceName: DeviceInfo.getDeviceName() || "",
+                isEmulator: DeviceInfo.isEmulator(),
+                //TODO: EXPO add yearClass
+                yearClass:  "",
+                manufacturer: DeviceInfo.getManufacturer() || "",
+                model: DeviceInfo.getModel() || "",
+                osName: DeviceInfo.getSystemName() || "",
+                osVersion: DeviceInfo.getSystemVersion() || "",
               };
               if (Platform.OS !== "web") {
                 axios

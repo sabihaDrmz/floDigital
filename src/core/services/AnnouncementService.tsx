@@ -7,7 +7,8 @@ import { asyncFileKey } from "../StorageKeys";
 import MessageBox, { MessageBoxDetailType, MessageBoxType } from "./MessageBox";
 import { GetServiceUri, ServiceUrlType } from "../Settings";
 // import Crashlytics from "@react-native-firebase/crashlytics";
-import * as FileSystem from "expo-file-system";
+//TODO: EXPO expo-file-system
+// import * as FileSystem from "expo-file-system";
 import FcmService from "./FcmService";
 import linq from "linq";
 import { FloDigitalErrorParse } from "../HttpModule";
@@ -16,7 +17,8 @@ import FileViewer from "react-native-file-viewer";
 import { Linking, Platform } from "react-native";
 import { onlyUnique } from "../Util";
 
-const downloadedMediaDir = FileSystem.documentDirectory + "announceMedia/";
+//TODO: EXPO expo-file-system
+const downloadedMediaDir = 'FileSystem.documentDirectory' + "announceMedia/";
 class AnnouncementServiceService {
   @observable isLoading: boolean = false;
   @observable announcements: Announcement[] = [];
@@ -106,10 +108,12 @@ class AnnouncementServiceService {
       await this.ensureDirExists(downloadedMediaDir);
       const f = `${downloadedMediaDir}media_${fileId}${fileName}`;
 
-      let fileInfo = await FileSystem.getInfoAsync(f);
+     /* let fileInfo = await FileSystem.getInfoAsync(f);
       if (!fileInfo.exists) {
         await FileSystem.downloadAsync(encodeURI(uri), f);
       }
+
+      */
       FileViewer.open(f);
     } catch (err: any) {
       FloDigitalErrorParse(err);
@@ -120,10 +124,13 @@ class AnnouncementServiceService {
 
   ensureDirExists = async (fileDir: string) => {
     try {
+      /*
       const dirInfo = await FileSystem.getInfoAsync(fileDir);
       if (!dirInfo.exists) {
         await FileSystem.makeDirectoryAsync(fileDir, { intermediates: true });
       }
+
+       */
     } catch (err: any) {
       FloDigitalErrorParse(err);
     }

@@ -30,7 +30,6 @@ import linq from "linq";
 import MessageBoxNew from "../../core/services/MessageBoxNew";
 import FloTextBoxNew from "../../components/FloTextBoxNew";
 import { Portal } from "react-native-portalize";
-import { BlurView } from "expo-blur";
 import OmsCargoConsensusDatePopup from "./Partials/OmsCargoConsensusDatePopup";
 import { translate } from "../../helper/localization/locaizationMain";
 import ApplicationGlobalService from "../../core/services/ApplicationGlobalService";
