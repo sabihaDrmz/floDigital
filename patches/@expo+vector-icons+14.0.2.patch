@@ -1,0 +1,31 @@
+diff --git a/node_modules/@expo/vector-icons/build/createIconSet.js b/node_modules/@expo/vector-icons/build/createIconSet.js
+index e8e1ec0..8875ebe 100644
+--- a/node_modules/@expo/vector-icons/build/createIconSet.js
++++ b/node_modules/@expo/vector-icons/build/createIconSet.js
+@@ -1,4 +1,4 @@
+-import * as Font from 'expo-font';
++//import * as Font from 'expo-font';
+ import React from 'react';
+ import { Text, } from 'react-native';
+ import createIconSet from './vendor/react-native-vector-icons/lib/create-icon-set';
+@@ -13,17 +13,17 @@ export default function (glyphMap, fontName, expoAssetId, fontStyle) {
+         static glyphMap = glyphMap;
+         static getRawGlyphMap = () => glyphMap;
+         static getFontFamily = () => fontName;
+-        static loadFont = () => Font.loadAsync(font);
++        static loadFont = () => null;
+         static font = font;
+         _mounted = false;
+         _icon;
+         state = {
+-            fontIsLoaded: Font.isLoaded(fontName),
++            fontIsLoaded:false,
+         };
+         async componentDidMount() {
+             this._mounted = true;
+             if (!this.state.fontIsLoaded) {
+-                await Font.loadAsync(font);
++               // await Font.loadAsync(font);
+                 /* eslint-disable react/no-did-mount-set-state */
+                 this._mounted && this.setState({ fontIsLoaded: true });
+             }

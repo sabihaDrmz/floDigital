@@ -1,0 +1,58 @@
+diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/commonjs/components/AppButton.js b/node_modules/@flomagazacilik/flo-digital-components/lib/commonjs/components/AppButton.js
+index 09288b5..1c95c88 100644
+--- a/node_modules/@flomagazacilik/flo-digital-components/lib/commonjs/components/AppButton.js
++++ b/node_modules/@flomagazacilik/flo-digital-components/lib/commonjs/components/AppButton.js
+@@ -15,7 +15,7 @@ var _reactNative = require("react-native");
+ 
+ var _AppText = require("../typography/AppText");
+ 
+-var _expoLinearGradient = require("expo-linear-gradient");
++//var _expoLinearGradient = require("expo-linear-gradient");
+ 
+ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+ 
+@@ -57,17 +57,7 @@ const AppButtonContent = props => {
+ };
+ 
+ const AppButton = props => {
+-  if (props.linear) return /*#__PURE__*/_react.default.createElement(_expoLinearGradient.LinearGradient, {
+-    colors: ['rgb(255,134,0)', 'rgb(255,103,28)'],
+-    style: {
+-      borderRadius: props.rounded ? 25 : 8,
+-      marginBottom: 5
+-    },
+-    start: {
+-      x: 1,
+-      y: 0
+-    }
+-  }, /*#__PURE__*/_react.default.createElement(AppButtonContent, _extends({}, props, {
++  if (props.linear) return /*#__PURE__*/_react.default.createElement(AppButtonContent, _extends({}, props, {
+     style: {
+       backgroundColor: 'transparent'
+     }
+diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/module/components/AppButton.js b/node_modules/@flomagazacilik/flo-digital-components/lib/module/components/AppButton.js
+index 9997030..2f7158e 100644
+--- a/node_modules/@flomagazacilik/flo-digital-components/lib/module/components/AppButton.js
++++ b/node_modules/@flomagazacilik/flo-digital-components/lib/module/components/AppButton.js
+@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
+ import { AppText, FontSizes, ColorType, LabelType } from '@flomagazacilik/flo-digital-components';
+ import { ActivityIndicator } from 'react-native';
+ import { getFontColor } from '../typography/AppText';
+-import { LinearGradient } from 'expo-linear-gradient';
++import LinearGradient from '../../../../../src/components/LinearGradient';
+ const AppButtonContainer = styled.TouchableOpacity(props => {
+   let bc = props.$transparent ? 'transparent' : getFontColor(props.$color).color;
+   return {
+diff --git a/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx b/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx
+index c223583..f7f2726 100644
+--- a/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx
++++ b/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx
+@@ -9,7 +9,7 @@ import {
+ } from '@flomagazacilik/flo-digital-components';
+ import { ActivityIndicator } from 'react-native';
+ import { getFontColor } from '../typography/AppText';
+-import { LinearGradient } from 'expo-linear-gradient';
++import LinearGradient from '../../../../../src/components/LinearGradient';
+ 
+ const AppButtonContainer = styled.TouchableOpacity<{
+   $color?: ColorType;
