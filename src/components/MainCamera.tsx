@@ -1,16 +1,22 @@
-//TODO: EXPO BarCodeScanner
-// import { BarCodeEvent, BarCodeScanner } from "expo-barcode-scanner";
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
+//TODO: EXPO BarCodeScanner only test
+import type { Code } from 'react-native-vision-camera';
+import {
+  useCameraDevice,
+  useCodeScanner,
+  Camera,
+} from 'react-native-vision-camera';
+import { check, request, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
+
+import React, { useCallback, useEffect, useState } from "react";
+import { View, Text, StyleSheet, Dimensions, Platform, StatusBar, Linking } from "react-native";
 import { Portal } from "react-native-portalize";
-import FloHeaderNew from "./Header/FloHeaderNew";
 import { translate } from "../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../helper/PerfectPixel";
-import { colors } from "../theme/colors";
 import BarcodeMask from "react-native-barcode-mask";
 import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native";
+import { useMessageBoxService } from "../contexts/MessageBoxService";
 
 interface CameraProps {
   onReadComplete: (barcode: string) => void;
@@ -21,49 +27,81 @@ interface CameraProps {
 }
 
 const MainCamera: React.FC<CameraProps> = (props) => {
-  const [camPermission, setCamPermission] = useState<boolean>(false);
-  const [isReading, setIsReading] = useState<boolean>(false);
-/*
+  const [isPermitted, setIsPermitted] = useState<boolean>(false);
+  const device = useCameraDevice('back');
+  const MessageBoxShow = useMessageBoxService(state => state.show);
+
   const allowedBarCodes = props.isKazakistan
-    ? [BarCodeScanner.Constants.BarCodeType.datamatrix]
+    ? ['data-matrix']
     : props.isSelfCheckOut
       ? [
-        BarCodeScanner.Constants.BarCodeType.datamatrix,
-        BarCodeScanner.Constants.BarCodeType.qr,
+        'data-matrix',
+        'qr',
       ]
       : [
-        BarCodeScanner.Constants.BarCodeType.ean13,
-        BarCodeScanner.Constants.BarCodeType.code128,
-        BarCodeScanner.Constants.BarCodeType.code39,
-        BarCodeScanner.Constants.BarCodeType.qr,
-        BarCodeScanner.Constants.BarCodeType.upc_e,
+        'ean-13',
+        'code-128',
+        'code-39',
+        'qr',
+        'upc-e',
       ];
 
- */
-  const handleBarCodeScanned = (barcode: any) => {
-    if (!isReading) {
-      setIsReading(true);
-      if (props.onReadComplete) {
-        props.onReadComplete(barcode.data);
-      }
-      setIsReading(false);
-    }
-  };
+
+  const onCodeScanned = useCallback((codes: Code[]) => {
+    const value = codes[0]?.value;
+    if (value == null) return;
+
+    props.onReadComplete(value);
+  }, []);
 
   useEffect(() => {
-    /*
-    if (Platform.OS !== "web") {
-      BarCodeScanner.getPermissionsAsync().then((permission) => {
-        if (!permission.granted && permission.canAskAgain) {
-          BarCodeScanner.requestPermissionsAsync().then((perm) => {
-            if (perm.granted) setCamPermission(true);
+    if (props.isShow) {
+      if (Platform.OS === 'android') {
+        check(PERMISSIONS.ANDROID.CAMERA)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.ANDROID.CAMERA).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
           });
-        } else if (permission.granted) setCamPermission(true);
-      });
+      }
+      if (Platform.OS === 'ios') {
+        check(PERMISSIONS.IOS.CAMERA)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.IOS.CAMERA).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
     }
+  }, [props.isShow]);
 
-     */
-  }, []);
+
+  const codeScanner = useCodeScanner({
+    codeTypes: allowedBarCodes,
+    onCodeScanned: onCodeScanned,
+  });
 
   if (!props.isShow) return null;
 
@@ -133,7 +171,7 @@ const MainCamera: React.FC<CameraProps> = (props) => {
           </View>
         </View>
 
-        {camPermission ? (
+        {isPermitted ? (
           <View style={styles.container}>
             <View style={styles.cameraInfoContainer}>
               <Text style={styles.cameraInfoText}>
@@ -154,20 +192,18 @@ const MainCamera: React.FC<CameraProps> = (props) => {
                 width: Dimensions.get("window").width,
               }}
             >
-              {
-                /*
-                Platform.OS !== "web" && (
-
-                <BarCodeScanner
-                  onBarCodeScanned={handleBarCodeScanned}
-                  barCodeTypes={allowedBarCodes}
+              {device != null && (
+                <Camera
                   style={StyleSheet.absoluteFill}
-                >
-                  <BarcodeMask showAnimatedLine={false} />
-                </BarCodeScanner>
-              )
-                */
-              }
+                  device={device}
+                  isActive={props.isShow}
+                  codeScanner={codeScanner}
+                  torch={'off'}
+                  enableZoomGesture={true}
+                />
+              )}
+              <BarcodeMask showAnimatedLine={false} />
+
             </View>
           </View>
         ) : (
