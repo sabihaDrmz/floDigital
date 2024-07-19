@@ -50,7 +50,7 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
   const discoverDevices = async () => {
     console.log("Search device");
     try {
-    //TODO:EXPO
+    //TODO: EXPO Pathfinder
       //  const foundDevices = await Pathfinder.discoverDevices();
       const foundDevices = [];
 

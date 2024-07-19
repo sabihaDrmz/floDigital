@@ -96,7 +96,7 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
           dev[1]
         );
       } else {
-        //TODO: EXPO
+        //TODO: EXPO Pathfinder
         // await Pathfinder.connectDevice(deviceKey);
       }
     } catch (err) {

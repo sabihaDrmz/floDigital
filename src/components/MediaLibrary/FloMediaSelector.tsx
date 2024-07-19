@@ -8,7 +8,7 @@ import {
   TouchableOpacityProps,
   Image,
 } from "react-native";
-//TODO: EXPO exImp
+//TODO: EXPO expo-image-picker
 // import * as exImp from "expo-image-picker";
 //TODO: EXPO expo-image-picker
 // import { ImageInfo, ImagePickerAsset, } from "expo-image-picker/build/ImagePicker.types";
