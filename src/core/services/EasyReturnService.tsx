@@ -1,5 +1,5 @@
 import axios from "axios";
-//TODO: EXPO expo-camera
+//TODO: EXPO expo-camera   +++++   type için kullanılmış sadece, any olarak setledim .
 // import { CameraCapturedPicture } from "expo-camera";
 import {
   action,

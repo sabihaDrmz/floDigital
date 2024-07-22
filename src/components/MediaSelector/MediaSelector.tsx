@@ -1,13 +1,16 @@
 // @ts-nocheck
 import React, { createContext, useContext, useEffect, useState } from "react";
-// TODO: EXPO MediaLibrary
+// TODO: EXPO MediaLibrary expo-media-library
 //import * as MediaLibrary from "expo-media-library";
 import linq from "linq";
-// TODO: EXPO VideoThumbnails
-//import * as VideoThumbnails from "expo-video-thumbnails";
-// TODO: EXPO Camera
-//import { Camera } from "expo-camera";
-import { PermissionsAndroid, Platform } from "react-native";
+// TODO: EXPO VideoThumbnails expo-video-thumbnails  only test
+import createThumbnail from 'react-native-create-thumbnail';
+
+// TODO: EXPO Camera expo-camera ++++  only test
+import { check, request, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
+
+import { Linking, PermissionsAndroid, Platform } from "react-native";
+import { useMessageBoxService } from "../../contexts/MessageBoxService";
 type MediaSelectorProviderProps = {};
 
 type MediaType = "video" | "picture";
@@ -31,8 +34,6 @@ type MediaSelector = {
   openMediaLibrary: () => void;
   openCamera: () => void;
   setIsShowData: (visiblity: boolean) => void;
-  // TODO: EXPO MediaLibrary
-  // getMediaLibraryPreviewData: () => Promise<MediaLibrary.Asset[]>;
   getMediaLibraryPreviewData: () => Promise<any>;
   onAssetSelect: (media: Media) => void;
   removeMedia: (media: Media) => void;
@@ -46,6 +47,8 @@ export const useMediaSelector = () => useContext(MediaSelectorContext);
 export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
   const [isShow, setIsShow] = useState(false);
   const [medias, setMedias] = useState<Media[]>([]);
+  const [isPermitted, setIsPermitted] = useState<boolean>(false);
+  const MessageBoxShow = useMessageBoxService(state => state.show);
 
   const [settings, setSettings] = useState<MediaSelectorSettings | undefined>();
 
@@ -56,6 +59,7 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
   const getMediaLibraryPreviewData = async (): Promise<
     any
   > => {
+    //TODO: EXPO MediaLibrary !!!!
     //  const assets = await MediaLibrary.getAssetsAsync({ mediaType: "photo" });
     const assets = {assets: []};
 
@@ -64,33 +68,142 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
 
   useEffect(() => {
     const cameraPermission = async () => {
-      const permission = {}//await Camera.getCameraPermissionsAsync();
-
-      console.log(permission);
-
-      if (!permission?.granted) {
-        if (Platform.OS === "android" || permission?.canAskAgain) {
-          const last = {} // await Camera.requestCameraPermissionsAsync();
-        }
+      if (Platform.OS === 'android') {
+        check(PERMISSIONS.ANDROID.CAMERA)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.ANDROID.CAMERA).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+      if (Platform.OS === 'ios') {
+        check(PERMISSIONS.IOS.CAMERA)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.IOS.CAMERA).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
     };
     const microphonePermission = async () => {
-      console.log('microphonePermission:')
-      const permission = {}//await Camera.getMicrophonePermissionsAsync();
-      console.log('permission:', permission)
-      if (!permission?.granted) {
-        if (Platform.OS === "android" || permission?.canAskAgain) {
-          const last = {}//await Camera.requestMicrophonePermissionsAsync();
-        }
+      if (Platform.OS === 'android') {
+        check(PERMISSIONS.ANDROID.RECORD_AUDIO)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.ANDROID.RECORD_AUDIO).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+      if (Platform.OS === 'ios') {
+        check(PERMISSIONS.IOS.MICROPHONE)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.IOS.MICROPHONE).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
     };
 
     const mediaLibPermission = async () => {
-      const permission ={granted:true}// await MediaLibrary.getPermissionsAsync();
-      if (!permission?.granted) {
-        if (Platform.OS === "android" || permission?.canAskAgain) {
-         // const last = await MediaLibrary.requestPermissionsAsync();
-        }
+      if (Platform.OS === 'android') {
+        check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+
+        check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+      if (Platform.OS === 'ios') {
+        check(PERMISSIONS.IOS.MEDIA_LIBRARY)
+          .then(result => {
+            setIsPermitted(RESULTS.GRANTED === result)
+            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
+              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+                yesButtonEvent: () => {
+                  Linking.openSettings().then();
+                },
+              })
+              request(PERMISSIONS.IOS.MEDIA_LIBRARY).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
+                console.error(error);
+              });
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
     };
 
@@ -113,19 +226,22 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
 
     const checkPermission = async () => {
       try {
+        console.log('nearby permission');
         await nearbyPermission();
-      } catch (err) { }
+      } catch (err) {
+        console.log('nearby permission error:',err);
+      }
       try {
         console.log("mic");
         await microphonePermission();
       } catch (err) {
-        console.log(err);
+        console.log('mic permission error:',err);
       }
 
       try {
         await cameraPermission();
       } catch (err) {
-        console.log(err);
+        console.log('cam permission error:',err);
       }
 
       try {
@@ -138,12 +254,11 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
 
   const generateThumbnail = async (videoUri: string, time: number) => {
     try {
-     /* TODO: EXPO VideoThumbnails
-      const { uri } = await VideoThumbnails.getThumbnailAsync(videoUri, {
-        time,
+      const { path } = await createThumbnail({
+        url: videoUri,
+        timeStamp: time
       });
-     */
-      return '';
+      return path;
     } catch (e) {
       console.warn(e);
     }

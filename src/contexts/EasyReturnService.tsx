@@ -1,4 +1,4 @@
-//TODO: EXPO expo-camera
+//TODO: EXPO expo-camera   +++++   type için kullanılmış sadece, any olarak setledim .
 // import { CameraCapturedPicture } from "expo-camera";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ErFiche, ErOrder } from "../core/models/ErFindFicheItem";

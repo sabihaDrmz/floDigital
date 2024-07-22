@@ -3,8 +3,9 @@ import {
   AppText,
   ColorType,
 } from "@flomagazacilik/flo-digital-components";
-//TODO: EXPO expo-camera
+//TODO: EXPO expo-camera ++++ propları extend alınmıştı, manuel ekledim gerek kalmadı.
 // import { CameraCapturedPicture } from "expo-camera";
+
 import React from "react";
 import {
   View,
@@ -20,6 +21,22 @@ import { useMediaSelector } from "./MediaSelector";
 
 interface ImagePreviewProps  {
   onCancel: () => void;
+  /**
+   * Captured image width.
+   */
+  width: number;
+  /**
+   * Captured image height.
+   */
+  height: number;
+  /**
+   * On web, the value of `uri` is the same as `base64` because file system URLs are not supported in the browser.
+   */
+  uri: string;
+  /**
+   * A Base64 representation of the image.
+   */
+  base64?: string;
 }
 
 const { width, height } = Dimensions.get("window");
