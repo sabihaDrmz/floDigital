@@ -22,11 +22,12 @@ import FloLoadingModal from "../../components/Modal/FloLoadingModal";
 import { Feather } from '@expo/vector-icons';
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
-//TODO: EXPO AV
+//TODO: EXPO AV  expo-av  ++++++ only test
 // import { Audio } from 'expo-av';
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../theme/colors";
 import { translate } from "../../helper/localization/locaizationMain";
+import { playSound } from "../../core/Util";
 
 const StoreWarehoseProductIdentification = ({ }: any) => {
   const { getListForStoreWarehouse, createProductForStoreWarehouseUnit, storeWarehouseList, isLoading, addProductList } = useStoreWarehouseService();
@@ -137,7 +138,7 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
           x => x.id === selectedWarehose
         );
 
-        await playNotificationSound();
+      await  playSound(require('../../../assets/ping.mp3'))
 
         newProduct.storeWhName = currentStoreWh?.code;
         setProductList([...productList, newProduct]);
@@ -151,18 +152,6 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
     const newProductList = productList.filter(x => x.storeWhId !== products.storeWhId || x?.sku !== products?.sku || x?.storeWhLabelCode !== products?.storeWhLabelCode);
     setProductList(newProductList);
   }
-
-
-  const playNotificationSound = async () => {
-   /*
-    const { sound } = await Audio.Sound.createAsync(
-
-      require('../../../assets/ping.mp3')
-    );
-    await sound.playAsync();
-
-    */
-  };
 
   const handleBlur = () => {
     const trimmedText = product?.storeWhLabelCode?.trim()

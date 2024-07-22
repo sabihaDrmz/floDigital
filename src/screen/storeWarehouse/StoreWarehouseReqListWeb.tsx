@@ -17,11 +17,12 @@ import { StoreWarehouseResModel } from "../../contexts/model/StoreWarehouseModal
 import FloLoading from "../../components/FloLoading";
 import { useAccountService } from "../../contexts/AccountService";
 import { AppButton, ColorType } from "@flomagazacilik/flo-digital-components";
-//TODO: EXPO AV
+//TODO: EXPO AV expo-av  ++++++ only test
 // import { Audio } from 'expo-av';
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { translate } from "../../helper/localization/locaizationMain";
+import { playSound } from "../../core/Util";
 export interface StoreWarehouseModel {
     id: string;
     code: string;
@@ -56,22 +57,12 @@ const StoreWarehouseReqListWeb = ({ }: any) => {
     const [lastMessage, setLastMessage] = useState()
     const [allData, setAllData] = useState<StoreWarehouseResModel[] | undefined>()
     const [currentIndex, setCurrentIndex] = useState<number | undefined>();
-    const playNotificationSound = async () => {
-      /*
-        const { sound } = await Audio.Sound.createAsync(
-
-            require('../../../assets/newReqSound.mp3')
-        );
-        await sound.playAsync();
-
-       */
-    };
 
     const checkStatusAndPlaySound = () => {
         if (allData) {
             const hasStatusZero = allData.some(item => item.status === 0);
             if (hasStatusZero) {
-                playNotificationSound();
+                playSound(require('../../../assets/newReqSound.mp3'))
             }
         }
     };

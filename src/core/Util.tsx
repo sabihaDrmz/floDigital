@@ -2,6 +2,7 @@ import { useApplicationGlobal } from "contexts/ApplicationGlobalContext";
 import { useUser } from "contexts/UserContext";
 import React from "react";
 import { Linking, Platform } from "react-native";
+import Sound from "react-native-sound";
 
 export function tokenizeHeader(st: any) {
   var token = st.get("accountInfo");
@@ -125,4 +126,22 @@ export const openGps = (lat: any, lng: any, storeName: any) => {
   });
 
   if (url) Linking.openURL(url);
+};
+
+export const playSound = (soundPath:any) => {
+
+  var whoosh = new Sound(soundPath, (error) => {
+    if (error) {
+      //console.log('failed to load the sound', error);
+      return;
+    }
+    // Play the sound with an onEnd callback
+    whoosh.play((success) => {
+      if (success) {
+       // console.log('successfully finished playing');
+      } else {
+        console.log('playback failed due to audio decoding errors');
+      }
+    });
+  });
 };

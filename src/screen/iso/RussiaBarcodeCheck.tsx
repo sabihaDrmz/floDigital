@@ -19,10 +19,12 @@ import MainCamera from "../../components/MainCamera";
 import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import { MaterialIcons } from "../../components";
-//TODO: EXPO AV
+//TODO: EXPO AV expo-av ++++++ only test
 // import { Audio } from 'expo-av';
 import { NavigationType } from "./Navigation";
 import FloLoading from "../../components/FloLoading";
+
+import { playSound } from "../../core/Util";
 
 interface IsoBarcodeCheckProps {
 }
@@ -41,15 +43,8 @@ const RussiaBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
   const [isCameraShow, setIsCameraShow] = useState(false);
   const [barcodes, setbarcodes] = useState<barcodeOrGeneric[]>([]);
 
-  const playNotificationSound = async () => {
-   /*
-    const { sound } = await Audio.Sound.createAsync(
-      require('../../../assets/ping.mp3')
-    );
-    await sound.playAsync();
 
-    */
-  };
+
   const handleVibratePattern = async () => {
     const vibrationPromise = new Promise<void>((resolve) => {
       Vibration.vibrate([1000]);
@@ -57,7 +52,11 @@ const RussiaBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
     });
 
     // Ses oynatma Promise'i
-    const soundPromise = playNotificationSound();
+    const soundPromise =
+      new Promise<void>((resolve) => {
+        playSound(require('../../../assets/ping.mp3'));
+        resolve();
+      });
 
     // Her iki Promise'i aynı anda başlatıyoruz
     await Promise.all([vibrationPromise, soundPromise]);
