@@ -671,7 +671,7 @@ const CompletionOfSalesShortage: React.FC = ({ navigation }: any) => {
                               y.productImage.includes("flo-logo.svg") ? (
                               <View style={styles.imageButton}>
                                 <Image
-                                  source={require("../../../assets/img/ui/flo-logo.png")}
+                                  source={require("../../assets/img/ui/flo-logo.png")}
                                   style={{
                                     width: 70,
                                     height: 70,

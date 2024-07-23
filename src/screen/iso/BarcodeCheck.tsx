@@ -241,7 +241,7 @@ const IsoBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
             }}
           >
             <Image
-              source={require("../../../assets/S.png")}
+              source={require("../../assets/S.png")}
               style={{
                 width: PerfectPixelSize(112),
                 height: PerfectPixelSize(103),
@@ -271,7 +271,7 @@ const IsoBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
             }}
           >
             <Image
-              source={require("../../../assets/basketsicon.png")}
+              source={require("../../assets/basketsicon.png")}
               style={{
                 width: PerfectPixelSize(73),
                 height: PerfectPixelSize(73),

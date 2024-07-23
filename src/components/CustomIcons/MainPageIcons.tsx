@@ -738,7 +738,7 @@ const DiscountIcon = (props: any) => {
 };
 
 function ChangeOrderIcon(props: any) {
-  return <Image source={require("../../../assets/degisimicon.png")} />;
+  return <Image source={require("../../assets/degisimicon.png")} />;
 }
 export {
   AnnouncementIcon,

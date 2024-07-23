@@ -92,7 +92,7 @@ const BackCargoScreen: React.FC = () => {
               }}
             >
               <Image
-                source={require("../../../assets/storeico.png")}
+                source={require("../../assets/storeico.png")}
                 style={{ width: 40, height: 40 }}
               />
               <AppText selectable>

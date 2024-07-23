@@ -244,7 +244,7 @@ const TabBar = (props: any) => {
               {translate("tabbar.processBtnTxt")}
             </Text>
             <Image
-              source={require("../../../assets/processicon.png")}
+              source={require("../../assets/processicon.png")}
               style={{
                 height: 21,
                 tintColor: "#fff",
@@ -305,7 +305,7 @@ const TabBar = (props: any) => {
               >
                 <View>
                   <Image
-                    source={require("../../../assets/depoekle.png")}
+                    source={require("../../assets/depoekle.png")}
                     style={{ width: 47, height: 40, resizeMode: "contain" }}
                   />
                 </View>
@@ -340,7 +340,7 @@ const TabBar = (props: any) => {
             onPress={() => navigateTo("scTbHome", 1)}
           >
             <Animated.Image
-              source={require("../../../assets/homeicon.png")}
+              source={require("../../assets/homeicon.png")}
               style={[
                 {
                   width: 21,
@@ -366,7 +366,7 @@ const TabBar = (props: any) => {
           <TouchableOpacity style={styles.tab} onPress={() => openMenu()}>
             <View>
               <Animated.Image
-                source={require("../../../assets/processicon.png")}
+                source={require("../../assets/processicon.png")}
                 style={[
                   {
                     height: 21,

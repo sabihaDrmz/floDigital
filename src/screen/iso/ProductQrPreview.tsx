@@ -83,7 +83,7 @@ const ProductQrPreview: React.FC<any> = (props) => {
           >
             {productData.images && productData.images.indexOf("flo-logo.svg") ? (
               <Image
-                source={require("../../../assets/ruNoImage.png")}
+                source={require("../../assets/ruNoImage.png")}
                 style={{
                   width: 100,
                   height: 100,
@@ -804,7 +804,7 @@ const ProductQrPreview: React.FC<any> = (props) => {
                       }}
                     >
                       <Image
-                        source={require("../../../assets/S.png")}
+                        source={require("../../assets/S.png")}
                         style={{
                           width: PerfectPixelSize(112),
                           height: PerfectPixelSize(103),

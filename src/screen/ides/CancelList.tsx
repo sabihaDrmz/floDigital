@@ -42,7 +42,7 @@ const InformationLine: React.FC = (props) => {
         }}
       >
         <Image
-          source={require("../../../assets/crmi.png")}
+          source={require("../../assets/crmi.png")}
           style={{ width: 40, height: 40, marginRight: 10 }}
         />
         <AppText style={{ width: "85%" }}>{translate("cancelList")}</AppText>
@@ -83,7 +83,7 @@ const FicheInfo: React.FC<{
           }}
         >
           <Image
-            source={require("../../../assets/storeico.png")}
+            source={require("../../assets/storeico.png")}
             style={{ width: 35, height: 35, marginLeft: 10 }}
           />
           <AppText selectable>{props.storeId}</AppText>

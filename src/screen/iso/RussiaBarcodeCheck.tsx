@@ -54,7 +54,7 @@ const RussiaBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
     // Ses oynatma Promise'i
     const soundPromise =
       new Promise<void>((resolve) => {
-        playSound(require('../../../assets/ping.mp3'));
+        playSound(require('../../assets/ping.mp3'));
         resolve();
       });
 
@@ -288,7 +288,7 @@ const RussiaBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
             }}
           >
             <Image
-              source={require("../../../assets/S.png")}
+              source={require("../../assets/S.png")}
               style={{
                 width: PerfectPixelSize(112),
                 height: PerfectPixelSize(103),

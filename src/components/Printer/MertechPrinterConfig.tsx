@@ -18,13 +18,13 @@ import DevicePicker from './DevicePicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as bleLib from "react-native-ble-plx";
 
-import { alert } from '../../../utils';
 //@ts-ignore
 import { useBluetoothModuleService } from '../../contexts/BluetoothModuleService';
 
 import PrinterImagePopup from "./PrinterImagePopup";
 import { useMessageBoxService } from '../../contexts/MessageBoxService';
 import { MessageBoxType } from '../../contexts/model/MessageBoxOptions';
+import { alertCustom } from "../../utils/util";
 
 const MertechPrinterConfig = () => {
   const { printerConfigList, loadAllPrinterConfigs, selectedPrinter, setPrintConfig } = usePrinterConfigService();
@@ -259,7 +259,7 @@ const MertechPrinterConfig = () => {
       if (error) {
         setIsMonitoring(false);
         console.log('monitor fail:', error);
-        alert('monitor fail: ' + error.reason);
+        alertCustom('monitor fail: ' + error.reason);
       }
       else {
         setIsMonitoring(false);

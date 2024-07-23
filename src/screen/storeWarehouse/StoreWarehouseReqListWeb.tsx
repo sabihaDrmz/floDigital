@@ -62,7 +62,7 @@ const StoreWarehouseReqListWeb = ({ }: any) => {
         if (allData) {
             const hasStatusZero = allData.some(item => item.status === 0);
             if (hasStatusZero) {
-                playSound(require('../../../assets/newReqSound.mp3'))
+                playSound(require('../../assets/newReqSound.mp3'))
             }
         }
     };

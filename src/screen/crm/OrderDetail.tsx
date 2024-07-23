@@ -419,12 +419,12 @@ const OrderDetail: React.FC<any> = (props) => {
                   onPress={() => Linking.openURL(props.info?.shipping_link_url)}
                 >
                   <Image
-                    source={require("../../../assets/shippingIcon.png")}
+                    source={require("../../assets/shippingIcon.png")}
                     style={{ width: 59, height: 59, marginLeft: 10 }}
                   />
                   <View style={{ position: "absolute" }}>
                     <Image
-                      source={require("../../../assets/crmi.png")}
+                      source={require("../../assets/crmi.png")}
                       style={{
                         width: 38,
                         height: 38,
@@ -526,7 +526,7 @@ const OrderDetail: React.FC<any> = (props) => {
             }}
           >
             <Image
-              source={require("../../../assets/storeico.png")}
+              source={require("../../assets/storeico.png")}
               style={{ width: 35, height: 35 }}
             />
             <AppText selectable>{crmOrders.createdStore}</AppText>

@@ -82,7 +82,7 @@ class TabBar extends Component<any> {
                 İŞLEMLER
               </Text>
               <Image
-                source={require("../../../assets/processicon.png")}
+                source={require("../../assets/processicon.png")}
                 style={{
                   width: 21,
                   height: 21,
@@ -103,7 +103,7 @@ class TabBar extends Component<any> {
               onPress={() => this.navigateTo("scTbHome", 1)}
             >
               <Image
-                source={require("../../../assets/homeicon.png")}
+                source={require("../../assets/homeicon.png")}
                 style={{
                   width: 21,
                   height: 21,
@@ -132,7 +132,7 @@ class TabBar extends Component<any> {
               onPress={() => this.navigateTo("scTbFindBarcode", 2)}
             >
               <Image
-                source={require("../../../assets/searchico.png")}
+                source={require("../../assets/searchico.png")}
                 style={{
                   width: 30,
                   height: 30,
@@ -145,7 +145,7 @@ class TabBar extends Component<any> {
               onPress={() => this.openMenu()}
             >
               <Image
-                source={require("../../../assets/processicon.png")}
+                source={require("../../assets/processicon.png")}
                 style={{
                   width: 21,
                   height: 21,

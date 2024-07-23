@@ -50,7 +50,7 @@ const FindOrder: React.FC = () => {
           >
             <Image
               style={cameraButtonIco}
-              source={require("../../../assets/S.png")}
+              source={require("../../assets/S.png")}
             />
           </TouchableOpacity>
         </View>

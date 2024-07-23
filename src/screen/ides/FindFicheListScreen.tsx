@@ -77,7 +77,7 @@ const FindFicheListScreen: React.FC = () => {
                 }}
               >
                 <Image
-                  source={require("../../../assets/storeico.png")}
+                  source={require("../../assets/storeico.png")}
                   style={{ width: 35, height: 35 }}
                 />
                 <AppText selectable>{props.storeId}</AppText>

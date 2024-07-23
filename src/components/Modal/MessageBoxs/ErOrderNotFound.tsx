@@ -115,7 +115,7 @@ const NotFoundIcon: React.FC = (props) => {
     return (
         <Image
             style={{ width: 72, height: 83 }}
-            source={require("../../../../assets/notfoundorder.png")}
+            source={require("../../../assets/notfoundorder.png")}
         />
     );
 };

@@ -138,7 +138,7 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
           x => x.id === selectedWarehose
         );
 
-      await  playSound(require('../../../assets/ping.mp3'))
+      await  playSound(require('../../assets/ping.mp3'))
 
         newProduct.storeWhName = currentStoreWh?.code;
         setProductList([...productList, newProduct]);
@@ -313,7 +313,7 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
                 <FloTextBoxNew
                   onChangeText={(txt) => handleOnchange(txt, "storeWhLabelCode", false)}
                   value={product.storeWhLabelCode}
-                  placeholder={translate("storeWarehouse.scanEnterQr")}
+                  placeholder={'ldnaskdh'}
                   style={{
                     backgroundColor: "transparent",
                     width: width * 0.75,
@@ -329,7 +329,7 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
                   Keyboard.dismiss();
                 }}>
                   <Image
-                    source={require("../../../assets/S.png")}
+                    source={require("../../assets/S.png")}
                     style={{
                       width: PerfectPixelSize(50),
                       height: PerfectPixelSize(50),
@@ -376,7 +376,7 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
                   Keyboard.dismiss();
                 }}>
                   <Image
-                    source={require("../../../assets/S.png")}
+                    source={require("../../assets/S.png")}
                     style={{
                       width: PerfectPixelSize(50),
                       height: PerfectPixelSize(50),

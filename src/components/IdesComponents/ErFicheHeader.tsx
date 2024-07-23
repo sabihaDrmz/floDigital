@@ -37,7 +37,7 @@ const FONT_SIZE = 12,
         <TitleComponent title="Belge No " val={props.ficheNumber} />
         <View style={[styles.horizontalLine, styles.mg20]}>
           <Image
-            source={require("../../../assets/storeico.png")}
+            source={require("../../assets/storeico.png")}
             style={{ width: 40, height: 40 }}
           />
           <AppText selectable>{props.storeNum || "-"}</AppText>

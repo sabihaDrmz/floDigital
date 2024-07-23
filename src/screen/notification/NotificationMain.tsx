@@ -130,7 +130,7 @@ const NotificationMain: React.FC<any> = (props) => {
               >
                 {/* <BellNew fill={"#fff"} /> */}
                 <Image
-                  source={require("../../../assets/ntf2.png")}
+                  source={require("../../assets/ntf2.png")}
                   style={{
                     height: 20,
                     width: 30,
@@ -155,7 +155,7 @@ const NotificationMain: React.FC<any> = (props) => {
                 }}
               >
                 <Image
-                  source={require("../../../assets/ntf2.png")}
+                  source={require("../../assets/ntf2.png")}
                   style={{
                     tintColor: "#707070",
                     width: 30,
@@ -185,7 +185,7 @@ const NotificationMain: React.FC<any> = (props) => {
               >
                 {/* <BellNew fill={"#fff"} /> */}
                 <Image
-                  source={require("../../../assets/ntf3.png")}
+                  source={require("../../assets/ntf3.png")}
                   style={{ width: 30, height: 30, tintColor: "#fff" }}
                 />
                 <BadgeCnt
@@ -205,7 +205,7 @@ const NotificationMain: React.FC<any> = (props) => {
                 }}
               >
                 <Image
-                  source={require("../../../assets/ntf3.png")}
+                  source={require("../../assets/ntf3.png")}
                   style={{ width: 30, height: 30, tintColor: "#707070" }}
                 />
                 <BadgeCnt
@@ -272,7 +272,7 @@ const NotificationMain: React.FC<any> = (props) => {
               >
                 {/* <BellNew fill={"#fff"} /> */}
                 <Image
-                  source={require("../../../assets/ntf1.png")}
+                  source={require("../../assets/ntf1.png")}
                   style={{
                     resizeMode: "contain",
                     height: 30,
@@ -297,7 +297,7 @@ const NotificationMain: React.FC<any> = (props) => {
                 }}
               >
                 <Image
-                  source={require("../../../assets/ntf1.png")}
+                  source={require("../../assets/ntf1.png")}
                   style={{
                     resizeMode: "contain",
                     width: 30,
@@ -327,7 +327,7 @@ const NotificationMain: React.FC<any> = (props) => {
               >
                 {/* <BellNew fill={"#fff"} /> */}
                 <Image
-                  source={require("../../../assets/selfCheckIcon2.png")}
+                  source={require("../../assets/selfCheckIcon2.png")}
                   style={{
                     resizeMode: "contain",
                     height: 30,
@@ -353,7 +353,7 @@ const NotificationMain: React.FC<any> = (props) => {
                 }}
               >
                 <Image
-                  source={require("../../../assets/selfCheckIcon2.png")}
+                  source={require("../../assets/selfCheckIcon2.png")}
                   style={{
                     resizeMode: "contain",
                     width: 30,

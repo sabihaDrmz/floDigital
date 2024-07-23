@@ -29,10 +29,10 @@ const DigitalStore: React.FC<DigitalStoreProps> = () => {
             />
             <View style={{ flexDirection: "row", justifyContent: "space-around", alignItems: "center", margin: Platform.OS === "web" ? 40 : 10 }}>
                 <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('StoreWarehouse', { screen: 'SalesRepresentativeScreen' })}>
-                    <Image source={require("../../../assets/talep_takip.png")} style={styles.image} />
+                    <Image source={require("../../assets/talep_takip.png")} style={styles.image} />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('StoreWarehouse', { screen: 'StoreWarehouseRayonDevice' })}>
-                    <Image source={require("../../../assets/cihaz_tanimlama.png")} style={styles.image} />
+                    <Image source={require("../../assets/cihaz_tanimlama.png")} style={styles.image} />
                 </TouchableOpacity>
             </View>
         </View>

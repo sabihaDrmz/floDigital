@@ -1,9 +1,9 @@
 import { PermissionsAndroid, Platform } from "react-native";
 import { create } from 'zustand';
 import {BleManager, Device, Service} from "react-native-ble-plx"
-import PrinterZpl from "../../utils/PrinterHelperZpl";
+import PrinterZpl from "../utils/PrinterHelperZpl";
 //@ts-ignore
-import util from '../../utils/util.js'
+import { hexStringToBuff } from "../utils/util.js";
 import { usePrinterConfigService } from "./PrinterConfigService";
 import { Buffer } from 'buffer';
 //TODO: EXPO Device
@@ -184,7 +184,7 @@ export const useBluetoothModuleService = create<BluetoothModuleServiceModel>((se
 
 
             let printData = value;
-            var directiveTxt = util.hexStringToBuff(printData);
+            var directiveTxt = hexStringToBuff(printData);
                 directiveTxt.map((item: string) => {
                     let hexValues = item.split(' ');
                     var data = hexValues.map(hex => parseInt(hex, 16));

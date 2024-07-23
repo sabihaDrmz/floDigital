@@ -174,7 +174,7 @@ const { width, height } = Dimensions.get("window"),
                   }}
                 >
                   <Image
-                    source={require("../../../assets/cargoret.png")}
+                    source={require("../../assets/cargoret.png")}
                     style={{ width: 40, height: 53, resizeMode: "cover" }}
                   />
                 </View>
@@ -237,7 +237,7 @@ const { width, height } = Dimensions.get("window"),
                   }}
                 >
                   <Image
-                    source={require("../../../assets/storeret.png")}
+                    source={require("../../assets/storeret.png")}
                     style={{ width: 32, height: 53, resizeMode: "cover" }}
                   />
                 </View>
@@ -259,7 +259,7 @@ const { width, height } = Dimensions.get("window"),
                       }}
                     >
                       <Image
-                        source={require("../../../assets/S.png")}
+                        source={require("../../assets/S.png")}
                         style={{
                           width: PerfectPixelSize(112),
                           height: PerfectPixelSize(103),

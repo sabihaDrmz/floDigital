@@ -21,21 +21,21 @@ function getFileIcon(ext: string, uri?: string) {
   switch (ext) {
     case 'xls':
     case 'xlsx':
-      return require('../../../assets/img/ui/FileIcon/excel.png');
+      return require('../../assets/img/ui/FileIcon/excel.png');
     case 'pdf':
-      return require('../../../assets/img/ui/FileIcon/pdf.png');
+      return require('../../assets/img/ui/FileIcon/pdf.png');
     case 'doc':
     case 'tex':
     case 'odt':
     case 'docx':
-      return require('../../../assets/img/ui/FileIcon/word.png');
+      return require('../../assets/img/ui/FileIcon/word.png');
   }
 
   // Fotoğraf ise ve url geldiyse fotoğrafı dön
   if (imageExt.includes(ext) && uri) return {uri: BASE_URL + uri.substring(1)};
 
   // Varsayılan dosya ikonu
-  return require('../../../assets/img/ui/FileIcon/file.png');
+  return require('../../assets/img/ui/FileIcon/file.png');
 }
 
 export {fileExt, imageExt, getFileIcon};

@@ -49,7 +49,7 @@ const CustomerComplaintList: React.FC = (props) => {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Image
-          source={require("../../../assets/crmcustomercomplaintcreate.png")}
+          source={require("../../assets/crmcustomercomplaintcreate.png")}
         />
         <CreateButton />
       </View>

@@ -27,7 +27,7 @@ const SearchFiche: React.FC = ({ }: any) => {
       />
       <KeyboardAwareScrollView bounces={false}>
         <Image
-          source={require("../../../assets/ficheSearchIcon.png")}
+          source={require("../../assets/ficheSearchIcon.png")}
           style={imageStyle}
         />
         <View style={inputContainer}>

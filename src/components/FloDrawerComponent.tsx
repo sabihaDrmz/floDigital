@@ -123,7 +123,7 @@ const FloDrawerComponent: React.FC = (props) => {
                 <View>
                   <View>
                     <Image
-                      source={require("../../assets/profile_image_default.png")}
+                      source={require("../assets/profile_image_default.png")}
                       style={{ width: 90, height: 90, resizeMode: "contain" }}
                     />
                     <View style={{ position: "absolute", left: -3, top: -0.5 }}>

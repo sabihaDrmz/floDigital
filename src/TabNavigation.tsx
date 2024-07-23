@@ -15,7 +15,7 @@ import { translate } from "./helper/localization/locaizationMain";
 import { SearchQR } from "./components/CustomIcons/MainPageIcons";
 import IsoBarcodeCheck from "./screen/iso/BarcodeCheck";
 import Home from "./screen/home";
-import OperationMenu from "../OperationMenu";
+import OperationMenu from "./OperationMenu";
 import { useAccountService } from "./contexts/AccountService";
 import { useRoute } from "@react-navigation/native";
 
@@ -94,7 +94,7 @@ const TabNavigation = () => {
         return (
             <TouchableOpacity style={styles.tab}>
                 <Animated.Image
-                    source={require("../assets/processicon.png")}
+                    source={require("./assets/processicon.png")}
                     style={[
                         {
                             height: 21,
@@ -123,7 +123,7 @@ const TabNavigation = () => {
                     (
                         <View style={styles.tab}>
                             <Animated.Image
-                                source={require("../assets/homeicon.png")}
+                                source={require("./assets/homeicon.png")}
                                 style={[
                                     {
                                         width: 21,

@@ -293,7 +293,7 @@ const CaseDetailScreen: React.FC = (props) => {
           style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
         >
           <Image
-            source={require("../../../assets/crmfileicon.png")}
+            source={require("../../assets/crmfileicon.png")}
             style={{ width: 12, height: 15, marginRight: 14 }}
           />
           <Text style={styles.layer3}>{props.case.incident.layer3.name}</Text>
@@ -315,7 +315,7 @@ const CaseDetailScreen: React.FC = (props) => {
             }}
           >
             <Image
-              source={require("../../../assets/crmcalendaricon.png")}
+              source={require("../../assets/crmcalendaricon.png")}
               style={{
                 width: 15,
                 height: 15,

@@ -233,7 +233,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
                     }}
                   >
                     <Image
-                      source={require("../../../assets/logo.png")}
+                      source={require("../../assets/logo.png")}
                       style={{
                         height: 35, //PerfectPixelSize(35),
                         width: 76, //PerfectPixelSize(76),
@@ -255,7 +255,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
                       height: PerfectPixelSize(35),
                       width: PerfectPixelSize(76),
                     }}
-                    source={require("../../../assets/fdheaderlogo.png")}
+                    source={require("../../assets/fdheaderlogo.png")}
                   />
                 </View>
               )}
@@ -354,7 +354,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
               }
             >
               <Image
-                source={require("../../../assets/cart.png")}
+                source={require("../../assets/cart.png")}
                 style={{ tintColor: "#fff", width: 25, height: 23 }}
               />
             </TouchableOpacity>
@@ -388,7 +388,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
               }
             >
               <Image
-                source={require("../../../assets/searchico.png")}
+                source={require("../../assets/searchico.png")}
                 style={{ tintColor: "#fff", width: 25, height: 23 }}
               />
             </TouchableOpacity>

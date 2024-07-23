@@ -3,7 +3,8 @@ import moment from "moment";
 import React from "react";
 import { Dimensions, TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import { notificationEvent } from "../core/libraries/FcmFroground";
+//TODO: EXPO notification
+// import { notificationEvent } from "../core/libraries/FcmFroground";
 import { Notify } from "../contexts/model/Notify";
 import { useAccountService } from "../contexts/AccountService";
 import { useFcmService } from "../contexts/FcmService";
@@ -39,20 +40,23 @@ const NotificationCard: React.FC<NtfCardProps> = (props) => {
         maxHeight: 150,
         padding: 10,
       }}
-      onPress={() =>
-        notificationEvent(
-          {
-            actionType: props.actionType,
-            appId: props.appId,
-            dataJson: props.dataJson,
-            notificationId: props.id,
-          },
-          router,
-          account,
-          fcm,
-          props.onTabChanged
-        )
+      /* onPress={() =>
+     notificationEvent(
+         {
+           actionType: props.actionType,
+           appId: props.appId,
+           dataJson: props.dataJson,
+           notificationId: props.id,
+         },
+         router,
+         account,
+         fcm,
+         props.onTabChanged
+       )
+
       }
+
+       */
     >
       <View style={{ flexDirection: "row" }}>
         <View style={{ alignItems: "center" }}>

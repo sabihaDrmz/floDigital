@@ -228,7 +228,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
           <>
             <View style={{ justifyContent: "center", alignItems: "center", }}>
               <Image
-                source={require("../../../assets/fdheaderlogo.png")}
+                source={require("../../assets/fdheaderlogo.png")}
                 style={{
                   width:
                     Platform.OS === "web"
@@ -309,7 +309,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
           <>
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <Image
-                source={require("../../../assets/loginLogo.png")}
+                source={require("../../assets/loginLogo.png")}
                 style={{
                   width:
                     Platform.OS === "web"
@@ -456,7 +456,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
               >
                 <Image
                   style={{ width: 70, height: 70, marginTop: 20 }}
-                  source={require("../../../assets/IosMarketQr.png")}
+                  source={require("../../assets/IosMarketQr.png")}
                 ></Image>
                 <TouchableOpacity
                   onPress={() => {
@@ -467,7 +467,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
                 >
                   <Image
                     style={{ width: 90, marginTop: 10 }}
-                    source={require("../../../assets/StoreIosButton.png")}
+                    source={require("../../assets/StoreIosButton.png")}
                     resizeMode="contain"
                   ></Image>
                 </TouchableOpacity>
@@ -481,7 +481,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
               >
                 <Image
                   style={{ width: 70, height: 70, marginTop: 20 }}
-                  source={require("../../../assets/AndroidMarketQr.png")}
+                  source={require("../../assets/AndroidMarketQr.png")}
                 ></Image>
                 <TouchableOpacity
                   onPress={() => {
@@ -492,7 +492,7 @@ const LoginScreen: React.FC<LoginScreenProps> = (props) => {
                 >
                   <Image
                     style={{ width: 90, marginTop: 10 }}
-                    source={require("../../../assets/StoreAndroidButton.png")}
+                    source={require("../../assets/StoreAndroidButton.png")}
                     resizeMode="contain"
                   ></Image>
                 </TouchableOpacity>

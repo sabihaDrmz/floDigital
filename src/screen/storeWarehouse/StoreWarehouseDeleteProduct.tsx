@@ -139,7 +139,7 @@ const StoreWarehouseDeleteProduct = ({ }: any) => {
                     />
                     <TouchableOpacity onPress={() => setIsUnitCameraShow(true)}>
                         <Image
-                            source={require("../../../assets/S.png")}
+                            source={require("../../assets/S.png")}
                             style={{
                                 width: PerfectPixelSize(50),
                                 height: PerfectPixelSize(50),

@@ -60,7 +60,7 @@ const NavScreen: React.FC = () => {
         {isInRole("omc-crm") && (
           <React.Fragment>
             <NaviCard
-              ico={require(`../../../assets/crm1ico.png`)}
+              ico={require(`../../assets/crm1ico.png`)}
               title={translate("crmNavSceen.caseManagement")}
               route={"MainScreen"}
             />
@@ -70,7 +70,7 @@ const NavScreen: React.FC = () => {
         {isInRole("omc-crm2") && (
           <React.Fragment>
             <NaviCard
-              ico={require(`../../../assets/crmcustomercomplaint.png`)}
+              ico={require(`../../assets/crmcustomercomplaint.png`)}
               title={translate("crmNavSceen.customerComplaintManagement")}
               route={"CustomerComplaintList"}
             />
@@ -79,7 +79,7 @@ const NavScreen: React.FC = () => {
         )}
         <React.Fragment>
           <NaviCard
-            ico={require(`../../../assets/findorder.png`)}
+            ico={require(`../../assets/findorder.png`)}
             title={translate("crmNavSceen.checkOrder")}
             route={"FindOrder"}
           />
@@ -87,7 +87,7 @@ const NavScreen: React.FC = () => {
         </React.Fragment>
         <React.Fragment>
           <NaviCard
-            ico={require(`../../../assets/crm2ico.png`)}
+            ico={require(`../../assets/crm2ico.png`)}
             title={translate("crmFindOrderScreen.findFiche")}
             route={"CrmSearchFiche"}
           />

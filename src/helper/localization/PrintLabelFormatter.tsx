@@ -1,5 +1,5 @@
 import I18n from "i18n-js";
-import { SayaVeMensei } from "../../../assets/static/SayaVeMensei";
+import { SayaVeMensei } from "../../assets/static/SayaVeMensei";
 
 const PriceType = {
   F1: "<f1>",

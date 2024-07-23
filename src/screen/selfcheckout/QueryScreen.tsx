@@ -45,7 +45,7 @@ const QueryScreen: React.FC<QueryScreenProps> = (props) => {
         }}
       >
         <Image
-          source={require("../../../assets/S.png")}
+          source={require("../../assets/S.png")}
           style={{
             width: PerfectPixelSize(112),
             height: PerfectPixelSize(103),

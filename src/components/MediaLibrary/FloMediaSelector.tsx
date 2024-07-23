@@ -107,7 +107,7 @@ const FloMediaSelector: React.FC = (props) => {
     <View style={styles.container}>
       <FloMediaButton onPress={questionMediaLibrary}>
         <Image
-          source={require("../../../assets/cameraicon.png")}
+          source={require("../../assets/cameraicon.png")}
           style={{ width: 41, height: 41 }}
         />
       </FloMediaButton>
@@ -128,7 +128,7 @@ const FloMediaSelector: React.FC = (props) => {
               blurRadius={1}
             />
             <Image
-              source={require("../../../assets/closeicon.png")}
+              source={require("../../assets/closeicon.png")}
               style={{ width: 41, height: 41 }}
             />
           </FloMediaButton>

@@ -274,7 +274,7 @@ const OrderCard: React.FC<{
             <Image
               resizeMode="center"
               style={{ marginTop: 10, alignItems: "flex-end" }}
-              source={require("../../../../assets/floLogo.png")}
+              source={require("../../../assets/floLogo.png")}
             />
           </View>
           <TouchableOpacity

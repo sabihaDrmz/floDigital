@@ -74,7 +74,7 @@ const BasketItem = (basket: Basket) => {
                 marginRight: 20,
                 resizeMode: "stretch",
               }}
-              source={require("../../../assets/cart.png")}
+              source={require("../../assets/cart.png")}
             />
             <View
               style={{
@@ -124,7 +124,7 @@ const BasketItem = (basket: Basket) => {
                   height: 33,
                   resizeMode: "stretch",
                 }}
-                source={require("../../../assets/trash.png")}
+                source={require("../../assets/trash.png")}
               />
             </TouchableOpacity>
           </View>
@@ -213,7 +213,7 @@ const BasketItem = (basket: Basket) => {
                           height: 94,
                           resizeMode: "stretch",
                         }}
-                        source={require("../../../assets/border-purple-orders.png")}
+                        source={require("../../assets/border-purple-orders.png")}
                       />
                     ) : (
                       <Image
@@ -222,7 +222,7 @@ const BasketItem = (basket: Basket) => {
                           height: 94,
                           resizeMode: "stretch",
                         }}
-                        source={require("../../../assets/border-green-orders.png")}
+                        source={require("../../assets/border-green-orders.png")}
                       />
                     )}
                   </View>

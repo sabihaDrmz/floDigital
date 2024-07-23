@@ -101,7 +101,7 @@ const StickerCard: React.FC<{
               uri: props.sticker.image,
             }}
             style={{ width: 25, height: 25, resizeMode: "cover" }}
-            defaultSource={require("../../../assets/imgicon.png")}
+            defaultSource={require("../../assets/imgicon.png")}
             // loadingIndicatorSource={require('../../../assets/imgicon.png')}
           />
         </View>

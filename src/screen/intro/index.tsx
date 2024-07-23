@@ -32,19 +32,19 @@ import {
 const { width } = Dimensions.get("window");
 const INTRO = [
     {
-        image: require("../../../assets/slide1.png"),
+        image: require("../../assets/slide1.png"),
         title1: translate("intro.intro1.title1"),
         title2: translate("intro.intro1.title2"),
         description: translate("intro.intro1.description"),
     },
     {
-        image: require("../../../assets/slide2.png"),
+        image: require("../../assets/slide2.png"),
         title1: translate("intro.intro2.title1"),
         title2: translate("intro.intro2.title2"),
         description: translate("intro.intro2.description"),
     },
     {
-        image: require("../../../assets/slide3.png"),
+        image: require("../../assets/slide3.png"),
         title1: translate("intro.intro3.title1"),
         title2: translate("intro.intro3.title2"),
         description: translate("intro.intro3.description"),

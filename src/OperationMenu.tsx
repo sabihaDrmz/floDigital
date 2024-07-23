@@ -1,5 +1,5 @@
 
-import { PerfectFontSize } from "./src/helper/PerfectPixel";
+import { PerfectFontSize } from "./helper/PerfectPixel";
 import Modal from 'react-native-modal';
 import {
     View,
@@ -14,20 +14,20 @@ import {
 import Animated from "react-native-reanimated";
 import React, { useState, useEffect } from "react";
 import { useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
-import { useAccountService } from "./src/contexts/AccountService";
+import { useAccountService } from "./contexts/AccountService";
 import { AntDesign } from "@expo/vector-icons";
-import { translate } from "./src/helper/localization/locaizationMain";
-import { BrokenProductIcon } from "./src/components/CustomIcons/BrokenProductIcon";
+import { translate } from "./helper/localization/locaizationMain";
+import { BrokenProductIcon } from "./components/CustomIcons/BrokenProductIcon";
 import {
     CancelOrderIcon,
     ReturnOrderIcon,
     SearchQR,
-} from "./src/components/CustomIcons/MainPageIcons";
+} from "./components/CustomIcons/MainPageIcons";
 import { AppText } from "@flomagazacilik/flo-digital-components";
-import { useApplicationGlobalService } from "./src/contexts/ApplicationGlobalService";
+import { useApplicationGlobalService } from "./contexts/ApplicationGlobalService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { accountInfoKey, salesOrgKey } from "./src/core/StorageKeys";
-import { NavigationType } from "./src/StackNavigator";
+import { accountInfoKey, salesOrgKey } from "./core/StorageKeys";
+import { NavigationType } from "./StackNavigator";
 const OperationMenu = () => {
     const navigation = useNavigation<NavigationType>()
     const [modalVisible, setModalVisible] = useState(false);

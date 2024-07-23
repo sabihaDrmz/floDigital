@@ -113,7 +113,7 @@ const ReturnFicheProductList: React.FC = (props) => {
           >
             <View style={{ marginRight: 10 }}>
               <Image
-                source={require("../../../assets/crmi.png")}
+                source={require("../../assets/crmi.png")}
                 style={{ width: 30, height: 30 }}
               />
             </View>
