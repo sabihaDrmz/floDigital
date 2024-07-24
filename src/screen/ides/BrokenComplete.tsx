@@ -21,7 +21,8 @@ import {
 import Svg, { Path, SvgXml } from "react-native-svg";
 //TODO: EXPO exPrint
 // import * as exPrint from "expo-print";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
+
 import { useMediaSelector } from "../../components/MediaSelector/MediaSelector";
 //TODO: EXPO expo-image-picker
 // import { ImageInfo } from "expo-image-picker";

@@ -29,7 +29,7 @@ import { colors } from "../../../src/theme/colors";
 import FloComboBox from "../../../src/components/FloComobox";
 import FloHeaderNew from "../../../src/components/Header/FloHeaderNew";
 import MediaSelectorPopup from "../../../src/components/MediaSelector/MediaSelectorPopup";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { FloButton } from "../../../src/components";
 import FloLoading from "../../components/FloLoading";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";

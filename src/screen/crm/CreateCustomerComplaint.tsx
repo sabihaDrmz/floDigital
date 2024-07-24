@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Dimensions,
 } from "react-native";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 //import * as exImp from "expo-image-picker";
 //import { ImageInfo } from "expo-image-picker/build/ImagePicker.types";
 import {

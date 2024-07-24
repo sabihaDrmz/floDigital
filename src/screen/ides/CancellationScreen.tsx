@@ -27,7 +27,7 @@ import { FloHeader } from "../../components/Header";
 import { PerfectPixelSize } from "../../helper/PerfectPixel";
 import { colors } from "../../theme/colors";
 import BlurView from "../../components/BlurView";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import NotFoundIcon from "../../components/IdesComponents/SVG/NotFoundIcon";
 import MainCamera from "../../components/MainCamera";
 import { useEasyReturnService } from "../../contexts/EasyReturnService";

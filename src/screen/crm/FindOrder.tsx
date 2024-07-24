@@ -8,7 +8,7 @@ import {
   Platform,
 } from "react-native";
 import FloTextBoxNew from "../../components/FloTextBoxNew";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { FloButton } from "../../components";
 import { FloHeader } from "../../components/Header";
 import { translate } from "../../helper/localization/locaizationMain";

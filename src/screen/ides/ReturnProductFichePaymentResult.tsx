@@ -7,7 +7,7 @@ import {
   TextInput,
 } from "react-native";
 import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import BlurView from "../../components/BlurView";
 import {
   AppButton,

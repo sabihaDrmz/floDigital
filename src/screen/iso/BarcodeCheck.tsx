@@ -12,7 +12,7 @@ import FloTextBoxNew from "../../components/FloTextBoxNew";
 import { TextManipulator } from "../../NewComponents/FormElements/AppTextBox";
 import { FloButton } from "../../components";
 import RoleGroup from "../../components/RoleGroup";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { useAccountService } from "../../contexts/AccountService";
 import { useProductService } from "../../contexts/ProductService";
 import MainCamera from "../../components/MainCamera";

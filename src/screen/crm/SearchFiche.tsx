@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Platform } from "react-native";
 import FloTextBoxNew from "../../components/FloTextBoxNew";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { FloButton } from "../../components";
 import { translate } from "../../helper/localization/locaizationMain";
 import { PerfectFontSize, PerfectPixelSize } from "../../helper/PerfectPixel";

@@ -12,8 +12,10 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@codler/react-native-keyboard-aware-scroll-view": "^2.0.1",
-    "@expo/vector-icons": "^14.0.2",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@flomagazacilik/flo-digital-components": "^1.0.53",
     "@flomagazacilik/flo-zebra-bt": "^1.0.30",
     "@react-native-async-storage/async-storage": "^1.23.1",

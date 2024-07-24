@@ -17,7 +17,7 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { translate } from "../../helper/localization/locaizationMain";
 import { useOmsService } from "../../contexts/OmsService";
 import { useAccountService } from "../../contexts/AccountService";

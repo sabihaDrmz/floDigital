@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import moment from "moment";
 import QrSearchBar from "../../components/IdesComponents/QrSearchBar";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import {
   AppButton,
   AppCard,

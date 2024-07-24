@@ -1,4 +1,4 @@
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { AppColor } from "@flomagazacilik/flo-digital-components";
 import AppTextBox, {
   TextManipulator,

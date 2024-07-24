@@ -1,4 +1,4 @@
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import axios from "axios";
 import { VersionInfo } from "../../constant/ApplicationVersionInfo";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";

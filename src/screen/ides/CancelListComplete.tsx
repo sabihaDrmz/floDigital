@@ -8,8 +8,9 @@ import {
 } from "@flomagazacilik/flo-digital-components";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import { translate } from "../../helper/localization/locaizationMain";
-import OTPInputView from '@twotalltotems/react-native-otp-input'
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+// TODO: EXPO OTP
+// import OTPInputView from '@twotalltotems/react-native-otp-input'
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 import { useEasyReturnService } from "../../contexts/EasyReturnService";
 const CancelListComplete: React.FC = (props) => {
   const [code, setCode] = useState("");

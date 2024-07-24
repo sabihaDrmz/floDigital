@@ -21,7 +21,7 @@ import { colors } from "../../theme/colors";
 import FloTextBoxNew from "../../components/FloTextBoxNew";
 import { FloButton } from "../../components";
 import { TextManipulator } from "../../NewComponents/FormElements/AppTextBox";
-import { KeyboardAwareScrollView } from "@codler/react-native-keyboard-aware-scroll-view";
+import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 interface QueryScreenProps { }
 
 const QueryScreen: React.FC<QueryScreenProps> = (props) => {
