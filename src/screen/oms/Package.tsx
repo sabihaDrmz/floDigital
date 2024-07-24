@@ -23,7 +23,7 @@ import {
   TextInput,
   Platform
 } from "react-native";
-import LinearGradient from "../../components/LinearGradient";
+import LinearGradient from "../../components/LinearGradient/LinearGradientView";
 import { Portal } from "react-native-portalize";
 import {
   AntDesign,

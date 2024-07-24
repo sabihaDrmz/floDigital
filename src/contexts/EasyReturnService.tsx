@@ -657,8 +657,6 @@ export const useEasyReturnService = create<EasyReturnServiceModel>((set, get) =>
             return false;
         } finally {
         }
-
-        return false;
     },
     clearTransaction: async () => {
         set((state) => ({

@@ -249,6 +249,7 @@ const WaitingList: React.FC<WaitingListProps> = (props) => {
                   onPress={() => {
                     setOpenReasons(true);
                     return;
+                    /* returndan sonraki kodlara hiç giremeyecegi için yorum satırına aldım duruma gore silinebilir.
                     if (selectedReason === "") {
                       setMessage(
                         translate("warehouseRequest.aReasonMustBeChosen")
@@ -272,6 +273,8 @@ const WaitingList: React.FC<WaitingListProps> = (props) => {
                         },
                       }
                     );
+
+                     */
                   }}
                 />
               </View>

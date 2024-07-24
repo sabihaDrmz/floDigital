@@ -161,7 +161,6 @@ const StoreWarehoseReqList = () => {
             <Text numberOfLines={1} style={[styles.itemText, { color: '#fff' }]}>{translate("storeWarehouse.putIntoProcess")}</Text>
           </TouchableOpacity>
         )
-        break;
       case 1:
         return (
           <View style={{ flexDirection: 'row', width: '100%' }}>
@@ -173,7 +172,6 @@ const StoreWarehoseReqList = () => {
             </TouchableOpacity>
           </View>
         )
-        break;
       case 2:
         return (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
@@ -182,7 +180,6 @@ const StoreWarehoseReqList = () => {
             </TouchableOpacity>
           </View>
         )
-        break;
       case 3:
         return (
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
@@ -191,7 +188,6 @@ const StoreWarehoseReqList = () => {
             </TouchableOpacity>
           </View>
         )
-        break;
       default:
         return (
           <TouchableOpacity onPress={() => changeStatus(item, 1)} style={{ backgroundColor: '#2c6a9e', padding: 5, width: screenWidth * 0.3, borderRadius: 18.5 }}>

@@ -144,16 +144,12 @@ const StoreWarehouseReqListWeb = ({ }: any) => {
         switch (status) {
             case 0:
                 return `${translate("storeWarehouse.new")}`
-                break;
             case 1:
                 return `${translate("storeWarehouse.inProcess")}`
-                break;
             case 2:
                 return `${translate("storeWarehouse.ok")}`
-                break;
             case 3:
                 return `${translate("storeWarehouse.requestUnrealized")}`
-                break;
             default:
                 return `${translate("storeWarehouse.new")}`
         }
@@ -464,12 +460,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         width: "100%",
         marginTop: 20,
-    },
-    itemContainer: {
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexDirection: "row",
-        width: "100%",
     },
     headerText: {
         fontSize: PerfectFontSize(12),

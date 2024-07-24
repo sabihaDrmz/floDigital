@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import I18n from "i18n-js";
+import i18n from 'i18next';
 import { action, makeAutoObservable, observable, runInAction } from "mobx";
 import { Actions } from "react-native-router-flux";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -240,7 +240,7 @@ class BasketService {
 
     MessageBoxNew.show(
       result.data.message.startsWith("be.")
-        ? I18n.t(result.data.message)
+        ? i18n.t(result.data.message)
         : result.data.message
     );
   };
@@ -336,7 +336,7 @@ class BasketService {
         );
       }
       MessageBoxNew.show(
-        I18n.translate("isoBasket.showMssMessage"),
+        i18n.t("isoBasket.showMssMessage"),
         result.data.state !== FloResultCode.Successfully
           ? {
               onHide: () => {
@@ -492,7 +492,7 @@ class BasketService {
           this.selectedBasket = result.data.model;
           MessageBoxNew.show(
             result.data.message.startsWith("be.")
-              ? I18n.t(result.data.message)
+              ? i18n.t(result.data.message)
               : result.data.message
           );
         } else {
@@ -954,7 +954,7 @@ class BasketService {
 
         MessageBox.Show(
           contractRes.data.message.startsWith("be.")
-            ? I18n.t(contractRes.data.message)
+            ? i18n.t(contractRes.data.message)
             : contractRes.data.message,
           MessageBoxDetailType.Information,
           MessageBoxType.Standart,
@@ -1183,7 +1183,7 @@ class BasketService {
 
         MessageBoxNew.show(
           basketState.data.message.startsWith("be.")
-            ? I18n.t(basketState.data.message)
+            ? i18n.t(basketState.data.message)
             : basketState.data.message
         );
       }

@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { action, makeAutoObservable, makeObservable, observable } from "mobx";
 import AccountService from "./AccountService";
-import RNExitApp from "react-native-exit-app";
 import MessageBox, { MessageBoxDetailType, MessageBoxType } from "./MessageBox";
 import { GetServiceUri, ServiceUrlType } from "../Settings";
 import {
@@ -10,7 +9,7 @@ import {
   ServiceResponseBase,
 } from "../models/ServiceResponseBase";
 import { SapStore } from "../models/SapStoreModel";
-import { chekcAuthError } from "../Util";
+import { chekcAuthError, RNExitAppCustom } from "../Util";
 import { translate } from "../../helper/localization/locaizationMain";
 import { PaymentType } from "../models/PaymentType";
 import { EasyReturnReason } from "../models/EasyReturnReason";
@@ -110,7 +109,7 @@ class ApplicationGlobalService {
       MessageBoxDetailType.Information,
       MessageBoxType.Standart,
       () => {
-        Platform.OS === "web" ? window.location.reload() : RNExitApp.exitApp();
+        Platform.OS === "web" ? window.location.reload() : RNExitAppCustom?.exitApp();
       },
       () => {}
     );

@@ -1,5 +1,5 @@
 import { AppText, ColorType } from "@flomagazacilik/flo-digital-components";
-import I18n from "i18n-js";
+import i18n from 'i18next';
 import { Observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import {
@@ -90,8 +90,8 @@ const Basket: React.FC<BasketProps> = (props) => {
           navigation.navigate("Home");
           clearBasket();
         },
-        noButtonTitle: I18n.t("messageBox.cancel"),
-        yesButtonTitle: I18n.t(
+        noButtonTitle: i18n.t("messageBox.cancel"),
+        yesButtonTitle: i18n.t(
           selectedBasket &&
             selectedBasket.basketTicketId
             ? "messageBox.exit"
@@ -399,14 +399,14 @@ const Basket: React.FC<BasketProps> = (props) => {
                 <TouchableOpacity
                   onPress={() =>
                     show(
-                      I18n.t("isoBasket.deleteProductMessage", {
+                      i18n.t("isoBasket.deleteProductMessage", {
                         productName: props.description,
                       }),
                       {
                         yesButtonEvent: () =>
                           removeProduct(props.id),
-                        yesButtonTitle: I18n.t("messageBox.delete"),
-                        noButtonTitle: I18n.t("messageBox.cancel"),
+                        yesButtonTitle: i18n.t("messageBox.delete"),
+                        noButtonTitle: i18n.t("messageBox.cancel"),
                         type: MessageBoxType.YesNo,
                       }
                     )
@@ -660,7 +660,7 @@ const Basket: React.FC<BasketProps> = (props) => {
                   style={{ marginBottom: 20, fontWeight: "700" }}
                   labelColorType={ColorType.Danger}
                 >
-                  {I18n.translate("isoBasket.showMssMessage")}
+                  {i18n.translate("isoBasket.showMssMessage")}
                 </AppText>
               )} */}
               {isInRole("omc-basket-pos") &&
@@ -720,7 +720,7 @@ const Basket: React.FC<BasketProps> = (props) => {
                         isOmcStoc && isValidAddress()
                           ? sentContract()
                           : !isOmcStoc
-                            ? show(I18n.t("iso.omsOmniStockError"))
+                            ? show(i18n.t("iso.omsOmniStockError"))
                             : null
                       }
                     />
@@ -752,7 +752,7 @@ const Basket: React.FC<BasketProps> = (props) => {
                             }
                           })
                           : !isOmcStoc
-                            ? show(I18n.t("iso.omsOmniStockError"))
+                            ? show(i18n.t("iso.omsOmniStockError"))
                             : null
                       }
                     />

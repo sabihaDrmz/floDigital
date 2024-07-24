@@ -41,7 +41,7 @@ const CancelListComplete: React.FC = (props) => {
             </AppText>
           </View>
           <View style={[{ flex: 1, justifyContent: "center" }, Platform.OS === "web" && { alignItems: "center" }]}>
-            <OTPInputView
+            {/*<OTPInputView
               style={{ height: 100, bottom: 40, paddingHorizontal: 80 }}
               autoFocusOnLoad
               pinCount={4}
@@ -50,6 +50,8 @@ const CancelListComplete: React.FC = (props) => {
               codeInputFieldStyle={styles.underlineStyleBase}
               codeInputHighlightStyle={styles.underlineStyleHighLighted}
             />
+            */
+            }
           </View>
           <View style={{ paddingHorizontal: 40, marginBottom: 20 }}>
             <AppButton

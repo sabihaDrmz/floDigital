@@ -65,7 +65,8 @@ const ReturnFicheProductList: React.FC = (props) => {
 
       setSelectedCombo(tempBarcodeList);
 
-      erSelectedReturnProducts = tempBarcodeList;
+      //TODO: bu bir constant olduğu için bu şekilde bir setleme yapılmaz. CLI geçişinde yorum satırına aldım. ihtiyac varsa düzeltilmeli
+      // erSelectedReturnProducts = tempBarcodeList;
     },
     GetQuantityPopup = (maxQuantity: number) => {
       let model: any[] = [];
@@ -82,7 +83,8 @@ const ReturnFicheProductList: React.FC = (props) => {
               }
 
               setSelectedCombo(temp);
-              erSelectedReturnProducts = temp;
+              //TODO: bu bir constant olduğu için bu şekilde bir setleme yapılmaz. CLI geçişinde yorum satırına aldım. ihtiyac varsa düzeltilmeli
+              //  erSelectedReturnProducts = temp;
             }}
             transparent
             style={{
@@ -272,7 +274,8 @@ const ReturnFicheProductList: React.FC = (props) => {
                         }
 
                         setSelectedCombo(temp);
-                        erSelectedReturnProducts = temp;
+                        //TODO: bu bir constant olduğu için bu şekilde bir setleme yapılmaz. CLI geçişinde yorum satırına aldım. ihtiyac varsa düzeltilmeli
+                        //   erSelectedReturnProducts = temp;
                       }}
                       transparent
                       style={{

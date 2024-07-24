@@ -9,12 +9,12 @@ import axios from "axios";
 //TODO: EXPO expo-device
 // import * as Device from "expo-device";
 import DeviceInfo from 'react-native-device-info';
-import RNExitApp from "react-native-exit-app";
 import { create } from "zustand";
 import * as RootNavigation from "../core/RootNavigation"
 import { useMessageBoxService } from "./MessageBoxService";
 import { translate } from "../helper/localization/locaizationMain";
 import { useApplicationGlobalService } from "./ApplicationGlobalService";
+import { RNExitAppCustom } from "../core/Util";
 
 export interface AccountServiceModel {
     organizationCode?: string;
@@ -301,7 +301,7 @@ export const useAccountService = create<AccountServiceModel>((set, get) => ({
                 yesButtonEvent: () => {
                     Platform.OS === "web"
                         ? window.location.reload()
-                        : RNExitApp.exitApp();
+                        : RNExitAppCustom?.exitApp();
                 },
             }
         );

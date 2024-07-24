@@ -4,7 +4,7 @@ import {
     ServiceResponseBase,
 } from "../core/models/ServiceResponseBase";
 import { toOrganization } from "../core/Util";
-import I18n from "i18n-js";
+import i18n from 'i18next';
 import { AxiosResponse } from "axios";
 import { turkishtoEnglish } from "../helper";
 import { MessageBoxType } from "./model/MessageBoxOptions";
@@ -270,7 +270,7 @@ export const useBasketService = create<BasketServiceModel>((set, get) => ({
 
         MessageBoxService.show(
             result.data.message.startsWith("be.")
-                ? I18n.t(result.data.message)
+                ? i18n.t(result.data.message)
                 : result.data.message
         );
     },
@@ -355,7 +355,7 @@ export const useBasketService = create<BasketServiceModel>((set, get) => ({
                 updateBasketList(selectedBasket.id, result.data.model[0].basketItems);
             }
             MessageBoxService.show(
-                I18n.translate("isoBasket.showMssMessage"),
+                i18n.t("isoBasket.showMssMessage"),
                 result.data.state !== FloResultCode.Successfully
                     ? {
                         onHide: () => {
@@ -525,7 +525,7 @@ export const useBasketService = create<BasketServiceModel>((set, get) => ({
                     }));
                     MessageBoxService.show(
                         result.data.message.startsWith("be.")
-                            ? I18n.t(result.data.message)
+                            ? i18n.t(result.data.message)
                             : result.data.message
                     );
                 } else {
@@ -1003,7 +1003,7 @@ export const useBasketService = create<BasketServiceModel>((set, get) => ({
 
                 MessageBoxService.show(
                     contractRes.data.message.startsWith("be.")
-                        ? I18n.t(contractRes.data.message)
+                        ? i18n.t(contractRes.data.message)
                         : contractRes.data.message
                 );
                 await getAllBaskets();
@@ -1167,7 +1167,7 @@ export const useBasketService = create<BasketServiceModel>((set, get) => ({
 
                 MessageBoxService.show(
                     basketState.data.message.startsWith("be.")
-                        ? I18n.t(basketState.data.message)
+                        ? i18n.t(basketState.data.message)
                         : basketState.data.message
                 );
             }

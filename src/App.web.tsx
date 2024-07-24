@@ -14,7 +14,7 @@ import moment from "moment";
 import { useMessageBoxService } from "./contexts/MessageBoxService";
 import { translate } from "./helper/localization/locaizationMain";
 import VersionErrorModal from "./components/Modal/VersionErrorModal";
-import 'react-native-gesture-handler'
+
 const App = () => {
   const [onLoadComplete, setOnloadComplete] = useState(false);
   //TODO: EXPO fcm

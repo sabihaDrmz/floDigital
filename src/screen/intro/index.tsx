@@ -10,7 +10,7 @@ import {
     Platform,
     SafeAreaView
 } from "react-native";
-import LinearGradient from "../../components/LinearGradient";
+import LinearGradient from "../../components/LinearGradient/LinearGradientView";
 import Animated, {
     useSharedValue,
     useAnimatedScrollHandler,

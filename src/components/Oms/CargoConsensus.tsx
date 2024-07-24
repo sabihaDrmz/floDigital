@@ -36,7 +36,7 @@ import { useOmsService } from "../../contexts/OmsService";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";
 import CargoConsensusDatePopup from "./partials/CargoConsensusDatePopup";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
-import LinearGradient from "../LinearGradient";
+import LinearGradient from "../LinearGradient/LinearGradientView";
 import MainCamera from "../../components/MainCamera";
 
 const CargoConsensus: React.FC = (props) => {

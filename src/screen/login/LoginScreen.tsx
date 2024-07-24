@@ -3,7 +3,7 @@ import axios from "axios";
 import { VersionInfo } from "../../constant/ApplicationVersionInfo";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { useVersionService } from "../../contexts/VersionService";
-import LinearGradient from "../../components/LinearGradient";
+import LinearGradient from "../../components/LinearGradient/LinearGradientView";
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet, Dimensions, Image, Platform, AppState, TextInput, TouchableOpacity, ScrollView, Linking } from "react-native";
 import { FloButton, FloTextBox } from "../../components";

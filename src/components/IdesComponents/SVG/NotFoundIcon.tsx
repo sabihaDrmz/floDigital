@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "react-native";
 import Svg, { Circle, Defs, G, Path, TSpan } from "react-native-svg";
 
 const NotFoundIcon: React.FC = (props) => (
