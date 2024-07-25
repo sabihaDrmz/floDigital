@@ -19,7 +19,9 @@ import { PerfectFontSize, PerfectPixelSize } from "../../helper/PerfectPixel";
 import { colors } from "../../theme/colors";
 import { translate } from "../../helper/localization/locaizationMain";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
-import { AntDesign, FloButton, FontAwesome, MaterialIcons } from "../../components";
+import { FloButton} from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useAccountService } from "../../contexts/AccountService";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import FloLoading from "../../components/FloLoading";
@@ -413,8 +415,8 @@ const Basket: React.FC<BasketProps> = (props) => {
                   }
                   style={{ marginLeft: 30 }}
                 >
-                  <FontAwesome
-                    name={"trash"}
+                  <FontAwesomeIcon
+                    icon={"trash"}
                     size={24}
                     color={colors.brightOrange}
                   />
@@ -466,7 +468,7 @@ const Basket: React.FC<BasketProps> = (props) => {
               }}
               style={{ marginTop: 30, marginLeft: 10 }}
             >
-              <AntDesign name={"infocirlceo"} size={24} color={"#707070"} />
+              <FontAwesomeIcon icon={"infocirlceo"} size={24} color={"#707070"} />
             </TouchableOpacity>
           </View>
 
@@ -833,8 +835,8 @@ const Basket: React.FC<BasketProps> = (props) => {
               { justifyContent: "center", alignItems: "center" },
             ]}
           >
-            <MaterialIcons
-              name={"shopping-cart"}
+            <FontAwesomeIcon
+              icon={"shopping-cart"}
               size={50}
               color={"rgb(255,134,0)"}
             />

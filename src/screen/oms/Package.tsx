@@ -25,11 +25,8 @@ import {
 } from "react-native";
 import LinearGradient from "../../components/LinearGradient/LinearGradientView";
 import { Portal } from "react-native-portalize";
-import {
-  AntDesign,
-  FontAwesome,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PackageOrder } from "../../core/models/OmsPackageModel";
 import { translate } from "../../helper/localization/locaizationMain";
 import { MenuIcon } from "../../components/Oms/partials/ReaseonRadios";
@@ -168,8 +165,8 @@ const OmsPackage: React.FC = (props) => {
             onPress={() => props.onExpand(!props.isExpand)}
             style={styles.expandContainer}
           >
-            <AntDesign
-              name={!props.isExpand ? "caretright" : "caretdown"}
+            <FontAwesomeIcon
+              icon={!props.isExpand ? "caretright" : "caretdown"}
               size={20}
               color={AppColor.FD.Text.Ash}
             />
@@ -244,8 +241,8 @@ const OmsPackage: React.FC = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <MaterialCommunityIcons
-                    name="qrcode-scan"
+                  <FontAwesomeIcon
+                    icon="qrcode-scan"
                     size={24}
                     color="white"
                   />
@@ -687,7 +684,7 @@ const OmsPackage: React.FC = (props) => {
                     }}
                   >
                     {approveContract && (
-                      <FontAwesome name={"check"} size={20} color={"#fff"} />
+                      <FontAwesomeIcon icon={"check"} size={20} color={"#fff"} />
                     )}
                   </View>
                   <AppText
@@ -878,7 +875,7 @@ const OmsPackage: React.FC = (props) => {
                   }}
                   onPress={() => setShowBagPopup(false)}
                 >
-                  <FontAwesome name="times-circle" size={36} color="red" />
+                  <FontAwesomeIcon icon="times-circle" size={36} color="red" />
                 </TouchableOpacity>
                 <View
                   style={{ justifyContent: "center", alignItems: "center" }}
@@ -1172,7 +1169,7 @@ const CloseIco = (props: any) => {
         marginTop: -10,
       }}
     >
-      <FontAwesome name="close" size={60} color={"#fff"} />
+      <FontAwesomeIcon icon="close" size={60} color={"#fff"} />
     </View>
   );
   // return (

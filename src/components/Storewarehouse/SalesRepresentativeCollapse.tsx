@@ -6,7 +6,8 @@ import {
     Image,
     ScrollView
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { AppColor, AppText } from "@flomagazacilik/flo-digital-components";
 import { PerfectFontSize, PerfectPixelSize } from "../../../src/helper/PerfectPixel";
 import { useApplicationGlobalService } from "../../../src/contexts/ApplicationGlobalService";
@@ -222,8 +223,8 @@ const componentName: React.FC<componentNameProps> = (props) => {
                     <AppText style={{ color: isSelected ? "#fff" : "#000", fontFamily: "Poppins_600SemiBold", fontSize: PerfectFontSize(16) }}>
                         Sepet No : {props.item.basketKey}
                     </AppText>
-                    <AntDesign
-                        name={isSelected ? "caretup" : "caretdown"}
+                    <FontAwesomeIcon
+                        icon={isSelected ? "caretup" : "caretdown"}
                         size={24}
                         color={isSelected ? "#fff" : orangeColor}
                     />

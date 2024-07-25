@@ -15,7 +15,8 @@ import {
   AppText,
   ColorType,
 } from "@flomagazacilik/flo-digital-components";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { SearchQR } from "../../components/CustomIcons/MainPageIcons";
 import { FloHeader } from "../../components/Header";
 import AppCardColorizeSVG from "../../components/AppColorizeSvg";
@@ -140,7 +141,7 @@ const ReturnProductFichePaymentResult: React.FC = () => {
               >
                 {selectedPaymentTypes.find(
                   (y) => y.type === x.key
-                ) && <FontAwesome size={20} color={"#fff"} name={"check"} />}
+                ) && <FontAwesomeIcon size={20} color={"#fff"} icon={"check"} />}
               </View>
               <AppText selectable style={{ color: "rgb(103,103,103)" }}>
                 {x.description} (
@@ -237,7 +238,7 @@ const ReturnProductFichePaymentResult: React.FC = () => {
                     alignItems: "center",
                   }}
                 >
-                  <FontAwesome name="close" color={"white"} size={25} />
+                  <FontAwesomeIcon icon="close" color={"white"} size={25} />
                 </AppButton>
               </View>
               <View style={{ position: "absolute" }}>

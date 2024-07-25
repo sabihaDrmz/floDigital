@@ -12,7 +12,8 @@ import { useStoreWarehouseService } from '../../contexts/StoreWarehoseService';
 import FloComboBox from '../../components/FloComobox';
 import { StoreRayonDeviceList } from '../../contexts/model/StoreRayonModel';
 import { TouchableOpacity } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import Modal from "react-native-modal";
 import FloTextBoxNew from '../../components/FloTextBoxNew';
 import { useNavigation } from '@react-navigation/native';
@@ -166,7 +167,7 @@ const StoreWarehouseRayonDevice = ({ }: any) => {
                                             <Text numberOfLines={3} style={styles.itemP}>{item.code}</Text>
                                         </View>
                                         <TouchableOpacity onPress={() => onDelete(item?.id)} style={[styles.itemWrapper, { width: width * 0.09, alignItems: 'center', justifyContent: 'center' }]}>
-                                            <Feather name="trash-2" size={24} color="#ff0000" />
+                                            <FontAwesomeIcon icon="trash" size={24} color="#ff0000" />
                                         </TouchableOpacity>
                                     </TouchableOpacity>
                                 )

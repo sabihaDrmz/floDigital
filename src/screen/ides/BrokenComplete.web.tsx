@@ -29,7 +29,8 @@ import { useMediaSelector } from "../../components/MediaSelector/MediaSelector";
 import { translate } from "../../helper/localization/locaizationMain";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import FloLoading from "../../components/FloLoading";
-import { AntDesign, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { MenuIcon } from "../../components/Oms/partials/ReaseonRadios";
 import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
@@ -312,7 +313,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
                   borderColor: "#28A128"
                 }}
               >
-                <FontAwesome5 name="check" size={22} color={"#28A128"} />
+                <FontAwesomeIcon icon="check" size={22} color={"#28A128"} />
               </View>
               <AppText style={{ fontFamily: "Poppins_600SemiBold", fontSize: PerfectFontSize(Platform.OS === 'web' ? 16 : 14), color: colors.white }}>
                 Ürünü kasadan iade alabilirsiniz.
@@ -338,7 +339,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
                   marginRight: 10,
                 }}
               >
-                <FontAwesome5 name="info" size={20} color={"#fff"} />
+                <FontAwesomeIcon icon="info" size={20} color={"#fff"} />
               </View>
               <AppText style={{ fontFamily: "Poppins_500Medium" }}>
                 Ürün Kontrolü için incelenmesi gerekmektedir
@@ -440,8 +441,8 @@ const BrokenComplete: React.FC = ({ }: any) => {
                         : comboboxData[1].name
                       : "Seçiniz"}
                   </AppText>
-                  <AntDesign
-                    name={showDropdown ? "up" : "down"}
+                  <FontAwesomeIcon
+                    icon={showDropdown ? "up" : "down"}
                     size={16}
                     color="#a1a1a1"
                   />
@@ -508,7 +509,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
           >
             {storeChiefChk && (
               <>
-                <AntDesign name="checkcircle" size={24} color="#29C735" />
+                <FontAwesomeIcon icon="checkcircle" size={24} color="#29C735" />
                 <View style={{ marginLeft: 10 }}>
                   <AppText
                     style={{
@@ -533,7 +534,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
             )}
             {storeChiefChk !== undefined && !storeChiefChk && (
               <>
-                <FontAwesome name="times-circle" size={24} color="#DD0A0A" />
+                <FontAwesomeIcon icon="times-circle" size={24} color="#DD0A0A" />
                 <View style={{ marginLeft: 10 }}>
                   <AppText
                     style={{
@@ -679,7 +680,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
                         setProductGroup(undefined);
                       }}
                     >
-                      <AntDesign name="close" size={20} color={"white"} />
+                      <FontAwesomeIcon icon="close" size={20} color={"white"} />
                     </AppButton>
                   </View>
                 </View>
@@ -761,7 +762,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
                         setProductSubGroup(undefined);
                       }}
                     >
-                      <AntDesign name="close" size={20} color={"white"} />
+                      <FontAwesomeIcon icon="close" size={20} color={"white"} />
                     </AppButton>
                   </View>
                 </View>
@@ -976,7 +977,7 @@ const BrokenComplete: React.FC = ({ }: any) => {
                  */
                 }}
               >
-                <AntDesign name="printer" size={20} color={"white"} />
+                <FontAwesomeIcon icon="printer" size={20} color={"white"} />
                 <AppText
                   labelType={LabelType.Label}
                   labelColorType={ColorType.Light}

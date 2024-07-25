@@ -7,7 +7,8 @@ import {
 } from "@flomagazacilik/flo-digital-components";
 import React, { useState } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import ProductDetail from "./ProductDetail";
 import { OmsPackageModel } from "../../../core/models/OmsPackageModel";
 import { OmsErrorReasonModel } from "../../../core/models/OmsErrorReasonModel";
@@ -35,8 +36,8 @@ const PackageCard: React.FC<OmsPackageModel> = (props) => {
             onPress={() => setExpand(!isExpand)}
             style={{ flexDirection: "row", alignItems: "center", flex: 1 }}
           >
-            <AntDesign
-              name={!isExpand ? "caretright" : "caretdown"}
+            <FontAwesomeIcon
+              icon={!isExpand ? "caretright" : "caretdown"}
               size={15}
               color={AppColor.FD.Text.Ash}
             />

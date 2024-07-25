@@ -18,7 +18,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { AntDesign } from ".";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { NavigationTree } from "../constant/NavigationTree";
 import { removeDuplicates } from "../helper/ArrayHelper";
 import { translate } from "../helper/localization/locaizationMain";
@@ -105,7 +106,7 @@ const EventsearchComponent = (props: any) => {
           alignItems: "center",
         }}
       >
-        <AntDesign name={"search1"} size={27} color={"rgba(191,191,191,1)"} />
+        <FontAwesomeIcon icon={"search"} size={27} color={"rgba(191,191,191,1)"} />
         <TextInput
           onChangeText={(txt) => {
             onSearch(txt);

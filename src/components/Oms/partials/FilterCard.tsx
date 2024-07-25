@@ -11,7 +11,8 @@ import {
 import React, { useState } from "react";
 import { Dimensions, View } from "react-native";
 import { Portal } from "react-native-portalize";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import OmsFilterIco from "../../../Icons/OmsFilterIco";
 import { translate } from "../../../helper/localization/locaizationMain";
 import { useOmsService } from "../../../contexts/OmsService";
@@ -147,7 +148,7 @@ const FilterCard: React.FC<{
                     height: 40,
                   }}
                 >
-                  <AntDesign color={"#fff"} size={25} name={"close"} />
+                  <FontAwesomeIcon color={"#fff"} size={25} icon={"close"} />
                 </AppButton>
               </View>
             </View>
@@ -312,7 +313,7 @@ const FilterCard: React.FC<{
                 height: 40,
               }}
             >
-              <AntDesign color={"#fff"} size={25} name={"close"} />
+              <FontAwesomeIcon color={"#fff"} size={25} icon={"close"} />
             </AppButton>
           </>
         ) : (

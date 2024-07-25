@@ -14,7 +14,8 @@ import FloAutoComplete, {
 import Modal from "react-native-modal";
 import { colors } from "../theme/colors";
 import { paddings } from "../theme/paddingConst";
-import { AntDesign, Feather } from ".";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PerfectFontSize } from "../helper/PerfectPixel";
 
 interface FloComboBoxProps extends FloAutoCompleteSoftProps {
@@ -35,7 +36,7 @@ const FloComboBox: React.FC<FloComboBoxProps> = (props) => {
   useEffect(() => {
     setSelectedItem(props.selectedItem)
   }, [props.selectedItem])
-  
+
   const _renderComplateItem = (item: AutoCompleteItem) => {
     return (
       <View
@@ -78,8 +79,8 @@ const FloComboBox: React.FC<FloComboBoxProps> = (props) => {
         >
           {selectedItem ? selectedItem[props.valueProp] : props.placeholder}
         </Text>
-        <Feather
-          name={"chevron-down"}
+        <FontAwesomeIcon
+          icon={"chevron-down"}
           size={25}
           style={{ position: "absolute", right: 16, top: 13 }}
           color={props.textColor ? props.textColor : colors.darkGrey}
@@ -130,7 +131,7 @@ const FloComboBox: React.FC<FloComboBoxProps> = (props) => {
                     marginRight: 10,
                   }}
                 >
-                  <Feather name={"trash-2"} size={20} color={"white"} />
+                  <FontAwesomeIcon icon={"trash"} size={20} color={"white"} />
                 </TouchableOpacity>
               )}
               <TouchableOpacity
@@ -144,7 +145,7 @@ const FloComboBox: React.FC<FloComboBoxProps> = (props) => {
                   borderRadius: 15,
                 }}
               >
-                <AntDesign name={"close"} size={24} />
+                <FontAwesomeIcon icon={"close"} size={24} />
               </TouchableOpacity>
             </View>
           ) : (

@@ -1,3 +1,4 @@
+
 import {
   AppColor,
   AppText,
@@ -15,7 +16,7 @@ import {
   Dimensions,
 } from "react-native";
 import { Portal } from "react-native-portalize";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { ifIphoneX } from "react-native-iphone-x-helper";
 import { useMediaSelector } from "./MediaSelector";
 
@@ -57,7 +58,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = (props) => {
           onPress={props.onCancel}
           hitSlop={{ top: 20, left: 20, right: 20, bottom: 20 }}
         >
-          <AntDesign name="close" size={25} color="#fff" />
+          <FontAwesomeIcon icon="close" size={25} color="#fff" />
         </TouchableOpacity>
       </View>
       <View>
@@ -84,7 +85,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = (props) => {
             ),
           }}
         >
-          <AntDesign name="pluscircleo" size={70} color="white" />
+          <FontAwesomeIcon icon="pluscircleo" size={70} color="white" />
         </TouchableOpacity>
         <View
           style={{

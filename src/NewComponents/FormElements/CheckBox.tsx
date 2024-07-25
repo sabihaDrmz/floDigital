@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { ParagraphText, ParagraphTextType } from "..";
 import { AppColor } from "../../theme/AppColor";
 
@@ -17,7 +18,7 @@ const CheckBox: FC<CheckBoxProps> = (props) => {
   return (
     <TouchableOpacity onPress={onSelect} style={styles.container}>
       <View style={[styles.box, selected && styles.boxSelected]}>
-        {selected && <FontAwesome5 name={"check"} color={"#fff"} size={15} />}
+        {selected && <FontAwesomeIcon icon={"check"} color={"#fff"} size={15} />}
       </View>
       <ParagraphText
         style={{ color: AppColor.FD.Text.Ash }}

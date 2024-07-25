@@ -18,7 +18,8 @@ import { useProductService } from "../../contexts/ProductService";
 import MainCamera from "../../components/MainCamera";
 import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
-import { MaterialIcons } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 //TODO: EXPO AV expo-av ++++++ only test
 // import { Audio } from 'expo-av';
 import { NavigationType } from "./Navigation";
@@ -311,7 +312,7 @@ const RussiaBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
                 <View style={{ justifyContent: "space-between", flexDirection: "row", alignItems: "center" }}>
                   <Text style={styles.barcodeText} key={index}>{item.barcode ? item.barcode : item.generic}</Text>
                   <TouchableOpacity onPress={() => deleteBarcode(item)}>
-                    <MaterialIcons name="cancel" size={32} color="red" />
+                    <FontAwesomeIcon icon="cancel" size={32} color="red" />
                   </TouchableOpacity>
                 </View>
               )

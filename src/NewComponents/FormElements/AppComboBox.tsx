@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, StyleSheet, StyleProp, ViewStyle, FlatList, TouchableOpacity } from "react-native";
-import { Octicons } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { LabelText, ParagraphText } from "..";
 import { AppColor } from "../../theme/AppColor";
 
@@ -25,8 +26,8 @@ const AppComboBox: React.FC<AppComboBoxProps> = (props) => {
             : props.label}
         </ParagraphText>
         <View style={styles.dropDownIco}>
-          <Octicons
-            name={showDropdown ? "chevron-up" : "chevron-down"}
+          <FontAwesomeIcon
+            icon={showDropdown ? "chevron-up" : "chevron-down"}
             size={30}
             color={"#fff"}
           />

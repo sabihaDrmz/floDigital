@@ -18,7 +18,8 @@ import PdfIcon from "../../components/CustomIcons/PdfIcon";
 import { translate } from "../../helper/localization/locaizationMain";
 import { colors } from "../../theme/colors";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
-import { Entypo, AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { AppColor, AppText } from "@flomagazacilik/flo-digital-components";
 import { useAnnouncementService } from "../../contexts/AnnouncementService";
 import {
@@ -76,8 +77,8 @@ const AnnouncementsScreen: React.FC<{ currentTab: number }> = (props) => {
         )}
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           {!ancProps.isRead && (
-            <Entypo
-              name="new"
+            <FontAwesomeIcon
+              icon="new"
               size={25}
               color={AppColor.FD.Brand.Solid}
               style={{ marginBottom: 10 }}
@@ -312,9 +313,9 @@ const AnnouncementsScreen: React.FC<{ currentTab: number }> = (props) => {
         case "docx":
           return (
             <View style={styles.iconContainer}>
-              <AntDesign
+              <FontAwesomeIcon
                 style={styles.icon}
-                name={"wordfile1"}
+                icon={"wordfile1"}
                 size={props.size != null ? props.size : 32}
                 color={props.color || "#707070"}
               />

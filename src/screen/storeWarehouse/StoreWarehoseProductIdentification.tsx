@@ -19,7 +19,8 @@ import { FloButton } from "../../components";
 import MainCamera from "../../components/MainCamera";
 import { StoreWarehouseResUnitProductModel, StoreWhLabelAddProductListRequestModel } from "../../contexts/model/StoreWarehouseModal";
 import FloLoadingModal from "../../components/Modal/FloLoadingModal";
-import { Feather } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
 //TODO: EXPO AV  expo-av  ++++++ only test
@@ -246,7 +247,7 @@ const StoreWarehoseProductIdentification = ({ }: any) => {
           </View>
         </View>
         <TouchableOpacity onPress={() => deleteProduct(item)} style={{ backgroundColor: '#ff0000', height: 39, width: 39, borderRadius: 39, alignItems: 'center', justifyContent: 'center' }}>
-          <Feather name="trash-2" size={24} color="#fff" />
+          <FontAwesomeIcon name="trash-2" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
     )

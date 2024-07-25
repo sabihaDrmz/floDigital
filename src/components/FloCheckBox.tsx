@@ -8,7 +8,8 @@ import {
   TextStyle,
   TouchableOpacity
 } from "react-native";
-import { FontAwesome } from ".";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { colors } from "../theme/colors";
 
 interface FloCheckBoxProps extends ViewProps {
@@ -34,7 +35,7 @@ const FloCheckBox = (props: FloCheckBoxProps) => {
     >
       <View style={styles.checkboxIconContainer}>
         {checked ? (
-          <FontAwesome name={"check"} color={"white"} size={16} />
+          <FontAwesomeIcon icon={"check"} color={"white"} size={16} />
         ) : null}
       </View>
       <Text style={[styles.title, props.textStyle]}>{props.title}</Text>

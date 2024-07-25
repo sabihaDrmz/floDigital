@@ -17,12 +17,9 @@ import {
   ColorType,
   FontSizes,
 } from "@flomagazacilik/flo-digital-components";
-import {
-  MaterialCommunityIcons,
-  AntDesign,
-  MaterialIcons,
-  FontAwesome,
-} from "@expo/vector-icons";
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { Portal } from "react-native-portalize";
 import { ifIphoneX } from "react-native-iphone-x-helper";
 //TODO: EXPO expo-media-library
@@ -198,8 +195,8 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                 setCameracapPicture(undefined);
               }}
             >
-              <MaterialCommunityIcons
-                name="camera-plus"
+              <FontAwesomeIcon
+                icon="camera-plus"
                 size={30}
                 color="white"
               />
@@ -251,7 +248,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                       borderRadius: 13,
                     }}
                   >
-                    <AntDesign name="closecircle" size={25} color={"black"} />
+                    <FontAwesomeIcon icon="closecircle" size={25} color={"black"} />
                   </TouchableOpacity>
                 )}
               </View>
@@ -327,7 +324,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                       onPress={() => setIsShowData(false)}
                       hitSlop={{ top: 20, left: 20, right: 20, bottom: 20 }}
                     >
-                      <AntDesign name="close" size={25} color="#fff" />
+                      <FontAwesomeIcon icon="close" size={25} color="#fff" />
                     </TouchableOpacity>
                     <View style={{ position: "absolute", bottom: 60, width }}>
                       <FlatList
@@ -369,8 +366,8 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                             alignItems: "center",
                           }}
                         >
-                          <MaterialCommunityIcons
-                            name="folder-upload"
+                          <FontAwesomeIcon
+                            icon="folder-upload"
                             size={35}
                             color="white"
                           />
@@ -412,8 +409,8 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                             alignItems: "center",
                           }}
                         >
-                          <MaterialIcons
-                            name="flip-camera-ios"
+                          <FontAwesomeIcon
+                            icon="flip-camera-ios"
                             size={35}
                             color="white"
                           />
@@ -463,7 +460,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                       }}
                       style={{ left: width - 100, top: 30 }}
                     >
-                      <FontAwesome name="times" size={40} color="black" />
+                      <FontAwesomeIcon icon="times" size={40} color="black" />
                     </TouchableOpacity>
                     <View
                       style={{
@@ -483,8 +480,8 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                           alignItems: "center",
                         }}
                       >
-                        <MaterialCommunityIcons
-                          name="file-image-plus"
+                        <FontAwesomeIcon
+                          icon="file-image-plus"
                           size={36}
                           color="black"
                         />
@@ -544,7 +541,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                   onPress={() => setSelectedVideo("")}
                   hitSlop={{ top: 20, left: 20, right: 20, bottom: 20 }}
                 >
-                  <AntDesign name="close" size={25} color="#fff" />
+                  <FontAwesomeIcon icon="close" size={25} color="#fff" />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
@@ -568,7 +565,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps> = (props) => {
                     ),
                   }}
                 >
-                  <AntDesign name="pluscircleo" size={70} color="white" />
+                  <FontAwesomeIcon icon="pluscircleo" size={70} color="white" />
                 </TouchableOpacity>
                 <View
                   style={{

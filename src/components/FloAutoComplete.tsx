@@ -12,7 +12,8 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { translate } from "../helper/localization/locaizationMain";
 import { colors } from "../theme/colors";
 
@@ -71,7 +72,7 @@ class FloAutoComplete extends Component<FloAutoCompleteProps> {
       <View style={[styles.container, this.props.containerStyle]}>
         <View style={styles.textInputContainer}>
           <View style={styles.searchIcon}>
-            <Feather name="search" color={colors.black} size={28} />
+            <FontAwesomeIcon icon="search" color={colors.black} size={28} />
             <View
               style={{
                 width: 1,

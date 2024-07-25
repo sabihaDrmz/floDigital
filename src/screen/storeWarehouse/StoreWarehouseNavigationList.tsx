@@ -24,7 +24,6 @@ import OmsWarehouseDeleteProductIcon from '../../Icons/OmsWarehouseDeleteProduct
 import OmsWarehouseRapor from '../../Icons/OmsWarehouseRapor';
 import OmsWarehouseInventoryIcon from "../../Icons/OmsWarehouseInventoryIcon";
 import OmsWarehouseProductReport from "../../Icons/OmsWarehouseProductReport";
-import { Octicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { translate } from "../../helper/localization/locaizationMain";

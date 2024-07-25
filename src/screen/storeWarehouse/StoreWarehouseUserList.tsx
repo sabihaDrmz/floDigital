@@ -14,7 +14,8 @@ import FloHeaderNew from "../../components/Header/FloHeaderNew";
 const { width, height } = Dimensions.get("window");
 const PADDING_TOTAL = Platform.OS === "android" ? 50 : 50;
 import { useStoreWarehouseService } from "../../contexts/StoreWarehoseService";
-import { Feather } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
@@ -160,7 +161,7 @@ const StoreWarehouseUserList = ({ }: any) => {
                                             <Text numberOfLines={3} style={styles.itemP}>{item.name}</Text>
                                         </View>
                                         <TouchableOpacity onPress={() => deleteUser(item.employeeId)} style={[styles.itemWrapper, { width: width * 0.1, alignItems: 'center', justifyContent: 'center' }]}>
-                                            <Feather name="trash-2" size={24} color="#ff0000" />
+                                            <FontAwesomeIcon name="trash" size={24} color="#ff0000" />
                                         </TouchableOpacity>
                                     </View>
                                 )
@@ -197,7 +198,7 @@ const StoreWarehouseUserList = ({ }: any) => {
                                         <Text numberOfLines={3} style={styles.itemP}>{item.name}</Text>
                                     </View>
                                     <TouchableOpacity onPress={() => deleteUser(item.employeeId)} style={[styles.itemWrapper, { width: width * 0.1, alignItems: 'center', justifyContent: 'center' }]}>
-                                        <Feather name="trash-2" size={24} color="#ff0000" />
+                                        <FontAwesomeIcon icon="trash-2" size={24} color="#ff0000" />
                                     </TouchableOpacity>
                                 </View>
                             )

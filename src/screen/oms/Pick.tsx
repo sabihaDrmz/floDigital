@@ -19,7 +19,8 @@ import {
   ScrollView
 } from "react-native";
 import BarcodeSearchBar from "../../components/Oms/partials/BarcodeSearchBar";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { OmsErrorReasonModel } from "../../core/models/OmsErrorReasonModel";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import Radio from "../../components/Oms/partials/Radio";
@@ -84,8 +85,8 @@ const Pick: React.FC = (props) => {
             onPress={() => props.onExpand(!props.isExpand)}
             style={styles.expandContainer}
           >
-            <AntDesign
-              name={!props.isExpand ? "caretright" : "caretdown"}
+            <FontAwesomeIcon
+              icon={!props.isExpand ? "caretright" : "caretdown"}
               size={20}
               color={AppColor.FD.Text.Ash}
             />

@@ -1,4 +1,5 @@
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PerfectPixelSize } from "../../helper/PerfectPixel";
 import React, { useState } from "react";
 import {
@@ -112,7 +113,7 @@ const IsoImageSlider: React.FC<{
             if (props.onCloseImageModal) props.onCloseImageModal();
           }}
         >
-          <AntDesign name={"close"} size={40} />
+          <FontAwesomeIcon icon={"close"} size={40} />
         </TouchableOpacity>
       </View>
       <View

@@ -6,7 +6,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Entypo } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PrinterConfigProp } from "../../contexts/model/PrinterConfigGroupModel";
 
 interface StickerAccordionProps {
@@ -57,7 +58,7 @@ const StickerAccordion: React.FC<StickerAccordionProps> = (props) => {
           {props.title}
         </AppText>
         <Animated.View style={animatedRoute}>
-          <Entypo name={"chevron-thin-up"} size={20} />
+          <FontAwesomeIcon icon={"chevron-thin-up"} size={20} />
         </Animated.View>
       </TouchableOpacity>
       {props.items.map(props.renderItem)}

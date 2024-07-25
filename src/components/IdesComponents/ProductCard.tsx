@@ -6,7 +6,9 @@ import {
   AppText,
   ColorType,
 } from "@flomagazacilik/flo-digital-components";
-import { FontAwesome5 } from "../../components";
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { Product } from "../../core/models/ReturnedProduct/ErFindFicheResult";
 import AppCardColorizeSVG from "../../components/AppColorizeSvg";
 
@@ -105,7 +107,7 @@ const MenuIcon: React.FC = (props) => {
               alignItems: "center",
             }}
           >
-            <FontAwesome5 name={"check"} size={20} color={"white"} />
+            <FontAwesomeIcon icon={"check"} size={20} color={"white"} />
           </View>
         </View>
         <View style={{ flexDirection: "row", marginLeft: 30 }}>

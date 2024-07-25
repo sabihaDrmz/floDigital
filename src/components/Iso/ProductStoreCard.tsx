@@ -1,4 +1,5 @@
-import { Feather } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import {
   AppColor,
   AppText,
@@ -57,7 +58,7 @@ const ProductStoreCard: React.FC<IsoProductStoreCardProps> = (props) => {
           value={query}
         />
         <View style={styles.searchBarIcoContainer}>
-          <Feather name="search" color={colors.black} size={25} />
+          <FontAwesomeIcon on="search" color={colors.black} size={25} />
           <View
             style={{
               width: 1,

@@ -16,7 +16,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { OmsOrderModel } from "../../../core/models/OmsOrderModel";
 import OmsExpandIcon from "../../../Icons/OmsExpandIco";
 import OmsClockIcon from "../../../Icons/OmsClockIco";
@@ -238,8 +239,8 @@ const OrderCard: React.FC<{
             onPress={() => OmsService.assignOrderToMe(props.order.ID)}
             style={styles.plusButtonContainer}
           >
-            <FontAwesome5
-              name={"plus"}
+            <FontAwesomeIcon
+              icon={"plus"}
               size={20}
               color={AppColor.FD.Brand.Solid}
             />
@@ -328,7 +329,7 @@ const OrderCard: React.FC<{
               }}
             >
               <TouchableOpacity onPress={() => setShowFullScreenModal(false)}>
-                <AntDesign name={"close"} size={40} />
+                <FontAwesomeIcon icon={"close"} size={40} />
               </TouchableOpacity>
             </View>
           </View>

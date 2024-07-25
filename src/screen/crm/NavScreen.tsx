@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
-import { MaterialIcons } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { translate } from "../../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 import { useAccountService } from "../../contexts/AccountService";
@@ -42,7 +43,7 @@ const NavScreen: React.FC = () => {
             />
             <Text style={navText}>{props.title}</Text>
           </View>
-          <MaterialIcons name={"chevron-right"} size={25} color={"#7d7e81"} />
+          <FontAwesomeIcon icon={"chevron-right"} size={25} color={"#7d7e81"} />
         </TouchableOpacity>
       );
     },

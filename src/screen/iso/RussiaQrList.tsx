@@ -8,10 +8,9 @@ import {
     TouchableOpacity,
     FlatList,
 } from "react-native";
-import {
-    MaterialIcons,
-    MaterialCommunityIcons,
-} from "@expo/vector-icons";
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useProductService } from "../../contexts/ProductService";
 import { usePrinterConfigService } from "../../contexts/PrinterConfigService";
 import {
@@ -56,7 +55,7 @@ const RussiaQr: React.FC<any> = (props) => {
                 }}
             >
                 <Text style={{ fontSize: PerfectFontSize(16), fontFamily: "Poppins_700Bold", marginLeft: 20, color: selectedIndexes.includes(props.index) ? colors.white : colors.black }}>{item.gtin}</Text>
-                <MaterialIcons style={{ marginRight: 20 }} name="qr-code-2" size={70} color={selectedIndexes.includes(props.index) ? colors.white : colors.floOrange} />
+                <FontAwesomeIcon style={{ marginRight: 20 }} icon="qr-code-2" size={70} color={selectedIndexes.includes(props.index) ? colors.white : colors.floOrange} />
 
             </TouchableOpacity>
         );
@@ -85,11 +84,11 @@ const RussiaQr: React.FC<any> = (props) => {
                             if(indices) setSelectedIndexes(indices);
                             setAllSelected(true)
                         }
-                        
-                    }} 
+
+                    }}
                     style={{justifyContent:"flex-start",flexDirection:"row",alignItems:"center",marginLeft:20}}>
-                        <MaterialCommunityIcons
-                            name={
+                        <FontAwesomeIcon
+                            icon={
                                 allSelected ? "checkbox-intermediate" : "checkbox-blank-outline"
                             }
                             size={28}
@@ -130,13 +129,13 @@ const RussiaQr: React.FC<any> = (props) => {
                                     yesButtonEvent: () => {
                                         //   closePopup();
                                     },
-                                    
+
                                 });
                                 // burda çektiğim Qr listesi ile Approvedan dönen listeyi karşılaştırıp baskı alınabilir olanları buldum
                                 const filteredItems = russiaQrlist?.qrResponseList.filter(item =>
                                     res.some(qr => qr.barcodeOrEan === item.gtin && qr.qrCodeId !== 0)
                                 );
-                                
+
                                 // burda da eşleşenlerden baskıya ekliceğim id leri buldum.
                                 const qrCodeIds = res
                                     .filter(qr => russiaQrlist?.qrResponseList.some(item => item.gtin === qr.barcodeOrEan) && qr.qrCodeId !== 0)
@@ -154,10 +153,10 @@ const RussiaQr: React.FC<any> = (props) => {
                                     yesButtonEvent: () => {
                                         //   closePopup();
                                     },
-                                    
+
                                 });
                                }
-                                
+
                             }
                         });
                     }}

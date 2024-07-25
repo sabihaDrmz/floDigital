@@ -7,7 +7,8 @@ import {
 } from "@flomagazacilik/flo-digital-components";
 import React from "react";
 import { ActivityIndicator, StyleSheet, View, TouchableOpacity } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { OmsOrderModel } from "../../../core/models/OmsOrderModel";
 import { useOmsService } from "../../../contexts/OmsService";
 import { translate } from "../../../helper/localization/locaizationMain";
@@ -57,8 +58,8 @@ const OrderTimeCard: React.FC<{
                 disabled={OmsService.assignLoading.isLoading}
                 onPress={() => OmsService.assignOrderToMe(props.orderID)}
               >
-                <FontAwesome5
-                  name={"plus"}
+                <FontAwesomeIcon
+                  icon={"plus"}
                   size={20}
                   color={AppColor.FD.Brand.Solid}
                 />

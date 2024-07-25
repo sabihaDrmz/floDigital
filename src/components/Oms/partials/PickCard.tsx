@@ -9,7 +9,8 @@ import {
 } from "@flomagazacilik/flo-digital-components";
 import React, { useState } from "react";
 import { Dimensions, Image, TouchableOpacity, View } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import {
   OmsOrderDetail,
   OmsOrderModel,
@@ -38,8 +39,8 @@ const OrderPickCardSub: React.FC<{ orderLines: OmsOrderDetail[] }> = (
             onPress={() => setExpand(!isExpand)}
             style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <AntDesign
-              name={!isExpand ? "caretright" : "caretdown"}
+            <FontAwesomeIcon
+              icon={!isExpand ? "caretright" : "caretdown"}
               size={15}
               color={AppColor.FD.Text.Ash}
             />
@@ -229,8 +230,8 @@ const PickCard: React.FC<OmsOrderModel> = (props) => {
             onPress={() => setExpand(!isExpand)}
             style={{ flexDirection: "row", alignItems: "flex-start", flex: 1 }}
           >
-            <AntDesign
-              name={!isExpand ? "caretright" : "caretdown"}
+            <FontAwesomeIcon
+              icon={!isExpand ? "caretright" : "caretdown"}
               size={15}
               color={AppColor.FD.Text.Ash}
             />

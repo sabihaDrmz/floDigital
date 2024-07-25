@@ -15,7 +15,8 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors } from "../../theme/colors";
-import { FontAwesome } from "../../../src/components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 
 const Profile = () => {
     const { employeeInfo, logout } = useAccountService();
@@ -104,7 +105,7 @@ const Profile = () => {
                 <TouchableOpacity
                     onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
                 >
-                    <FontAwesome name="arrow-left" color={"#fff"} size={25} />
+                    <FontAwesomeIcon icon="arrow-left" color={"#fff"} size={25} />
                 </TouchableOpacity>
             </View>
             <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
@@ -206,7 +207,7 @@ const Profile = () => {
                         alignItems: "center",
                     }}
                 >
-                    <FontAwesome name={"power-off"} color={"#8c8e90"} size={25} />
+                    <FontAwesomeIcon icon={"power-off"} color={"#8c8e90"} size={25} />
                 </View>
             </TouchableOpacity>
             <Text

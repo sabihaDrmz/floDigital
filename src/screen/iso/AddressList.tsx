@@ -1,4 +1,6 @@
-import { FloButton, FontAwesome } from "../../components";
+import { FloButton } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useBasketService } from "../../contexts/BasketService";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -67,8 +69,8 @@ const AddressList: React.FC<AddressListProps> = (props) => {
                 }}
               >
                 {selected ? (
-                  <FontAwesome
-                    name={"check"}
+                  <FontAwesomeIcon
+                    icon={"check"}
                     color={selected ? colors.white : colors.darkGrey}
                     size={15}
                   />

@@ -17,8 +17,8 @@ import {
   Image,
   ScrollView
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import { useSelfCheckOutService } from "../../contexts/SelfCheckOutService";
 import {
@@ -377,7 +377,7 @@ const SelfCheckOutScreen = ({ }: any) => {
                   <View
                     style={{ justifyContent: "center", alignItems: "center" }}
                   >
-                    <AntDesign name="checkcircle" size={40} color="#ff8600" />
+                    <FontAwesomeIcon icon="checkcircle" size={40} color="#ff8600" />
                     <AppText
                       labelColorType={ColorType.Brand}
                       style={{
@@ -476,7 +476,7 @@ const SelfCheckOutScreen = ({ }: any) => {
                   <View
                     style={{ justifyContent: "center", alignItems: "center" }}
                   >
-                    <FontAwesome
+                    <FontAwesomeIcon
                       name="times-circle"
                       size={40}
                       color="#D10D0D"

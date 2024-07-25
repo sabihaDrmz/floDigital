@@ -34,7 +34,8 @@ import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalSer
 import { useAccountService } from "../../contexts/AccountService";
 import { ToImageCdnUri } from "../../helper/ImageCdnExtensions";
 import FloIcon from "../../components/CustomIcons/FloIcon";
-import { AntDesign, Octicons } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import Svg, { Path } from "react-native-svg";
 import {
   AppButton,
@@ -220,7 +221,7 @@ const Product: React.FC<ProductProps> = (props) => {
           onPress={() => setshowData(true)}
           style={{ justifyContent: "center" }}
         >
-          <AntDesign name={"infocirlceo"} size={20} color={"#848484"} />
+          <FontAwesomeIcon icon={"infocirlceo"} size={20} color={"#848484"} />
         </TouchableOpacity>
       </View>
     );
@@ -688,7 +689,7 @@ const Product: React.FC<ProductProps> = (props) => {
             backgroundColor: "#fff",
           }}
         >
-          <AntDesign name={"printer"} size={25} color={colors.floOrange} />
+          <FontAwesomeIcon icon={"printer"} size={25} color={colors.floOrange} />
           <Text style={{ marginLeft: 14, color: colors.floOrange }}>
             {salesOrg === "3111" || salesOrg === "3112" || salesOrg === "3114"
               ? "Этикетка және QR басып шығар"
@@ -825,8 +826,8 @@ const Product: React.FC<ProductProps> = (props) => {
                   ? translate("isoProduct.hide")
                   : translate("isoProduct.seeAll")}
               </Text>
-              <Octicons
-                name={
+              <FontAwesomeIcon
+                icon={
                   showVerticalSimilarProducts ? "chevron-up" : "chevron-down"
                 }
                 size={20}

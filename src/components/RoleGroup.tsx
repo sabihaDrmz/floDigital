@@ -1,6 +1,7 @@
 import React, { Component, ReactNode } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { FontAwesome } from ".";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { translate } from "../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../helper/PerfectPixel";
 import { colors } from "../theme/colors";
@@ -48,7 +49,7 @@ const RoleGroup = (props: any) => {
           flex: 1,
         }}
       >
-        <FontAwesome name={"close"} color={colors.brightOrange} size={100} />
+        <FontAwesomeIcon icon={"close"} color={colors.brightOrange} size={100} />
         <Text
           style={{
             fontSize: PerfectFontSize(30),

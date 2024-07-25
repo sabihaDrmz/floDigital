@@ -4,7 +4,9 @@ import { Alert, Dimensions, FlatList, Platform, SafeAreaView, ScrollView, StyleS
 import Characteristic from '../Characteristic';
 import StickerAccordion from './StickerAccordion';
 import { DiscountIcon, NewIcon } from '../CustomIcons/MainPageIcons';
-import { FloButton, Foundation } from '../../components';
+import { FloButton } from '../../components';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { AppColor } from '../../theme/AppColor';
 import StickerCard from './StickerCard';
 import { PrinterConfigProp } from '../../contexts/model/PrinterConfigGroupModel';
@@ -319,8 +321,8 @@ const MertechPrinterConfig = () => {
                 ) : x.icon === "season" ? (
                   <NewIcon />
                 ) : (
-                  <Foundation
-                    name={"indent-more"}
+                  <FontAwesomeIcon
+                    icon={"indent-more"}
                     size={30}
                     color={AppColor.FD.Brand.Solid}
                   />

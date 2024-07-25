@@ -16,7 +16,8 @@ import {
   Platform,
   ScrollView
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import FloTextBoxNew from "../../components/FloTextBoxNew";
 import { translate } from "../../helper/localization/locaizationMain";
 import FloInfiniteScroll from "../../components/FloInfiniteScroll";
@@ -298,7 +299,7 @@ const OmsOrderHistory: React.FC = (props) => {
                     buttonColorType={ColorType.Success}
                     style={{ width: 50 }}
                   >
-                    <AntDesign name={"close"} size={25} color={"#fff"} />
+                    <FontAwesomeIcon icon={"close"} size={25} color={"#fff"} />
                   </AppButton>
                 </View>
                 <AppText

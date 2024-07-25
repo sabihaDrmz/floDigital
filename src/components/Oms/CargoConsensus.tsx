@@ -26,7 +26,8 @@ import Animated, {
   SlideInDown,
   SlideInRight,
 } from "react-native-reanimated";
-import { AntDesign, Entypo, FontAwesome, Fontisto } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import linq from "linq";
 import FloTextBoxNew from "../../components/FloTextBoxNew";
 import { Portal } from "react-native-portalize";
@@ -321,7 +322,7 @@ const CargoConsensus: React.FC = (props) => {
               >
                 {OmsService.selectedCensusList.findIndex(
                   (x) => x === props.OrderNo
-                ) >= 0 && <FontAwesome name="check" size={20} color={"#fff"} />}
+                ) >= 0 && <FontAwesomeIcon icon="check" size={20} color={"#fff"} />}
               </TouchableOpacity>
             </View>
           </View>
@@ -472,7 +473,7 @@ const CargoConsensus: React.FC = (props) => {
                 : translate("OmsCargoConsensus.selectCargo")}
             </AppText>
             <View style={styles.downIco}>
-              <Entypo name={"chevron-down"} size={30} color={"#fff"} />
+              <FontAwesomeIcon icon={"chevron-down"} size={30} color={"#fff"} />
             </View>
           </TouchableOpacity>
           <AppButton
@@ -480,7 +481,7 @@ const CargoConsensus: React.FC = (props) => {
             buttonColorType={ColorType.Brand}
             onPress={() => setShowDatePicker(true)}
           >
-            <Fontisto name="date" size={23} color={"#fff"} />
+            <FontAwesomeIcon icon="date" size={23} color={"#fff"} />
           </AppButton>
         </View>
       </View>
@@ -701,7 +702,7 @@ const CargoConsensus: React.FC = (props) => {
                     }}
                     hitSlop={{ bottom: 15, right: 15, left: 15, top: 15 }}
                   >
-                    <AntDesign name={"close"} color={"#fff"} size={20} />
+                    <FontAwesomeIcon icon={"close"} color={"#fff"} size={20} />
                   </TouchableOpacity>
                 </View>
                 <View style={{ paddingHorizontal: 20, paddingVertical: 10 }}>
@@ -903,7 +904,7 @@ const CargoConsensus: React.FC = (props) => {
                   }}
                   onPress={() => setShowReadOrderPopup(false)}
                 >
-                  <FontAwesome name="times-circle" size={36} color="red" />
+                  <FontAwesomeIcon icon="times-circle" size={36} color="red" />
                 </TouchableOpacity>
                 <View
                   style={{ justifyContent: "center", alignItems: "center" }}

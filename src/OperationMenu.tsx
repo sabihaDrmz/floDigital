@@ -11,11 +11,11 @@ import {
     Platform,
     ScrollView,
 } from "react-native";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Animated from "react-native-reanimated";
 import React, { useState, useEffect } from "react";
 import { useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
 import { useAccountService } from "./contexts/AccountService";
-import { AntDesign } from "@expo/vector-icons";
 import { translate } from "./helper/localization/locaizationMain";
 import { BrokenProductIcon } from "./components/CustomIcons/BrokenProductIcon";
 import {
@@ -117,7 +117,7 @@ const OperationMenu = () => {
                             {title}
                         </Text>
                     </View>
-                    <AntDesign name={"right"} size={17} color={"#7D7E81"} />
+                    <FontAwesomeIcon icon={"right"} size={17} color={"#7D7E81"} />
                 </TouchableOpacity>
                 <View
                     style={{

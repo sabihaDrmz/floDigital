@@ -10,7 +10,9 @@ import {
   KeyboardAvoidingView,
   Keyboard,
 } from "react-native";
-import { FloButton, Foundation } from "../../components";
+import { FloButton } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { FloZebraBtInfo, FloZebraPrinter } from "@flomagazacilik/flo-zebra-bt";
 import { translate } from "../../helper/localization/locaizationMain";
 import DevicePicker from "./DevicePicker";
@@ -135,8 +137,8 @@ const AndroidPrinterConfig = () => {
                     ) : x.icon === "season" ? (
                       <NewIcon />
                     ) : (
-                      <Foundation
-                        name={"indent-more"}
+                      <FontAwesomeIcon
+                        icon={"indent-more"}
                         size={30}
                         color={AppColor.FD.Brand.Solid}
                       />

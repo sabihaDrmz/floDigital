@@ -13,12 +13,12 @@ import {
   ViewProps,
 } from "react-native";
 import Svg, { Circle, G, Path } from "react-native-svg";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PerfectFontSize, PerfectPixelSize } from "../../helper/PerfectPixel";
 
 import { DrawerActions } from "@react-navigation/routers";
 import BellIcon from "../../components/CustomIcons/BellIcon";
-import { Ionicons } from "../../components";
 import HeaderSliderMenu from "./HeaderSliderMenu";
 import { useFcmService } from "../../contexts/FcmService";
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -269,7 +269,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
                 runButtonAction("back");
               }}
             >
-              <AntDesign name={"arrowleft"} size={27} color={"#fff"} />
+              <FontAwesomeIcon icon={"arrowleft"} size={27} color={"#fff"} />
             </TouchableOpacity>
           )}
           {!props.enableButtons?.includes("back") && (
@@ -370,7 +370,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
               }}
               onPress={() => runButtonAction("close")}
             >
-              <Ionicons name={"close"} size={30} color={"#fff"} />
+              <FontAwesomeIcon icon={"close"} size={30} color={"#fff"} />
             </TouchableOpacity>
           )}
           {props.enableButtons?.includes("findBarcode") && (

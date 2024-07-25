@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Animated, Dimensions, NativeScrollEvent, NativeSyntheticEvent, ScrollView, TouchableOpacity, View } from "react-native";
 import { PinchGestureHandler, State } from "react-native-gesture-handler";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PerfectPixelSize } from "../helper/PerfectPixel";
 
 const { width, height } = Dimensions.get("window"),
@@ -84,7 +85,7 @@ const { width, height } = Dimensions.get("window"),
               if (props.onCloseImageModal) props.onCloseImageModal();
             }}
           >
-            <AntDesign name={"close"} size={40} />
+            <FontAwesomeIcon icon={"close"} size={40} />
           </TouchableOpacity>
         </View>
         <View

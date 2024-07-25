@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { Octicons } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { usePrinterConfigService } from "../../contexts/PrinterConfigService";
 import { translate } from "../../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
@@ -39,8 +40,8 @@ const DevicePicker: React.FC<{
                 : selectedDevice?.name)}
           </Text>
           <View style={styles.dropdownIco}>
-            <Octicons
-              name={showDropdown ? "chevron-up" : "chevron-down"}
+            <FontAwesomeIcon
+              icon={showDropdown ? "chevron-up" : "chevron-down"}
               size={30}
               color={"#fff"}
             />

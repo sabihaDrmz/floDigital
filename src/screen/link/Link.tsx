@@ -14,7 +14,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Entypo } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useLinkService, Link } from "../../contexts/LinkService";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -89,14 +90,14 @@ const LinkAccordion: React.FC<LinkAccordionProps> = (props) => {
         >
           <>
             <View style={styles.collapseCircle}>
-              <Entypo name="menu" color={"#fff"} size={18} />
-              <Entypo name="chevron-thin-down" color={"#fff"} size={13} />
+              <FontAwesomeIcon icon="menu" color={"#fff"} size={18} />
+              <FontAwesomeIcon icon="chevron-thin-down" color={"#fff"} size={13} />
             </View>
             <AppText selectable style={styles.groupText}>
               {props.title}
             </AppText>
             <Animated.View style={animatedIcon}>
-              <Entypo name={"chevron-thin-up"} size={20} />
+              <FontAwesomeIcon icon={"chevron-thin-up"} size={20} />
             </Animated.View>
           </>
         </TouchableOpacity>

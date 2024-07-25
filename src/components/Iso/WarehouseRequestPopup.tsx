@@ -12,9 +12,8 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/build/AntDesign";
-import MaterialCommunityIcons from "@expo/vector-icons/build/MaterialCommunityIcons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import { ProductModel } from "contexts/model/ProductModel";
@@ -160,8 +159,8 @@ const WarehouseRequestPopup: React.FC<WarehouseRequestPopupProps> = (props) => {
                   : employees.find((x) => x.employeeId === selectedEmployee)
                       ?.employeeName}
               </AppText>
-              <MaterialCommunityIcons
-                name="chevron-down"
+              <FontAwesomeIcon
+                icon="chevron-down"
                 size={20}
                 color={"rgba(0,0,0,.4)"}
               />
@@ -230,8 +229,8 @@ const WarehouseRequestPopup: React.FC<WarehouseRequestPopupProps> = (props) => {
               height: 40,
             }}
           >
-            <AntDesign
-              name={"search1"}
+            <FontAwesomeIcon
+              icon={"search1"}
               style={{ position: "absolute", left: 10, top: 12 }}
               size={15}
               color={colors.darkGrey}
@@ -265,8 +264,8 @@ const WarehouseRequestPopup: React.FC<WarehouseRequestPopupProps> = (props) => {
                     flexDirection: "row",
                   }}
                 >
-                  <Ionicons
-                    name={
+                  <FontAwesomeIcon
+                    icon={
                       e.employeeId === selectedEmployee
                         ? "radio-button-on"
                         : "radio-button-off"

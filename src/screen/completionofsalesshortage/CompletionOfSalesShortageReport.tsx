@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import DateTimePicker from "../../components/CompletionOfSalesShortage/DateTimePicker";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import moment from 'moment';
 import { useMessageBoxService } from '../../contexts/MessageBoxService';
 import { useCompletionOfSalesShortageService } from '../../../src/contexts/CompletionOfSalesShortageService'
@@ -322,7 +322,7 @@ const CompletionOfSalesShortageReport = () => {
                         style={{ width: 40, height: 40 }}
                         onPress={getReports}
                     >
-                        <AntDesign name={"search1"} color={"#fff"} size={23} />
+                        <FontAwesomeIcon icon={"search1"} color={"#fff"} size={23} />
                     </AppButton>
                 </View>
             </View>

@@ -11,7 +11,8 @@ import { MenuIconSales } from "../../components/CompletionOfSalesShortage/MenuIc
 import Popup from "../../components/CompletionOfSalesShortage/Popup";
 import CheckBoxSales from "../../components/CompletionOfSalesShortage/CheckBoxSales";
 import FloLoading from "../../components/FloLoading";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import MainCamera from "../../components/MainCamera";
 import { SearchQR } from "../../components/CustomIcons/MainPageIcons";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
@@ -406,8 +407,8 @@ const CompletionOfSalesShortage: React.FC = ({ navigation }: any) => {
               >
                 {item.productGroup}
               </AppText>
-              <FontAwesome
-                name={
+              <FontAwesomeIcon
+                icon={
                   isSelected && selectedCollapseIndex == index
                     ? "chevron-down"
                     : "chevron-up"
@@ -544,8 +545,8 @@ const CompletionOfSalesShortage: React.FC = ({ navigation }: any) => {
                     >
                       {x.brand}
                     </AppText>
-                    <FontAwesome
-                      name={
+                    <FontAwesomeIcon
+                      icon={
                         isSelectedChild && selectedChildIndex === index
                           ? "chevron-down"
                           : "chevron-up"

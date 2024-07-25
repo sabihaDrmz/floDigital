@@ -3,7 +3,9 @@ import { AppColor } from "@flomagazacilik/flo-digital-components";
 import AppTextBox, {
   TextManipulator,
 } from "../../NewComponents/FormElements/AppTextBox";
-import { Feather, FloButton } from "../../components";
+import { FloButton } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import AppComboSelect from "../../components/AppComboSelect";
 import FloCheckBox from "../../components/FloCheckBox";
 import FloLoading from "../../components/FloLoading";
@@ -73,7 +75,7 @@ const NewAddress: React.FC<any> = (props) => {
             marginRight: 20,
           }}
         >
-          <Feather name={"search"} size={24} />
+          <FontAwesomeIcon icon={"search"} size={24} />
           <TextInputMask
             type={"cel-phone"}
             options={{

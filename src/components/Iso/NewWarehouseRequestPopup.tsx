@@ -11,7 +11,8 @@ import {
   TouchableOpacity,
   Text
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import { ProductModel } from "../../contexts/model/ProductModel";
@@ -150,8 +151,8 @@ const NewWarehouseRequestPopup: React.FC<NewWarehouseRequestPopupProps> = (
                       }}
                     >
                       <AppText style={{ color: '#626262' }} selectable> {e.code} - {e?.unitQr}</AppText>
-                      <Ionicons
-                        name={
+                      <FontAwesomeIcon
+                        icon={
                           e.id === selectedEmployee
                             ? "radio-button-on"
                             : "radio-button-off"

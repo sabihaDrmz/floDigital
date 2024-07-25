@@ -1,4 +1,6 @@
 import { FontAwesome } from "../../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import React from "react";
 import { View } from "react-native";
 
@@ -15,7 +17,7 @@ export const CloseIco = (props: any) => {
         marginTop: -10,
       }}
     >
-      <FontAwesome name="close" size={60} color={"#fff"} />
+      <FontAwesomeIcon icon="close" size={60} color={"#fff"} />
     </View>
   );
 };

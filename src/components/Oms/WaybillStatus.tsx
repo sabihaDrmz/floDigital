@@ -6,7 +6,9 @@ import {
 import React, { useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { translate } from "../../helper/localization/locaizationMain";
-import { AntDesign } from "@expo/vector-icons";
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import AppDatePicker from "../../components/AppDatePicker";
 import { useOmsService } from "../../contexts/OmsService";
 
@@ -38,7 +40,7 @@ const WaybillStatus: React.FC<OmsWaybillStatusProps> = (props) => {
             style={{ width: 40, height: 40, marginVertical: 5 }}
             onPress={GetWaybills}
           >
-            <AntDesign name={"search1"} color={"#fff"} size={23} />
+            <FontAwesomeIcon icon={"search1"} color={"#fff"} size={23} />
           </AppButton>
         }
         containerStyle={{ margin: 0, marginBottom: 20 }}

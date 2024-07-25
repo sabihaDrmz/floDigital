@@ -12,8 +12,8 @@ import { useMessageBoxService } from "../../../contexts/MessageBoxService";
 import { MessageBoxOptions } from "../../../contexts/model/MessageBoxOptions";
 import { translate } from "../../../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../../../helper/PerfectPixel";
-import Svg, { Circle, Defs, G, Path, TSpan } from "react-native-svg";
-import { Octicons } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 const MbOmsComplete: React.FC<{
   message: string;
   options?: MessageBoxOptions;
@@ -30,7 +30,7 @@ const MbOmsComplete: React.FC<{
             marginBottom: 20,
           }}
         >
-          <Octicons name="checklist" size={40} color="black" />
+          <FontAwesomeIcon icon="checklist" size={40} color="black" />
         </View>
         <AppText style={{ textAlign: "center" }} labelType={LabelType.Label}>
           {props.message.split("|")[0]}{" "}

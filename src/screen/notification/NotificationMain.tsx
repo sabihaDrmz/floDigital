@@ -9,7 +9,8 @@ import {
   Dimensions,
 } from "react-native";
 import Svg, { Path } from "react-native-svg";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import { useFcmService } from "../../contexts/FcmService";
 import { useAccountService } from "../../contexts/AccountService";
@@ -228,7 +229,7 @@ const NotificationMain: React.FC<any> = (props) => {
                   alignItems: "center",
                 }}
               >
-                <FontAwesome5 name="warehouse" size={24} color={"#fff"} />
+                <FontAwesomeIcon icon="warehouse" size={24} color={"#fff"} />
                 <View style={{ position: "absolute", top: -10, right: -20 }}>
                   <BadgeCnt
                     selected
@@ -250,7 +251,7 @@ const NotificationMain: React.FC<any> = (props) => {
                   opacity: 0.8,
                 }}
               >
-                <FontAwesome5 name="warehouse" size={24} color={"#707070"} />
+                <FontAwesomeIcon name="warehouse" size={24} color={"#707070"} />
                 <BadgeCnt
                   selected
                   badgeCnt={

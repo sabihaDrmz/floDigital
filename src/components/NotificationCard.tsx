@@ -2,7 +2,8 @@ import { AppColor, AppText } from "@flomagazacilik/flo-digital-components";
 import moment from "moment";
 import React from "react";
 import { Dimensions, TouchableOpacity, View } from "react-native";
-import { Entypo } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 //TODO: EXPO notification
 // import { notificationEvent } from "../core/libraries/FcmFroground";
 import { Notify } from "../contexts/model/Notify";
@@ -61,7 +62,7 @@ const NotificationCard: React.FC<NtfCardProps> = (props) => {
       <View style={{ flexDirection: "row" }}>
         <View style={{ alignItems: "center" }}>
           {!props.isRead ? (
-            <Entypo name="new" size={25} color={AppColor.FD.Brand.Solid} />
+            <FontAwesomeIcon icon="new" size={25} color={AppColor.FD.Brand.Solid} />
           ) : (
             <View style={{ width: 25 }} />
           )}

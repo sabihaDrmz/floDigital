@@ -11,7 +11,6 @@ import {
   TextStyle,
 } from "react-native";
 
-import { Feather } from "@expo/vector-icons";
 import { TextInputMask } from "react-native-masked-text";
 import { Keyboard } from "react-native";
 import { colors } from "../../theme/colors";

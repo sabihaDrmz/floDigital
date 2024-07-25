@@ -9,7 +9,7 @@ import { View, StyleSheet, Dimensions,Clipboard, Platform } from "react-native";
 import { useMessageBoxService } from "../../../contexts/MessageBoxService";
 import { MessageBoxOptions } from "../../../contexts/model/MessageBoxOptions";
 import { PerfectFontSize } from "../../../helper/PerfectPixel";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 const MbIsoReturn: React.FC<{
     message: string;
@@ -56,7 +56,7 @@ const MbIsoReturn: React.FC<{
                     >
                         {basketTicketId}
                     </AppText>
-                    <MaterialCommunityIcons style={{ marginLeft: 5 }} onPress={copyToClipboard} name={copyCode ? "check-circle" : "clipboard-multiple-outline"} size={24} color={textColor} />
+                    <FontAwesomeIcon style={{ marginLeft: 5 }} onPress={copyToClipboard} icon={copyCode ? "check-circle" : "clipboard-multiple-outline"} size={24} color={textColor} />
                 </View>
                 <View style={styles.buttonContainer}>
                     <AppButton

@@ -13,7 +13,8 @@ import {
     AppButton,
     ColorType,
 } from "@flomagazacilik/flo-digital-components";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import moment from 'moment';
 import { useMessageBoxService } from '../../contexts/MessageBoxService';
 import { useAccountService } from '../../contexts/AccountService'
@@ -119,7 +120,7 @@ const SalesLossReport = () => {
                             style={{ width: 40, height: 40 }}
                             onPress={getReports}
                         >
-                            <AntDesign name={"search1"} color={"#fff"} size={23} />
+                            <FontAwesomeIcon icon={"search1"} color={"#fff"} size={23} />
                         </AppButton>
                     </View>
                 }

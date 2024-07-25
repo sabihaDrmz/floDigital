@@ -6,7 +6,6 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from "react-native-reanimated";
-import { Entypo } from "@expo/vector-icons";
 import { PrinterConfigProp } from "../../contexts/model/PrinterConfigGroupModel";
 
 interface StickerAccordionProps {

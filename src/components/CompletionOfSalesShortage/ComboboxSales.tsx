@@ -4,7 +4,8 @@ import { useIsFocused } from "@react-navigation/native";
 import { View, TouchableOpacity, Text, StyleSheet, Platform } from "react-native";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 import { colors } from "../../theme/colors";
-import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import Modal from "react-native-modal";
 
 interface ComboboxSalesProps extends FloAutoCompleteSoftProps {
@@ -56,8 +57,8 @@ const ComboboxSales = (props: ComboboxSalesProps) => {
         >
           {props.selectedItem === undefined ? props.placeholder : props.selectedItem}
         </Text>
-        {!props.hideIcon && <Ionicons
-          name={"caret-down-outline"}
+        {!props.hideIcon && <FontAwesomeIcon
+          icon={"caret-down-outline"}
           size={Platform.OS === "web" ? 20 : 18}
           color={colors.lightGrayText}
         />}
@@ -81,11 +82,11 @@ const ComboboxSales = (props: ComboboxSalesProps) => {
                   }}
                   style={styles.iconOne}
                 >
-                  <Feather name={"trash-2"} size={20} color={colors.white} />
+                  <FontAwesomeIcon icon={"trash"} size={20} color={colors.white} />
                 </TouchableOpacity>
               )}
               <TouchableOpacity onPress={() => setIsVisibleInfo(false)} style={styles.iconTwo}>
-                <AntDesign name={"close"} size={24} />
+                <FontAwesomeIcon icon={"close"} size={24} />
               </TouchableOpacity>
             </View>
           ) : (

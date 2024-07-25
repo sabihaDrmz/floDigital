@@ -25,7 +25,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { Actions } from "react-native-router-flux";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { translate } from "../../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 import { BrokenProductIcon } from "../CustomIcons/BrokenProductIcon";
@@ -35,7 +36,6 @@ import {
   SearchQR,
 } from "../CustomIcons/MainPageIcons";
 import { isInRole } from "../RoleGroup";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { AppColor, AppText } from "@flomagazacilik/flo-digital-components";
 
 const TabBar = (props: any) => {
@@ -165,7 +165,7 @@ const TabBar = (props: any) => {
               {title}
             </Text>
           </View>
-          <AntDesign name={"right"} size={17} color={"#7D7E81"} />
+          <FontAwesomeIcon icon={"right"} size={17} color={"#7D7E81"} />
         </TouchableWithoutFeedback>
         {showSperator && (
           <View
@@ -326,7 +326,7 @@ const TabBar = (props: any) => {
                   >
                     {translate("warehouseRequest.title")}
                   </AppText>
-                  <AntDesign name={"right"} size={17} color={"#7D7E81"} />
+                  <FontAwesomeIcon icon={"right"} size={17} color={"#7D7E81"} />
                 </View>
               </TouchableOpacity>
             )}

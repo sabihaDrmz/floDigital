@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Dimensions, ScrollView, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FloButton, Foundation } from "../../components";
+import { FloButton } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import FloPrinterConfigLoadingModal from "../../components/Modal/FloPrinterConfigLoadingModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -107,8 +109,8 @@ const IosPrinterConfig = () => {
                     ) : x.icon === "season" ? (
                       <NewIcon />
                     ) : (
-                      <Foundation
-                        name={"indent-more"}
+                      <FontAwesomeIcon
+                        icon={"indent-more"}
                         size={30}
                         color={AppColor.FD.Brand.Solid}
                       />

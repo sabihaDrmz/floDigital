@@ -6,7 +6,8 @@ import {
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, FlatList, Dimensions, Image, ScrollView } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
 import AppDatePicker from "../AppDatePicker";
 import { useOmsService } from "../../contexts/OmsService";
@@ -37,7 +38,7 @@ const NotFoundProducts: React.FC = (props) => {
                 buttonColorType={ColorType.Brand}
                 onPress={() => OmsService.loadNotFoundItems()}
               >
-                <AntDesign name={"search1"} size={20} color={"#fff"} />
+                <FontAwesomeIcon icon={"search1"} size={20} color={"#fff"} />
               </AppButton>
             </View>
           }

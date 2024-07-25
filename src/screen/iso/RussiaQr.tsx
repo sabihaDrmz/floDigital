@@ -12,11 +12,9 @@ import {
   AppText,
   ColorType,
 } from "@flomagazacilik/flo-digital-components";
-import {
-  MaterialIcons,
-  AntDesign,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import BlurView from "../../components/BlurView";
 import { useProductService } from "../../contexts/ProductService";
 import { usePrinterConfigService } from "../../contexts/PrinterConfigService";
@@ -311,8 +309,8 @@ const RussiaQr: React.FC<any> = (props) => {
           <View style={{ margin: 20 }}>
             {qrResult && (
               <View style={{ flexDirection: "row" }}>
-                <MaterialIcons
-                  name="qr-code-2"
+                <FontAwesomeIcon
+                  icon="qr-code-2"
                   size={50}
                   color={"#ff8600"}
                   style={{ marginRight: 5 }}
@@ -325,8 +323,8 @@ const RussiaQr: React.FC<any> = (props) => {
                     QR-код создан
                   </AppText>
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <AntDesign
-                      name={"infocirlceo"}
+                    <FontAwesomeIcon
+                      icon={"infocirlceo"}
                       size={14}
                       color={"#7D7E81"}
                       style={{
@@ -349,8 +347,8 @@ const RussiaQr: React.FC<any> = (props) => {
 
             {qrResult !== undefined && !qrResult && (
               <View style={{ flexDirection: "row" }}>
-                <MaterialCommunityIcons
-                  name="qrcode-remove"
+                <FontAwesomeIcon
+                  icon="qrcode-remove"
                   size={40}
                   color="red"
                   style={{ marginRight: 5 }}
@@ -374,8 +372,8 @@ const RussiaQr: React.FC<any> = (props) => {
             <View style={{ margin: 20 }}>
               {qrResult && (
                 <View style={{ flexDirection: "row" }}>
-                  <MaterialIcons
-                    name="qr-code-2"
+                  <FontAwesomeIcon
+                    name="qr-code"
                     size={50}
                     color={"#ff8600"}
                     style={{ marginRight: 5 }}
@@ -393,8 +391,8 @@ const RussiaQr: React.FC<any> = (props) => {
 
               {qrResult !== undefined && !qrResult && (
                 <View style={{ flexDirection: "row" }}>
-                  <MaterialCommunityIcons
-                    name="qrcode-remove"
+                  <FontAwesomeIcon
+                    icon="qrcode-remove"
                     size={40}
                     color="red"
                     style={{ marginRight: 5 }}
@@ -513,8 +511,8 @@ const RussiaQr: React.FC<any> = (props) => {
                       justifyContent: "center",
                     }}
                   >
-                    <MaterialIcons
-                      name="qr-code-2"
+                    <FontAwesomeIcon
+                      icon="qr-code-2"
                       size={35}
                       color={"#ff8600"}
                     />

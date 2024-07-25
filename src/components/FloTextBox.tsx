@@ -13,7 +13,7 @@ import {
 
 import { colors } from "../theme/colors";
 import { paddings } from "../theme/paddingConst";
-import { Feather } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { TextInputMask } from "react-native-masked-text";
 import { Keyboard } from "react-native";
 import { PerfectFontSize } from "../helper/PerfectPixel";
@@ -187,8 +187,8 @@ class FloTextBox extends Component<FloTextBoxProps> {
                 alignItems: "flex-end",
               }}
             >
-              <Feather
-                name={this.state.overrideTextEntry ? "eye" : "eye-off"}
+              <FontAwesomeIcon
+                icon={this.state.overrideTextEntry ? "eye" : "eye-off"}
                 size={20}
                 // @ts-ignore
                 color={

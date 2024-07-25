@@ -14,7 +14,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AntDesign } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import AppClosePopup from "../../components/AppClosePopup";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
@@ -151,8 +152,8 @@ const WaitingList: React.FC<WaitingListProps> = (props) => {
                             }}
                           >
                             {selectedReason === item.description && (
-                              <AntDesign
-                                name="check"
+                              <FontAwesomeIcon
+                                icon="check"
                                 size={20}
                                 color={"white"}
                               />

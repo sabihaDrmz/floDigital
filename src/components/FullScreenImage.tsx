@@ -3,7 +3,8 @@ import React from "react";
 import { Animated, Dimensions, TouchableOpacity, View } from "react-native";
 import { PinchGestureHandler, State } from "react-native-gesture-handler";
 import { Portal } from "react-native-portalize";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PerfectPixelSize } from "../helper/PerfectPixel";
 import { useApplicationGlobalService } from "../contexts/ApplicationGlobalService";
 
@@ -72,7 +73,7 @@ const FullScreenImage: React.FC = (props) => {
                 }}
                 style={{ backgroundColor: "#ffffff", borderRadius: 10 }}
               >
-                <AntDesign name={"close"} size={40} />
+                <FontAwesomeIcon icon={"close"} size={40} />
               </TouchableOpacity>
             </View>
           </View>

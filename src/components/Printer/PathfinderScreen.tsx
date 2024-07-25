@@ -21,7 +21,8 @@ import {
   FontSizes,
 } from "@flomagazacilik/flo-digital-components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FontAwesome, FontAwesome5 } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
 import { useNavigation } from '@react-navigation/native';
@@ -153,8 +154,8 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
             <TouchableOpacity onPress={discoverDevices}>
               <AppText>
                 Обновить{"  "}
-                <FontAwesome
-                  name={"refresh"}
+                <FontAwesomeIcon
+                  icon={"refresh"}
                   size={15}
                   color={AppColor.FD.Brand.Solid}
                 />
@@ -167,8 +168,8 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
             onPress={() => setSelectedDevice(item)}
             style={styles.button}
           >
-            <FontAwesome5
-              name={item === selectedDevice ? "check-circle" : "circle"}
+            <FontAwesomeIcon
+              icon={item === selectedDevice ? "check-circle" : "circle"}
               size={20}
               color={
                 item === selectedDevice
@@ -206,8 +207,8 @@ const PathfinderScreen: React.FC<PathfinderScreenProps> = (props) => {
             onPress={() => setSelectedAlias(item.alias)}
             style={styles.button}
           >
-            <FontAwesome5
-              name={item.alias === selectedAlias ? "check-circle" : "circle"}
+            <FontAwesomeIcon
+              icon={item.alias === selectedAlias ? "check-circle" : "circle"}
               size={20}
               color={
                 item.alias === selectedAlias

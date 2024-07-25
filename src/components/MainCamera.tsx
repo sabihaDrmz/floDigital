@@ -13,7 +13,8 @@ import { Portal } from "react-native-portalize";
 import { translate } from "../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../helper/PerfectPixel";
 import BarcodeMask from "react-native-barcode-mask";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native";
 import { useMessageBoxService } from "../contexts/MessageBoxService";
@@ -149,7 +150,7 @@ const MainCamera: React.FC<CameraProps> = (props) => {
                   props.onHide()
                 }}
               >
-                <AntDesign name={"arrowleft"} size={27} color={"#fff"} />
+                <FontAwesomeIcon icon={"arrowleft"} size={27} color={"#fff"} />
               </TouchableOpacity>
               <View
                 style={{

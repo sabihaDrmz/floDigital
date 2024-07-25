@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { Modalize } from "react-native-modalize";
 import { Portal } from "react-native-portalize";
-import { MaterialCommunityIcons } from "../../components";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import AppTextBox from "../../NewComponents/FormElements/AppTextBox";
 import { colors } from "../../theme/colors";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -103,7 +103,7 @@ const StoreAdressSelect: React.FC<StoreAdressSelectProps> = (props) => {
             }}
           >
             {selectedStoreAdress !== "" && (
-              <MaterialCommunityIcons color={"white"} name="check" size={18} />
+              <FontAwesomeIcon color={"white"} icon="check" size={18} />
             )}
           </View>
           <AppText

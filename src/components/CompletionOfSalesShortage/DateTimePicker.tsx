@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { ViewStyle, StyleProp, View, Platform, TouchableOpacity, Text, StyleSheet, Pressable } from "react-native";
 import moment from "moment";
 import { colors } from "../../theme/colors";
-import { Ionicons } from "@expo/vector-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
 import { PerfectFontSize } from "../../../src/helper/PerfectPixel";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { AppColor } from "../../theme/AppColor";
@@ -132,13 +133,13 @@ const DateTimePicker = (props: DateTimePickerProps) => {
         <View style={{ flex: 1, flexDirection: 'row'}}>
           <View style={styles.buttonView}>
             <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", }} onPress={() => setIsDatePickerVisible(true)}>
-              <Ionicons name="calendar-outline" size={18} color={"#acacac"} />
+              <FontAwesomeIcon icon="calendar-outline" size={18} color={"#acacac"} />
               <Text style={[styles.text, { marginLeft: 5 }]}>{props.defaultDate ? props.defaultDate : props.dateTitle}</Text>
             </TouchableOpacity >
           </View>
           {props.canSelectTime && <View style={styles.buttonView}>
             <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", }} onPress={() => setIsTimePickerVisible(true)}>
-              <Ionicons name="time-outline" size={18} color={"#acacac"} />
+              <FontAwesomeIcon icon="time-outline" size={18} color={"#acacac"} />
               <Text style={[styles.text, { marginLeft: 5 }]}>{props.defaultTime ? props.defaultDate ? props.defaultTime : "" : ""}</Text>
             </TouchableOpacity >
           </View>}
