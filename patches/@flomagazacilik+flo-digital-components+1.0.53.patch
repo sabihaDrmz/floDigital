@@ -12,61 +12,31 @@ index 9997030..36ea224 100644
    let bc = props.$transparent ? 'transparent' : getFontColor(props.$color).color;
    return {
 diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/module/index.js b/node_modules/@flomagazacilik/flo-digital-components/lib/module/index.js
-index 0a21ab0..b408c7c 100644
+index 0a21ab0..897144c 100644
 --- a/node_modules/@flomagazacilik/flo-digital-components/lib/module/index.js
 +++ b/node_modules/@flomagazacilik/flo-digital-components/lib/module/index.js
-@@ -1,9 +1,10 @@
+@@ -1,9 +1,6 @@
  import AppButton from './components/AppButton';
  import ProgressBar from './components/ProgressBar';
 -import { AppButtonProps } from './models/AppButtonProps';
 -import { AppTextProps } from './models/AppTextProps';
 -import { ProgressBarProps } from './models/ProgressBar';
 -import { FloMessageBoxModalProps, FloMessageBoxModalType, FloMessageBoxOptions } from './models/FloMessageBoxModalProps';
-+import AppButtonProps from './models/AppButtonProps';
-+import AppTextProps from './models/AppTextProps';
-+import ProgressBarProps from './models/ProgressBar';
-+import { FloMessageBoxModalProps, FloMessageBoxModalType } from './models/FloMessageBoxModalProps';
-+import FloMessageBoxOptions from './models/FloMessageBoxModalProps';
++import { FloMessageBoxModalType, } from './models/FloMessageBoxModalProps';
  import { FontSizes, FontTypes, LabelType, ColorType } from './models/FontInfo';
  import AppText from './typography/AppText';
  import { AppColor } from './constants/AppColor';
-diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppButtonProps.js b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppButtonProps.js
-index e922a62..b3173ca 100644
---- a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppButtonProps.js
-+++ b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppButtonProps.js
-@@ -1,2 +1,3 @@
--export {};
-+
-+export default AppButtonProps;
- //# sourceMappingURL=AppButtonProps.js.map
-diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppTextProps.js b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppTextProps.js
-index f78d755..0d70ada 100644
---- a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppTextProps.js
-+++ b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/AppTextProps.js
-@@ -1,2 +1,2 @@
--export {};
-+export default AppTextProps;
- //# sourceMappingURL=AppTextProps.js.map
-diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/FloMessageBoxModalProps.js b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/FloMessageBoxModalProps.js
-index 7a01fa0..441ab7c 100644
---- a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/FloMessageBoxModalProps.js
-+++ b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/FloMessageBoxModalProps.js
-@@ -1,5 +1,6 @@
- export let FloMessageBoxModalType;
--
-+export default FloMessageBoxOptions;
-+export let FloMessageBoxModalProps;
- (function (FloMessageBoxModalType) {
-   FloMessageBoxModalType[FloMessageBoxModalType["Standart"] = 0] = "Standart";
-   FloMessageBoxModalType[FloMessageBoxModalType["YesNo"] = 1] = "YesNo";
-diff --git a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/ProgressBar.js b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/ProgressBar.js
-index 296d721..6d58203 100644
---- a/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/ProgressBar.js
-+++ b/node_modules/@flomagazacilik/flo-digital-components/lib/module/models/ProgressBar.js
-@@ -1,2 +1,2 @@
--export {};
-+export default ProgressBarProps;
- //# sourceMappingURL=ProgressBar.js.map
+@@ -13,5 +10,10 @@ import AppCard from './components/AppCard';
+ import AppIcon from './components/AppIcon';
+ import AppCheckBox from './components/AppCheckBox';
+ import AppComboBox from './components/AppComboBox';
++const AppButtonProps = {}
++const AppTextProps = {}
++const FloMessageBoxOptions = {}
++const FloMessageBoxModalProps = {}
++const ProgressBarProps = {}
+ export { AppButton, AppButtonProps, FontSizes, AppText, AppTextProps, ColorType, LabelType, FontTypes, FloMessageBoxModalType, FloMessageBoxOptions, FloMessageBoxModalProps, ProgressBar, ProgressBarProps, AppColor, AppDonught, AppHalfDonught, AppCard, AppIcon, AppCheckBox, AppComboBox };
+ //# sourceMappingURL=index.js.map
 diff --git a/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx b/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx
 index c223583..505d36c 100644
 --- a/node_modules/@flomagazacilik/flo-digital-components/src/components/AppButton.tsx

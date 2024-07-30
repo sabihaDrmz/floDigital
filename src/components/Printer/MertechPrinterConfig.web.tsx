@@ -24,7 +24,6 @@ import { useBluetoothModuleService } from '../../contexts/BluetoothModuleService
 import PrinterImagePopup from "./PrinterImagePopup";
 import { useMessageBoxService } from '../../contexts/MessageBoxService';
 import { MessageBoxType } from '../../contexts/model/MessageBoxOptions';
-import { alertCustom } from "../../utils/util";
 
 const MertechPrinterConfig = () => {
   const { printerConfigList, loadAllPrinterConfigs, selectedPrinter, setPrintConfig } = usePrinterConfigService();
@@ -206,7 +205,7 @@ const MertechPrinterConfig = () => {
       if (error) {
         setIsMonitoring(false);
         console.log('monitor fail:', error);
-        alertCustom('monitor fail: ' + error.reason);
+        Alert.alert('monitor fail: ' + error.reason);
       }
       else {
         setIsMonitoring(false);

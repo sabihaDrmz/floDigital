@@ -1,0 +1,839 @@
+diff --git a/node_modules/react-native-reanimated/lib/module/animationBuilder.js b/node_modules/react-native-reanimated/lib/module/animationBuilder.js
+index 55a3d84..4791a7d 100644
+--- a/node_modules/react-native-reanimated/lib/module/animationBuilder.js
++++ b/node_modules/react-native-reanimated/lib/module/animationBuilder.js
+@@ -37,10 +37,7 @@ export function maybeBuild(layoutAnimationOrBuilder, style, displayName) {
+   const isAnimationBuilder = value => 'build' in layoutAnimationOrBuilder && typeof layoutAnimationOrBuilder.build === 'function';
+   if (isAnimationBuilder(layoutAnimationOrBuilder)) {
+     const animationFactory = layoutAnimationOrBuilder.build();
+-    if (__DEV__ && style) {
+-      const layoutAnimation = animationFactory(mockTargetValues);
+-      maybeReportOverwrittenProperties(layoutAnimation.animations, style, displayName);
+-    }
++
+     return animationFactory;
+   } else {
+     return layoutAnimationOrBuilder;
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/NativeReanimated/NativeReanimated.js b/node_modules/react-native-reanimated/lib/module/reanimated2/NativeReanimated/NativeReanimated.js
+index 5cdfa38..dab99b9 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/NativeReanimated/NativeReanimated.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/NativeReanimated/NativeReanimated.js
+@@ -20,9 +20,6 @@ export class NativeReanimated {
+   constructor() {
+     _defineProperty(this, "InnerNativeModule", void 0);
+     // These checks have to split since version checking depend on the execution order
+-    if (__DEV__) {
+-      assertSingleReanimatedInstance();
+-    }
+     global._REANIMATED_VERSION_JS = jsVersion;
+     if (global.__reanimatedModuleProxy === undefined) {
+       const {
+@@ -35,9 +32,7 @@ export class NativeReanimated {
+       throw new Error(`[Reanimated] Native part of Reanimated doesn't seem to be initialized.
+ See https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#native-part-of-reanimated-doesnt-seem-to-be-initialized for more details.`);
+     }
+-    if (__DEV__) {
+-      checkCppVersion();
+-    }
++
+     this.InnerNativeModule = global.__reanimatedModuleProxy;
+   }
+   makeShareableClone(value, shouldPersistRemote) {
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/PropsRegistry.js b/node_modules/react-native-reanimated/lib/module/reanimated2/PropsRegistry.js
+index 906c154..a195160 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/PropsRegistry.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/PropsRegistry.js
+@@ -11,9 +11,7 @@ export function removeFromPropsRegistry(viewTag) {
+   }
+ }
+ function flush() {
+-  if (__DEV__ && !IS_FABRIC) {
+-    throw new Error('[Reanimated] PropsRegistry is only available on Fabric.');
+-  }
++
+   runOnUI(removeFromPropsRegistryOnUI)(VIEW_TAGS);
+   VIEW_TAGS = [];
+ }
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/animation/transformationMatrix/matrixUtils.js b/node_modules/react-native-reanimated/lib/module/reanimated2/animation/transformationMatrix/matrixUtils.js
+index effdd4d..a50b146 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/animation/transformationMatrix/matrixUtils.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/animation/transformationMatrix/matrixUtils.js
+@@ -89,9 +89,7 @@ function transposeMatrix(matrix) {
+ function assertVectorsHaveEqualLengths(a, b) {
+   'worklet';
+ 
+-  if (__DEV__ && a.length !== b.length) {
+-    throw new Error(`[Reanimated] Cannot calculate inner product of two vectors of different lengths. Length of ${a.toString()} is ${a.length} and length of ${b.toString()} is ${b.length}.`);
+-  }
++
+ }
+ function innerProduct(a, b) {
+   'worklet';
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.js b/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.js
+index 05fc741..4115f62 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.js
+@@ -7,9 +7,6 @@ import { flatten, multiplyMatrices, scaleMatrix, addMatrices, decomposeMatrixInt
+ import { isReducedMotion, shouldBeUseWeb } from '../PlatformChecker';
+ let IN_STYLE_UPDATER = false;
+ const IS_REDUCED_MOTION = isReducedMotion();
+-if (__DEV__ && IS_REDUCED_MOTION) {
+-  console.warn(`[Reanimated] Reduced motion setting is enabled on this device. This warning is visible only in the development mode. Some animations will be disabled by default. You can override the behavior for individual animations, see https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#reduced-motion-setting-is-enabled-on-this-device.`);
+-}
+ export function initialUpdaterRun(updater) {
+   IN_STYLE_UPDATER = true;
+   const result = updater();
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.web.js b/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.web.js
+new file mode 100644
+index 0000000..c619623
+--- /dev/null
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/animation/util.web.js
+@@ -0,0 +1,319 @@
++/* eslint-disable @typescript-eslint/no-shadow */
++'use strict';
++
++import { isColor, convertToRGBA, rgbaArrayToRGBAColor, toGammaSpace, toLinearSpace } from '../Colors';
++import { ReduceMotion } from '../commonTypes';
++import { flatten, multiplyMatrices, scaleMatrix, addMatrices, decomposeMatrixIntoMatricesAndAngles, isAffineMatrixFlat, subtractMatrices, getRotationMatrix } from './transformationMatrix/matrixUtils';
++import { isReducedMotion, shouldBeUseWeb } from '../PlatformChecker';
++let IN_STYLE_UPDATER = false;
++const IS_REDUCED_MOTION = isReducedMotion();
++
++export function initialUpdaterRun(updater) {
++  IN_STYLE_UPDATER = true;
++  const result = updater();
++  IN_STYLE_UPDATER = false;
++  return result;
++}
++export function recognizePrefixSuffix(value) {
++  'worklet';
++
++  if (typeof value === 'string') {
++    const match = value.match(/([A-Za-z]*)(-?\d*\.?\d*)([eE][-+]?[0-9]+)?([A-Za-z%]*)/);
++    if (!match) {
++      throw new Error("[Reanimated] Couldn't parse animation value.");
++    }
++    const prefix = match[1];
++    const suffix = match[4];
++    // number with scientific notation
++    const number = match[2] + (match[3] ?? '');
++    return {
++      prefix,
++      suffix,
++      strippedValue: parseFloat(number)
++    };
++  } else {
++    return {
++      strippedValue: value
++    };
++  }
++}
++
++/**
++ * Returns whether the motion should be reduced for a specified config.
++ * By default returns the system setting.
++ */
++export function getReduceMotionFromConfig(config) {
++  'worklet';
++
++  return !config || config === ReduceMotion.System ? IS_REDUCED_MOTION : config === ReduceMotion.Always;
++}
++
++/**
++ * Returns the value that should be assigned to `animation.reduceMotion`
++ * for a given config. If the config is not defined, `undefined` is returned.
++ */
++export function getReduceMotionForAnimation(config) {
++  'worklet';
++
++  // if the config is not defined, we want `reduceMotion` to be undefined,
++  // so the parent animation knows if it should overwrite it
++  if (!config) {
++    return undefined;
++  }
++  return getReduceMotionFromConfig(config);
++}
++function applyProgressToMatrix(progress, a, b) {
++  'worklet';
++
++  return addMatrices(a, scaleMatrix(subtractMatrices(b, a), progress));
++}
++function applyProgressToNumber(progress, a, b) {
++  'worklet';
++
++  return a + progress * (b - a);
++}
++function decorateAnimation(animation) {
++  'worklet';
++
++  const baseOnStart = animation.onStart;
++  const baseOnFrame = animation.onFrame;
++  if (animation.isHigherOrder) {
++    animation.onStart = (animation, value, timestamp, previousAnimation) => {
++      if (animation.reduceMotion === undefined) {
++        animation.reduceMotion = getReduceMotionFromConfig();
++      }
++      return baseOnStart(animation, value, timestamp, previousAnimation);
++    };
++    return;
++  }
++  const animationCopy = Object.assign({}, animation);
++  delete animationCopy.callback;
++  const prefNumberSuffOnStart = (animation, value, timestamp, previousAnimation) => {
++    // recognize prefix, suffix, and updates stripped value on animation start
++    const {
++      prefix,
++      suffix,
++      strippedValue
++    } = recognizePrefixSuffix(value);
++    animation.__prefix = prefix;
++    animation.__suffix = suffix;
++    animation.strippedCurrent = strippedValue;
++    const {
++      strippedValue: strippedToValue
++    } = recognizePrefixSuffix(animation.toValue);
++    animation.current = strippedValue;
++    animation.startValue = strippedValue;
++    animation.toValue = strippedToValue;
++    if (previousAnimation && previousAnimation !== animation) {
++      const {
++        prefix: paPrefix,
++        suffix: paSuffix,
++        strippedValue: paStrippedValue
++      } = recognizePrefixSuffix(previousAnimation.current);
++      previousAnimation.current = paStrippedValue;
++      previousAnimation.__prefix = paPrefix;
++      previousAnimation.__suffix = paSuffix;
++    }
++    baseOnStart(animation, strippedValue, timestamp, previousAnimation);
++    animation.current = (animation.__prefix ?? '') + animation.current + (animation.__suffix ?? '');
++    if (previousAnimation && previousAnimation !== animation) {
++      previousAnimation.current = (previousAnimation.__prefix ?? '') +
++      // FIXME
++      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
++      previousAnimation.current + (previousAnimation.__suffix ?? '');
++    }
++  };
++  const prefNumberSuffOnFrame = (animation, timestamp) => {
++    animation.current = animation.strippedCurrent;
++    const res = baseOnFrame(animation, timestamp);
++    animation.strippedCurrent = animation.current;
++    animation.current = (animation.__prefix ?? '') + animation.current + (animation.__suffix ?? '');
++    return res;
++  };
++  const tab = ['R', 'G', 'B', 'A'];
++  const colorOnStart = (animation, value, timestamp, previousAnimation) => {
++    let RGBAValue;
++    let RGBACurrent;
++    let RGBAToValue;
++    const res = [];
++    if (isColor(value)) {
++      RGBACurrent = toLinearSpace(convertToRGBA(animation.current));
++      RGBAValue = toLinearSpace(convertToRGBA(value));
++      if (animation.toValue) {
++        RGBAToValue = toLinearSpace(convertToRGBA(animation.toValue));
++      }
++    }
++    tab.forEach((i, index) => {
++      animation[i] = Object.assign({}, animationCopy);
++      animation[i].current = RGBACurrent[index];
++      animation[i].toValue = RGBAToValue ? RGBAToValue[index] : undefined;
++      animation[i].onStart(animation[i], RGBAValue[index], timestamp, previousAnimation ? previousAnimation[i] : undefined);
++      res.push(animation[i].current);
++    });
++    animation.current = rgbaArrayToRGBAColor(toGammaSpace(res));
++  };
++  const colorOnFrame = (animation, timestamp) => {
++    const RGBACurrent = toLinearSpace(convertToRGBA(animation.current));
++    const res = [];
++    let finished = true;
++    tab.forEach((i, index) => {
++      animation[i].current = RGBACurrent[index];
++      const result = animation[i].onFrame(animation[i], timestamp);
++      // We really need to assign this value to result, instead of passing it directly - otherwise once "finished" is false, onFrame won't be called
++      finished = finished && result;
++      res.push(animation[i].current);
++    });
++    animation.current = rgbaArrayToRGBAColor(toGammaSpace(res));
++    return finished;
++  };
++  const transformationMatrixOnStart = (animation, value, timestamp, previousAnimation) => {
++    const toValue = animation.toValue;
++    animation.startMatrices = decomposeMatrixIntoMatricesAndAngles(value);
++    animation.stopMatrices = decomposeMatrixIntoMatricesAndAngles(toValue);
++
++    // We create an animation copy to animate single value between 0 and 100
++    // We set limits from 0 to 100 (instead of 0-1) to make spring look good
++    // with default thresholds.
++
++    animation[0] = Object.assign({}, animationCopy);
++    animation[0].current = 0;
++    animation[0].toValue = 100;
++    animation[0].onStart(animation[0], 0, timestamp, previousAnimation ? previousAnimation[0] : undefined);
++    animation.current = value;
++  };
++  const transformationMatrixOnFrame = (animation, timestamp) => {
++    let finished = true;
++    const result = animation[0].onFrame(animation[0], timestamp);
++    // We really need to assign this value to result, instead of passing it directly - otherwise once "finished" is false, onFrame won't be called
++    finished = finished && result;
++    const progress = animation[0].current / 100;
++    const transforms = ['translationMatrix', 'scaleMatrix', 'skewMatrix'];
++    const mappedTransforms = [];
++    transforms.forEach((key, _) => mappedTransforms.push(applyProgressToMatrix(progress, animation.startMatrices[key], animation.stopMatrices[key])));
++    const [currentTranslation, currentScale, skewMatrix] = mappedTransforms;
++    const rotations = ['x', 'y', 'z'];
++    const mappedRotations = [];
++    rotations.forEach((key, _) => {
++      const angle = applyProgressToNumber(progress, animation.startMatrices['r' + key], animation.stopMatrices['r' + key]);
++      mappedRotations.push(getRotationMatrix(angle, key));
++    });
++    const [rotationMatrixX, rotationMatrixY, rotationMatrixZ] = mappedRotations;
++    const rotationMatrix = multiplyMatrices(rotationMatrixX, multiplyMatrices(rotationMatrixY, rotationMatrixZ));
++    const updated = flatten(multiplyMatrices(multiplyMatrices(currentScale, multiplyMatrices(skewMatrix, rotationMatrix)), currentTranslation));
++    animation.current = updated;
++    return finished;
++  };
++  const arrayOnStart = (animation, value, timestamp, previousAnimation) => {
++    value.forEach((v, i) => {
++      animation[i] = Object.assign({}, animationCopy);
++      animation[i].current = v;
++      animation[i].toValue = animation.toValue[i];
++      animation[i].onStart(animation[i], v, timestamp, previousAnimation ? previousAnimation[i] : undefined);
++    });
++    animation.current = value;
++  };
++  const arrayOnFrame = (animation, timestamp) => {
++    let finished = true;
++    animation.current.forEach((_, i) => {
++      const result = animation[i].onFrame(animation[i], timestamp);
++      // We really need to assign this value to result, instead of passing it directly - otherwise once "finished" is false, onFrame won't be called
++      finished = finished && result;
++      animation.current[i] = animation[i].current;
++    });
++    return finished;
++  };
++  const objectOnStart = (animation, value, timestamp, previousAnimation) => {
++    for (const key in value) {
++      animation[key] = Object.assign({}, animationCopy);
++      animation[key].onStart = animation.onStart;
++      animation[key].current = value[key];
++      animation[key].toValue = animation.toValue[key];
++      animation[key].onStart(animation[key], value[key], timestamp, previousAnimation ? previousAnimation[key] : undefined);
++    }
++    animation.current = value;
++  };
++  const objectOnFrame = (animation, timestamp) => {
++    let finished = true;
++    const newObject = {};
++    for (const key in animation.current) {
++      const result = animation[key].onFrame(animation[key], timestamp);
++      // We really need to assign this value to result, instead of passing it directly - otherwise once "finished" is false, onFrame won't be called
++      finished = finished && result;
++      newObject[key] = animation[key].current;
++    }
++    animation.current = newObject;
++    return finished;
++  };
++  animation.onStart = (animation, value, timestamp, previousAnimation) => {
++    if (animation.reduceMotion === undefined) {
++      animation.reduceMotion = getReduceMotionFromConfig();
++    }
++    if (animation.reduceMotion) {
++      if (animation.toValue !== undefined) {
++        animation.current = animation.toValue;
++      } else {
++        // if there is no `toValue`, then the base function is responsible for setting the current value
++        baseOnStart(animation, value, timestamp, previousAnimation);
++      }
++      animation.startTime = 0;
++      animation.onFrame = () => true;
++      return;
++    }
++    if (isColor(value)) {
++      colorOnStart(animation, value, timestamp, previousAnimation);
++      animation.onFrame = colorOnFrame;
++      return;
++    } else if (isAffineMatrixFlat(value)) {
++      transformationMatrixOnStart(animation, value, timestamp, previousAnimation);
++      animation.onFrame = transformationMatrixOnFrame;
++      return;
++    } else if (Array.isArray(value)) {
++      arrayOnStart(animation, value, timestamp, previousAnimation);
++      animation.onFrame = arrayOnFrame;
++      return;
++    } else if (typeof value === 'string') {
++      prefNumberSuffOnStart(animation, value, timestamp, previousAnimation);
++      animation.onFrame = prefNumberSuffOnFrame;
++      return;
++    } else if (typeof value === 'object' && value !== null) {
++      objectOnStart(animation, value, timestamp, previousAnimation);
++      animation.onFrame = objectOnFrame;
++      return;
++    }
++    baseOnStart(animation, value, timestamp, previousAnimation);
++  };
++}
++const SHOULD_BE_USE_WEB = shouldBeUseWeb();
++export function defineAnimation(starting, factory) {
++  'worklet';
++
++  if (IN_STYLE_UPDATER) {
++    return starting;
++  }
++  const create = () => {
++    'worklet';
++
++    const animation = factory();
++    decorateAnimation(animation);
++    return animation;
++  };
++  if (_WORKLET || SHOULD_BE_USE_WEB) {
++    return create();
++  }
++  // @ts-ignore: eslint-disable-line
++  return create;
++}
++
++/**
++ * Lets you cancel a running animation paired to a shared value.
++ *
++ * @param sharedValue - The shared value of a running animation that you want to cancel.
++ * @see https://docs.swmansion.com/react-native-reanimated/docs/core/cancelAnimation
++ */
++export function cancelAnimation(sharedValue) {
++  'worklet';
++
++  // setting the current value cancels the animation if one is currently running
++  sharedValue.value = sharedValue.value; // eslint-disable-line no-self-assign
++}
++//# sourceMappingURL=util.js.map
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/hook/useAnimatedStyle.js b/node_modules/react-native-reanimated/lib/module/reanimated2/hook/useAnimatedStyle.js
+index 0fe2380..b41018f 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/hook/useAnimatedStyle.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/hook/useAnimatedStyle.js
+@@ -286,10 +286,7 @@ export function useAnimatedStyle(updater, dependencies, adapters) {
+       // let web work without a Babel plugin
+       inputs = dependencies;
+     }
+-    if (__DEV__ && !inputs.length && !dependencies && !isWorkletFunction(updater)) {
+-      throw new Error(`[Reanimated] \`useAnimatedStyle\` was used without a dependency array or Babel plugin. Please explicitly pass a dependency array, or enable the Babel plugin.
+-For more, see the docs: \`https://docs.swmansion.com/react-native-reanimated/docs/guides/web-support#web-without-the-babel-plugin\`.`);
+-    }
++
+   }
+   const adaptersArray = adapters ? Array.isArray(adapters) ? adapters : [adapters] : [];
+   const adaptersHash = adapters ? buildWorkletsHash(adaptersArray) : null;
+@@ -305,9 +302,6 @@ For more, see the docs: \`https://docs.swmansion.com/react-native-reanimated/doc
+   adaptersHash && dependencies.push(adaptersHash);
+   if (!animatedUpdaterData.current) {
+     const initialStyle = initialUpdaterRun(updater);
+-    if (__DEV__) {
+-      validateAnimatedStyles(initialStyle);
+-    }
+     animatedUpdaterData.current = {
+       initial: {
+         value: initialStyle,
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/runtimes.js b/node_modules/react-native-reanimated/lib/module/reanimated2/runtimes.js
+index ef2a0a5..982c554 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/runtimes.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/runtimes.js
+@@ -33,9 +33,7 @@ export function createWorkletRuntime(name, initializer) {
+ export function runOnRuntime(workletRuntime, worklet) {
+   'worklet';
+ 
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && !isWorkletFunction(worklet)) {
+-    throw new Error('[Reanimated] The function passed to `runOnRuntime` is not a worklet.' + (_WORKLET ? ' Please make sure that `processNestedWorklets` option in Reanimated Babel plugin is enabled.' : ''));
+-  }
++
+   if (_WORKLET) {
+     return function () {
+       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/shareables.js b/node_modules/react-native-reanimated/lib/module/reanimated2/shareables.js
+index 2c56566..a6fa513 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/shareables.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/shareables.js
+@@ -108,15 +108,7 @@ export function makeShareableCloneRecursive(value) {
+       } else if (isPlainJSObject(value) || isTypeFunction) {
+         toAdapt = {};
+         if (isWorkletFunction(value)) {
+-          if (__DEV__) {
+-            const babelVersion = value.__initData.version;
+-            if (babelVersion !== undefined && babelVersion !== jsVersion) {
+-              throw new Error(`[Reanimated] Mismatch between JavaScript code version and Reanimated Babel plugin version (${jsVersion} vs. ${babelVersion}).        
+-See \`https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#mismatch-between-javascript-code-version-and-reanimated-babel-plugin-version\` for more details.
+-Offending code was: \`${getWorkletCode(value)}\``);
+-            }
+-            registerWorkletStackDetails(value.__workletHash, value.__stackDetails);
+-          }
++
+           if (value.__stackDetails) {
+             // `Error` type of value cannot be copied to the UI thread, so we
+             // remove it after we handled it in dev mode or delete it to ignore it in production mode.
+@@ -184,15 +176,7 @@ Offending code was: \`${getWorkletCode(value)}\``);
+         shareableMappingCache.set(value, inaccessibleObject);
+         return inaccessibleObject;
+       }
+-      if (__DEV__) {
+-        // we freeze objects that are transformed to shareable. This should help
+-        // detect issues when someone modifies data after it's been converted to
+-        // shareable. Meaning that they may be doing a faulty assumption in their
+-        // code expecting that the updates are going to automatically populate to
+-        // the object sent to the UI thread. If the user really wants some objects
+-        // to be mutable they should use shared values instead.
+-        Object.freeze(value);
+-      }
++
+       const adopted = NativeReanimatedModule.makeShareableClone(toAdapt, shouldPersistRemote);
+       shareableMappingCache.set(value, adopted);
+       shareableMappingCache.set(adopted);
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/threads.js b/node_modules/react-native-reanimated/lib/module/reanimated2/threads.js
+index 4a34fab..0cb17a2 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/threads.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/threads.js
+@@ -61,12 +61,8 @@ export const callMicrotasks = SHOULD_BE_USE_WEB ? () => {
+ export function runOnUI(worklet) {
+   'worklet';
+ 
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && _WORKLET) {
+-    throw new Error('[Reanimated] `runOnUI` cannot be called on the UI runtime. Please call the function synchronously or use `queueMicrotask` or `requestAnimationFrame` instead.');
+-  }
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && !isWorkletFunction(worklet)) {
+-    throw new Error('[Reanimated] `runOnUI` can only be used on worklets.');
+-  }
++
++
+   return function () {
+     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+       args[_key] = arguments[_key];
+@@ -88,15 +84,7 @@ export function runOnUI(worklet) {
+       }));
+       return;
+     }
+-    if (__DEV__) {
+-      // in DEV mode we call shareable conversion here because in case the object
+-      // can't be converted, we will get a meaningful stack-trace as opposed to the
+-      // situation when conversion is only done via microtask queue. This does not
+-      // make the app particularily less efficient as converted objects are cached
+-      // and for a given worklet the conversion only happens once.
+-      makeShareableCloneRecursive(worklet);
+-      makeShareableCloneRecursive(args);
+-    }
++
+     _runOnUIQueue.push([worklet, args]);
+     if (_runOnUIQueue.length === 1) {
+       queueMicrotask(() => {
+@@ -141,12 +129,8 @@ export function executeOnUIRuntimeSync(worklet) {
+ export function runOnUIImmediately(worklet) {
+   'worklet';
+ 
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && _WORKLET) {
+-    throw new Error('[Reanimated] `runOnUIImmediately` cannot be called on the UI runtime. Please call the function synchronously or use `queueMicrotask` or `requestAnimationFrame` instead.');
+-  }
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && !isWorkletFunction(worklet)) {
+-    throw new Error('[Reanimated] `runOnUIImmediately` can only be used on worklets.');
+-  }
++
++
+   return function () {
+     for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+       args[_key3] = arguments[_key3];
+diff --git a/node_modules/react-native-reanimated/lib/module/reanimated2/valueUnpacker.js b/node_modules/react-native-reanimated/lib/module/reanimated2/valueUnpacker.js
+index fb41439..5b83b61 100644
+--- a/node_modules/react-native-reanimated/lib/module/reanimated2/valueUnpacker.js
++++ b/node_modules/react-native-reanimated/lib/module/reanimated2/valueUnpacker.js
+@@ -57,24 +57,7 @@ See \`https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshoo
+     throw new Error(`[Reanimated] Data type in category "${category}" not recognized by value unpacker: "${_toString(objectToUnpack)}".`);
+   }
+ }
+-if (__DEV__ && !shouldBeUseWeb()) {
+-  const testWorklet = () => {
+-    'worklet';
+-  };
+-  if (!isWorkletFunction(testWorklet)) {
+-    throw new Error(`[Reanimated] Failed to create a worklet. See https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#failed-to-create-a-worklet for more details.`);
+-  }
+-  if (!isWorkletFunction(valueUnpacker)) {
+-    throw new Error('[Reanimated] `valueUnpacker` is not a worklet');
+-  }
+-  const closure = valueUnpacker.__closure;
+-  if (closure === undefined) {
+-    throw new Error('[Reanimated] `valueUnpacker` closure is undefined');
+-  }
+-  if (Object.keys(closure).length !== 0) {
+-    throw new Error('[Reanimated] `valueUnpacker` must have empty closure');
+-  }
+-}
++
+ export function getValueUnpackerCode() {
+   return valueUnpacker.__initData.code;
+ }
+diff --git a/node_modules/react-native-reanimated/src/animationBuilder.tsx b/node_modules/react-native-reanimated/src/animationBuilder.tsx
+index 489d4de..8c14440 100644
+--- a/node_modules/react-native-reanimated/src/animationBuilder.tsx
++++ b/node_modules/react-native-reanimated/src/animationBuilder.tsx
+@@ -88,14 +88,6 @@ export function maybeBuild(
+   if (isAnimationBuilder(layoutAnimationOrBuilder)) {
+     const animationFactory = layoutAnimationOrBuilder.build();
+ 
+-    if (__DEV__ && style) {
+-      const layoutAnimation = animationFactory(mockTargetValues);
+-      maybeReportOverwrittenProperties(
+-        layoutAnimation.animations,
+-        style,
+-        displayName
+-      );
+-    }
+ 
+     return animationFactory;
+   } else {
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/NativeReanimated/NativeReanimated.ts b/node_modules/react-native-reanimated/src/reanimated2/NativeReanimated/NativeReanimated.ts
+index 00a52f3..5c5740d 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/NativeReanimated/NativeReanimated.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/NativeReanimated/NativeReanimated.ts
+@@ -85,9 +85,7 @@ export class NativeReanimated {
+ 
+   constructor() {
+     // These checks have to split since version checking depend on the execution order
+-    if (__DEV__) {
+-      assertSingleReanimatedInstance();
+-    }
++ 
+     global._REANIMATED_VERSION_JS = jsVersion;
+     if (global.__reanimatedModuleProxy === undefined) {
+       const { ReanimatedModule } = NativeModules;
+@@ -100,9 +98,7 @@ export class NativeReanimated {
+ See https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#native-part-of-reanimated-doesnt-seem-to-be-initialized for more details.`
+       );
+     }
+-    if (__DEV__) {
+-      checkCppVersion();
+-    }
++
+     this.InnerNativeModule = global.__reanimatedModuleProxy;
+   }
+ 
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/PropsRegistry.ts b/node_modules/react-native-reanimated/src/reanimated2/PropsRegistry.ts
+index 911533c..609acb7 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/PropsRegistry.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/PropsRegistry.ts
+@@ -14,9 +14,7 @@ export function removeFromPropsRegistry(viewTag: number) {
+ }
+ 
+ function flush() {
+-  if (__DEV__ && !IS_FABRIC) {
+-    throw new Error('[Reanimated] PropsRegistry is only available on Fabric.');
+-  }
++ 
+   runOnUI(removeFromPropsRegistryOnUI)(VIEW_TAGS);
+   VIEW_TAGS = [];
+ }
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/animation/transformationMatrix/matrixUtils.tsx b/node_modules/react-native-reanimated/src/reanimated2/animation/transformationMatrix/matrixUtils.tsx
+index bb8d30c..963e3b9 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/animation/transformationMatrix/matrixUtils.tsx
++++ b/node_modules/react-native-reanimated/src/reanimated2/animation/transformationMatrix/matrixUtils.tsx
+@@ -254,13 +254,7 @@ function transposeMatrix(matrix: AffineMatrix): AffineMatrix {
+ 
+ function assertVectorsHaveEqualLengths(a: number[], b: number[]) {
+   'worklet';
+-  if (__DEV__ && a.length !== b.length) {
+-    throw new Error(
+-      `[Reanimated] Cannot calculate inner product of two vectors of different lengths. Length of ${a.toString()} is ${
+-        a.length
+-      } and length of ${b.toString()} is ${b.length}.`
+-    );
+-  }
++
+ }
+ 
+ function innerProduct(a: number[], b: number[]) {
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/animation/util.ts b/node_modules/react-native-reanimated/src/reanimated2/animation/util.ts
+index f3b4dc8..5f563c8 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/animation/util.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/animation/util.ts
+@@ -37,11 +37,7 @@ import { isReducedMotion, shouldBeUseWeb } from '../PlatformChecker';
+ let IN_STYLE_UPDATER = false;
+ const IS_REDUCED_MOTION = isReducedMotion();
+ 
+-if (__DEV__ && IS_REDUCED_MOTION) {
+-  console.warn(
+-    `[Reanimated] Reduced motion setting is enabled on this device. This warning is visible only in the development mode. Some animations will be disabled by default. You can override the behavior for individual animations, see https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#reduced-motion-setting-is-enabled-on-this-device.`
+-  );
+-}
++
+ 
+ export function initialUpdaterRun<T>(updater: () => T) {
+   IN_STYLE_UPDATER = true;
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/hook/useAnimatedStyle.ts b/node_modules/react-native-reanimated/src/reanimated2/hook/useAnimatedStyle.ts
+index 6b74e82..bf6a293 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/hook/useAnimatedStyle.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/hook/useAnimatedStyle.ts
+@@ -431,17 +431,7 @@ export function useAnimatedStyle<Style extends DefaultStyle>(
+       // let web work without a Babel plugin
+       inputs = dependencies;
+     }
+-    if (
+-      __DEV__ &&
+-      !inputs.length &&
+-      !dependencies &&
+-      !isWorkletFunction(updater)
+-    ) {
+-      throw new Error(
+-        `[Reanimated] \`useAnimatedStyle\` was used without a dependency array or Babel plugin. Please explicitly pass a dependency array, or enable the Babel plugin.
+-For more, see the docs: \`https://docs.swmansion.com/react-native-reanimated/docs/guides/web-support#web-without-the-babel-plugin\`.`
+-      );
+-    }
++    
+   }
+   const adaptersArray = adapters
+     ? Array.isArray(adapters)
+@@ -462,9 +452,7 @@ For more, see the docs: \`https://docs.swmansion.com/react-native-reanimated/doc
+ 
+   if (!animatedUpdaterData.current) {
+     const initialStyle = initialUpdaterRun(updater);
+-    if (__DEV__) {
+-      validateAnimatedStyles(initialStyle);
+-    }
++    
+     animatedUpdaterData.current = {
+       initial: {
+         value: initialStyle,
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/runtimes.ts b/node_modules/react-native-reanimated/src/reanimated2/runtimes.ts
+index 6506495..ba63326 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/runtimes.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/runtimes.ts
+@@ -58,14 +58,7 @@ export function runOnRuntime<Args extends unknown[], ReturnValue>(
+   worklet: WorkletFunction<Args, ReturnValue>
+ ): (...args: Args) => void {
+   'worklet';
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && !isWorkletFunction(worklet)) {
+-    throw new Error(
+-      '[Reanimated] The function passed to `runOnRuntime` is not a worklet.' +
+-        (_WORKLET
+-          ? ' Please make sure that `processNestedWorklets` option in Reanimated Babel plugin is enabled.'
+-          : '')
+-    );
+-  }
++
+   if (_WORKLET) {
+     return (...args) =>
+       global._scheduleOnRuntime(
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/shareables.ts b/node_modules/react-native-reanimated/src/reanimated2/shareables.ts
+index cdb4e9f..d9257ea 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/shareables.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/shareables.ts
+@@ -150,18 +150,7 @@ export function makeShareableCloneRecursive<T>(
+       } else if (isPlainJSObject(value) || isTypeFunction) {
+         toAdapt = {};
+         if (isWorkletFunction(value)) {
+-          if (__DEV__) {
+-            const babelVersion = value.__initData.version;
+-            if (babelVersion !== undefined && babelVersion !== jsVersion) {
+-              throw new Error(`[Reanimated] Mismatch between JavaScript code version and Reanimated Babel plugin version (${jsVersion} vs. ${babelVersion}).        
+-See \`https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#mismatch-between-javascript-code-version-and-reanimated-babel-plugin-version\` for more details.
+-Offending code was: \`${getWorkletCode(value)}\``);
+-            }
+-            registerWorkletStackDetails(
+-              value.__workletHash,
+-              value.__stackDetails!
+-            );
+-          }
++       
+           if (value.__stackDetails) {
+             // `Error` type of value cannot be copied to the UI thread, so we
+             // remove it after we handled it in dev mode or delete it to ignore it in production mode.
+@@ -241,15 +230,7 @@ Offending code was: \`${getWorkletCode(value)}\``);
+         shareableMappingCache.set(value, inaccessibleObject);
+         return inaccessibleObject;
+       }
+-      if (__DEV__) {
+-        // we freeze objects that are transformed to shareable. This should help
+-        // detect issues when someone modifies data after it's been converted to
+-        // shareable. Meaning that they may be doing a faulty assumption in their
+-        // code expecting that the updates are going to automatically populate to
+-        // the object sent to the UI thread. If the user really wants some objects
+-        // to be mutable they should use shared values instead.
+-        Object.freeze(value);
+-      }
++     
+       const adopted = NativeReanimatedModule.makeShareableClone(
+         toAdapt,
+         shouldPersistRemote
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/threads.ts b/node_modules/react-native-reanimated/src/reanimated2/threads.ts
+index dd8ff2f..04795b3 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/threads.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/threads.ts
+@@ -75,14 +75,8 @@ export function runOnUI<Args extends unknown[], ReturnValue>(
+   worklet: WorkletFunction<Args, ReturnValue>
+ ): (...args: Args) => void {
+   'worklet';
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && _WORKLET) {
+-    throw new Error(
+-      '[Reanimated] `runOnUI` cannot be called on the UI runtime. Please call the function synchronously or use `queueMicrotask` or `requestAnimationFrame` instead.'
+-    );
+-  }
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && !isWorkletFunction(worklet)) {
+-    throw new Error('[Reanimated] `runOnUI` can only be used on worklets.');
+-  }
++
++
+   return (...args) => {
+     if (IS_JEST) {
+       // Mocking time in Jest is tricky as both requestAnimationFrame and queueMicrotask
+@@ -102,15 +96,7 @@ export function runOnUI<Args extends unknown[], ReturnValue>(
+       );
+       return;
+     }
+-    if (__DEV__) {
+-      // in DEV mode we call shareable conversion here because in case the object
+-      // can't be converted, we will get a meaningful stack-trace as opposed to the
+-      // situation when conversion is only done via microtask queue. This does not
+-      // make the app particularily less efficient as converted objects are cached
+-      // and for a given worklet the conversion only happens once.
+-      makeShareableCloneRecursive(worklet);
+-      makeShareableCloneRecursive(args);
+-    }
++  
+     _runOnUIQueue.push([worklet as WorkletFunction, args]);
+     if (_runOnUIQueue.length === 1) {
+       queueMicrotask(() => {
+@@ -161,16 +147,8 @@ export function runOnUIImmediately<Args extends unknown[], ReturnValue>(
+   worklet: WorkletFunction<Args, ReturnValue>
+ ): (...args: Args) => void {
+   'worklet';
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && _WORKLET) {
+-    throw new Error(
+-      '[Reanimated] `runOnUIImmediately` cannot be called on the UI runtime. Please call the function synchronously or use `queueMicrotask` or `requestAnimationFrame` instead.'
+-    );
+-  }
+-  if (__DEV__ && !SHOULD_BE_USE_WEB && !isWorkletFunction(worklet)) {
+-    throw new Error(
+-      '[Reanimated] `runOnUIImmediately` can only be used on worklets.'
+-    );
+-  }
++ 
++
+   return (...args) => {
+     NativeReanimatedModule.scheduleOnUI(
+       makeShareableCloneRecursive(() => {
+diff --git a/node_modules/react-native-reanimated/src/reanimated2/valueUnpacker.ts b/node_modules/react-native-reanimated/src/reanimated2/valueUnpacker.ts
+index 66d6fd2..dfedefd 100644
+--- a/node_modules/react-native-reanimated/src/reanimated2/valueUnpacker.ts
++++ b/node_modules/react-native-reanimated/src/reanimated2/valueUnpacker.ts
+@@ -76,15 +76,7 @@ type ValueUnpacker = WorkletFunction<
+   any
+ >;
+ 
+-if (__DEV__ && !shouldBeUseWeb()) {
+-  const testWorklet = (() => {
+-    'worklet';
+-  }) as WorkletFunction<[], void>;
+-  if (!isWorkletFunction(testWorklet)) {
+-    throw new Error(
+-      `[Reanimated] Failed to create a worklet. See https://docs.swmansion.com/react-native-reanimated/docs/guides/troubleshooting#failed-to-create-a-worklet for more details.`
+-    );
+-  }
++
+   if (!isWorkletFunction(valueUnpacker)) {
+     throw new Error('[Reanimated] `valueUnpacker` is not a worklet');
+   }

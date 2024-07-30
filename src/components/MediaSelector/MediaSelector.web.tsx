@@ -4,7 +4,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 //import * as MediaLibrary from "expo-media-library";
 import linq from "linq";
 // TODO: EXPO VideoThumbnails expo-video-thumbnails  only test
-import createThumbnail from 'react-native-create-thumbnail';
 
 // TODO: EXPO Camera expo-camera ++++  only test
 import { check, request, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
@@ -230,15 +229,7 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
   }, []);
 
   const generateThumbnail = async (videoUri: string, time: number) => {
-    try {
-      const { path } = await createThumbnail({
-        url: videoUri,
-        timeStamp: time
-      });
-      return path;
-    } catch (e) {
-      console.warn(e);
-    }
+
   };
 
   const onAssetSelect = async (media: Media) => {

@@ -1,0 +1,373 @@
+diff --git a/node_modules/react-native-gesture-handler/lib/commonjs/handlers/PanGestureHandler.js b/node_modules/react-native-gesture-handler/lib/commonjs/handlers/PanGestureHandler.js
+index e9bf430..6343139 100644
+--- a/node_modules/react-native-gesture-handler/lib/commonjs/handlers/PanGestureHandler.js
++++ b/node_modules/react-native-gesture-handler/lib/commonjs/handlers/PanGestureHandler.js
+@@ -114,9 +114,6 @@ function transformPanGestureHandlerProps(props) {
+ }
+ 
+ function managePanProps(props) {
+-  if (__DEV__) {
+-    validatePanGestureHandlerProps(props);
+-  }
+ 
+   return transformPanGestureHandlerProps(props);
+ }
+diff --git a/node_modules/react-native-gesture-handler/lib/commonjs/handlers/createHandler.js b/node_modules/react-native-gesture-handler/lib/commonjs/handlers/createHandler.js
+index c19b0c6..be748ae 100644
+--- a/node_modules/react-native-gesture-handler/lib/commonjs/handlers/createHandler.js
++++ b/node_modules/react-native-gesture-handler/lib/commonjs/handlers/createHandler.js
+@@ -109,14 +109,6 @@ UIManagerAny.clearJSResponder = () => {
+ };
+ 
+ let allowTouches = true;
+-const DEV_ON_ANDROID = __DEV__ && _reactNative.Platform.OS === 'android'; // Toggled inspector blocks touch events in order to allow inspecting on Android
+-// This needs to be a global variable in order to set initial state for `allowTouches` property in Handler component
+-
+-if (DEV_ON_ANDROID) {
+-  _reactNative.DeviceEventEmitter.addListener('toggleElementInspector', () => {
+-    allowTouches = !allowTouches;
+-  });
+-}
+ 
+ function hasUnresolvedRefs(props) {
+   // TODO(TS) - add type for extract arg
+@@ -288,14 +280,6 @@ function createHandler({
+       const props = this.props;
+       this.isMountedRef.current = true;
+ 
+-      if (DEV_ON_ANDROID) {
+-        this.inspectorToggleListener = _reactNative.DeviceEventEmitter.addListener('toggleElementInspector', () => {
+-          this.setState(_ => ({
+-            allowTouches
+-          }));
+-          this.update(UNRESOLVED_REFS_RETRY_LIMIT);
+-        });
+-      }
+ 
+       if (hasUnresolvedRefs(props)) {
+         // If there are unresolved refs (e.g. ".current" has not yet been set)
+@@ -374,9 +358,7 @@ function createHandler({
+     render() {
+       var _this$props$testID;
+ 
+-      if (__DEV__ && !this.context && !(0, _utils.isJestEnv)() && _reactNative.Platform.OS !== 'web') {
+-        throw new Error(name + ' must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation for more details.');
+-      }
++
+ 
+       let gestureEventHandler = this.onGestureHandlerEvent; // Another instance of https://github.com/microsoft/TypeScript/issues/13995
+ 
+@@ -437,14 +419,7 @@ function createHandler({
+ 
+       let grandChildren = child.props.children;
+ 
+-      if (__DEV__ && child.type && (child.type === 'RNGestureHandlerButton' || child.type.name === 'View' || child.type.displayName === 'View')) {
+-        grandChildren = React.Children.toArray(grandChildren);
+-        grandChildren.push( /*#__PURE__*/React.createElement(_PressabilityDebugView.PressabilityDebugView, {
+-          key: "pressabilityDebugView",
+-          color: "mediumspringgreen",
+-          hitSlop: child.props.hitSlop
+-        }));
+-      }
++
+ 
+       return /*#__PURE__*/React.cloneElement(child, {
+         ref: this.refHandler,
+diff --git a/node_modules/react-native-gesture-handler/lib/commonjs/handlers/gestures/GestureDetector.js b/node_modules/react-native-gesture-handler/lib/commonjs/handlers/gestures/GestureDetector.js
+index f5dff41..2cb84c7 100644
+--- a/node_modules/react-native-gesture-handler/lib/commonjs/handlers/gestures/GestureDetector.js
++++ b/node_modules/react-native-gesture-handler/lib/commonjs/handlers/gestures/GestureDetector.js
+@@ -462,26 +462,7 @@ function validateDetectorChildren(ref) {
+   //          /     \
+   //         /       \
+   //   NativeView  NativeView
+-  if (__DEV__ && _reactNative.Platform.OS !== 'web') {
+-    const REACT_NATIVE_VERSION = (0, _getReactNativeVersion.getReactNativeVersion)(); // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+ 
+-    const wrapType = REACT_NATIVE_VERSION.minor > 63 || REACT_NATIVE_VERSION.major > 0 ? // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-    ref._reactInternals.elementType : // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-    ref._reactInternalFiber.elementType; // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+-
+-    let instance = _RNRenderer.RNRenderer.findHostInstance_DEPRECATED(ref)._internalFiberInstanceHandleDEV; // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-
+-
+-    while (instance && instance.elementType !== wrapType) {
+-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-      if (instance.sibling) {
+-        throw new Error('GestureDetector has more than one native view as its children. This can happen if you are using a custom component that renders multiple views, like React.Fragment. You should wrap content of GestureDetector with a <View> or <Animated.View>.');
+-      } // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+-
+-
+-      instance = instance.return;
+-    }
+-  }
+ }
+ 
+ const applyUserSelectProp = (userSelect, gesture) => {
+@@ -505,9 +486,7 @@ const applyTouchActionProp = (touchAction, gesture) => {
+ const GestureDetector = props => {
+   const rootViewContext = (0, _react.useContext)(_GestureHandlerRootViewContext.default);
+ 
+-  if (__DEV__ && !rootViewContext && !(0, _utils.isJestEnv)() && _reactNative.Platform.OS !== 'web') {
+-    throw new Error('GestureDetector must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation for more details.');
+-  }
++
+ 
+   const gestureConfig = props.gesture;
+ 
+diff --git a/node_modules/react-native-gesture-handler/lib/module/handlers/PanGestureHandler.js b/node_modules/react-native-gesture-handler/lib/module/handlers/PanGestureHandler.js
+index e286a9a..784a071 100644
+--- a/node_modules/react-native-gesture-handler/lib/module/handlers/PanGestureHandler.js
++++ b/node_modules/react-native-gesture-handler/lib/module/handlers/PanGestureHandler.js
+@@ -98,9 +98,7 @@ function transformPanGestureHandlerProps(props) {
+ }
+ 
+ export function managePanProps(props) {
+-  if (__DEV__) {
+-    validatePanGestureHandlerProps(props);
+-  }
++
+ 
+   return transformPanGestureHandlerProps(props);
+ }
+diff --git a/node_modules/react-native-gesture-handler/lib/module/handlers/createHandler.js b/node_modules/react-native-gesture-handler/lib/module/handlers/createHandler.js
+index ebdfdf3..a435919 100644
+--- a/node_modules/react-native-gesture-handler/lib/module/handlers/createHandler.js
++++ b/node_modules/react-native-gesture-handler/lib/module/handlers/createHandler.js
+@@ -82,14 +82,6 @@ UIManagerAny.clearJSResponder = () => {
+ };
+ 
+ let allowTouches = true;
+-const DEV_ON_ANDROID = __DEV__ && Platform.OS === 'android'; // Toggled inspector blocks touch events in order to allow inspecting on Android
+-// This needs to be a global variable in order to set initial state for `allowTouches` property in Handler component
+-
+-if (DEV_ON_ANDROID) {
+-  DeviceEventEmitter.addListener('toggleElementInspector', () => {
+-    allowTouches = !allowTouches;
+-  });
+-}
+ 
+ function hasUnresolvedRefs(props) {
+   // TODO(TS) - add type for extract arg
+@@ -258,14 +250,6 @@ export default function createHandler({
+       const props = this.props;
+       this.isMountedRef.current = true;
+ 
+-      if (DEV_ON_ANDROID) {
+-        this.inspectorToggleListener = DeviceEventEmitter.addListener('toggleElementInspector', () => {
+-          this.setState(_ => ({
+-            allowTouches
+-          }));
+-          this.update(UNRESOLVED_REFS_RETRY_LIMIT);
+-        });
+-      }
+ 
+       if (hasUnresolvedRefs(props)) {
+         // If there are unresolved refs (e.g. ".current" has not yet been set)
+@@ -342,9 +326,7 @@ export default function createHandler({
+     render() {
+       var _this$props$testID;
+ 
+-      if (__DEV__ && !this.context && !isJestEnv() && Platform.OS !== 'web') {
+-        throw new Error(name + ' must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation for more details.');
+-      }
++
+ 
+       let gestureEventHandler = this.onGestureHandlerEvent; // Another instance of https://github.com/microsoft/TypeScript/issues/13995
+ 
+@@ -405,14 +387,6 @@ export default function createHandler({
+ 
+       let grandChildren = child.props.children;
+ 
+-      if (__DEV__ && child.type && (child.type === 'RNGestureHandlerButton' || child.type.name === 'View' || child.type.displayName === 'View')) {
+-        grandChildren = React.Children.toArray(grandChildren);
+-        grandChildren.push( /*#__PURE__*/React.createElement(PressabilityDebugView, {
+-          key: "pressabilityDebugView",
+-          color: "mediumspringgreen",
+-          hitSlop: child.props.hitSlop
+-        }));
+-      }
+ 
+       return /*#__PURE__*/React.cloneElement(child, {
+         ref: this.refHandler,
+diff --git a/node_modules/react-native-gesture-handler/lib/module/handlers/gestures/GestureDetector.js b/node_modules/react-native-gesture-handler/lib/module/handlers/gestures/GestureDetector.js
+index b9e57c5..6d35c86 100644
+--- a/node_modules/react-native-gesture-handler/lib/module/handlers/gestures/GestureDetector.js
++++ b/node_modules/react-native-gesture-handler/lib/module/handlers/gestures/GestureDetector.js
+@@ -415,26 +415,7 @@ function validateDetectorChildren(ref) {
+   //          /     \
+   //         /       \
+   //   NativeView  NativeView
+-  if (__DEV__ && Platform.OS !== 'web') {
+-    const REACT_NATIVE_VERSION = getReactNativeVersion(); // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+ 
+-    const wrapType = REACT_NATIVE_VERSION.minor > 63 || REACT_NATIVE_VERSION.major > 0 ? // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-    ref._reactInternals.elementType : // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-    ref._reactInternalFiber.elementType; // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+-
+-    let instance = RNRenderer.findHostInstance_DEPRECATED(ref)._internalFiberInstanceHandleDEV; // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-
+-
+-    while (instance && instance.elementType !== wrapType) {
+-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-      if (instance.sibling) {
+-        throw new Error('GestureDetector has more than one native view as its children. This can happen if you are using a custom component that renders multiple views, like React.Fragment. You should wrap content of GestureDetector with a <View> or <Animated.View>.');
+-      } // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+-
+-
+-      instance = instance.return;
+-    }
+-  }
+ }
+ 
+ const applyUserSelectProp = (userSelect, gesture) => {
+@@ -458,9 +439,7 @@ const applyTouchActionProp = (touchAction, gesture) => {
+ export const GestureDetector = props => {
+   const rootViewContext = useContext(GestureHandlerRootViewContext);
+ 
+-  if (__DEV__ && !rootViewContext && !isJestEnv() && Platform.OS !== 'web') {
+-    throw new Error('GestureDetector must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation for more details.');
+-  }
++
+ 
+   const gestureConfig = props.gesture;
+ 
+diff --git a/node_modules/react-native-gesture-handler/src/handlers/PanGestureHandler.ts b/node_modules/react-native-gesture-handler/src/handlers/PanGestureHandler.ts
+index c596535..3275765 100644
+--- a/node_modules/react-native-gesture-handler/src/handlers/PanGestureHandler.ts
++++ b/node_modules/react-native-gesture-handler/src/handlers/PanGestureHandler.ts
+@@ -318,8 +318,6 @@ function transformPanGestureHandlerProps(props: PanGestureHandlerProps) {
+ }
+ 
+ export function managePanProps(props: PanGestureHandlerProps) {
+-  if (__DEV__) {
+-    validatePanGestureHandlerProps(props);
+-  }
++
+   return transformPanGestureHandlerProps(props);
+ }
+diff --git a/node_modules/react-native-gesture-handler/src/handlers/createHandler.tsx b/node_modules/react-native-gesture-handler/src/handlers/createHandler.tsx
+index c938663..477ac83 100644
+--- a/node_modules/react-native-gesture-handler/src/handlers/createHandler.tsx
++++ b/node_modules/react-native-gesture-handler/src/handlers/createHandler.tsx
+@@ -104,14 +104,6 @@ UIManagerAny.clearJSResponder = () => {
+ };
+ 
+ let allowTouches = true;
+-const DEV_ON_ANDROID = __DEV__ && Platform.OS === 'android';
+-// Toggled inspector blocks touch events in order to allow inspecting on Android
+-// This needs to be a global variable in order to set initial state for `allowTouches` property in Handler component
+-if (DEV_ON_ANDROID) {
+-  DeviceEventEmitter.addListener('toggleElementInspector', () => {
+-    allowTouches = !allowTouches;
+-  });
+-}
+ 
+ type HandlerProps<T extends Record<string, unknown>> = Readonly<
+   React.PropsWithChildren<BaseGestureHandlerProps<T>>
+@@ -211,15 +203,7 @@ export default function createHandler<
+       const props: HandlerProps<U> = this.props;
+       this.isMountedRef.current = true;
+ 
+-      if (DEV_ON_ANDROID) {
+-        this.inspectorToggleListener = DeviceEventEmitter.addListener(
+-          'toggleElementInspector',
+-          () => {
+-            this.setState((_) => ({ allowTouches }));
+-            this.update(UNRESOLVED_REFS_RETRY_LIMIT);
+-          }
+-        );
+-      }
++
+       if (hasUnresolvedRefs(props)) {
+         // If there are unresolved refs (e.g. ".current" has not yet been set)
+         // passed as `simultaneousHandlers` or `waitFor`, we enqueue a call to
+@@ -417,12 +401,6 @@ export default function createHandler<
+     }
+ 
+     render() {
+-      if (__DEV__ && !this.context && !isJestEnv() && Platform.OS !== 'web') {
+-        throw new Error(
+-          name +
+-            ' must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation for more details.'
+-        );
+-      }
+ 
+       let gestureEventHandler = this.onGestureHandlerEvent;
+       // Another instance of https://github.com/microsoft/TypeScript/issues/13995
+@@ -506,22 +484,7 @@ export default function createHandler<
+       }
+ 
+       let grandChildren = child.props.children;
+-      if (
+-        __DEV__ &&
+-        child.type &&
+-        (child.type === 'RNGestureHandlerButton' ||
+-          child.type.name === 'View' ||
+-          child.type.displayName === 'View')
+-      ) {
+-        grandChildren = React.Children.toArray(grandChildren);
+-        grandChildren.push(
+-          <PressabilityDebugView
+-            key="pressabilityDebugView"
+-            color="mediumspringgreen"
+-            hitSlop={child.props.hitSlop}
+-          />
+-        );
+-      }
++
+ 
+       return React.cloneElement(
+         child,
+diff --git a/node_modules/react-native-gesture-handler/src/handlers/gestures/GestureDetector.tsx b/node_modules/react-native-gesture-handler/src/handlers/gestures/GestureDetector.tsx
+index 569b0b7..7b24911 100644
+--- a/node_modules/react-native-gesture-handler/src/handlers/gestures/GestureDetector.tsx
++++ b/node_modules/react-native-gesture-handler/src/handlers/gestures/GestureDetector.tsx
+@@ -567,34 +567,7 @@ function validateDetectorChildren(ref: any) {
+   //          /     \
+   //         /       \
+   //   NativeView  NativeView
+-  if (__DEV__ && Platform.OS !== 'web') {
+-    const REACT_NATIVE_VERSION = getReactNativeVersion();
+-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+-    const wrapType =
+-      REACT_NATIVE_VERSION.minor > 63 || REACT_NATIVE_VERSION.major > 0
+-        ? // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-          ref._reactInternals.elementType
+-        : // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-          ref._reactInternalFiber.elementType;
+-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+-    let instance =
+-      RNRenderer.findHostInstance_DEPRECATED(
+-        ref
+-      )._internalFiberInstanceHandleDEV;
+-
+-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-    while (instance && instance.elementType !== wrapType) {
+-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+-      if (instance.sibling) {
+-        throw new Error(
+-          'GestureDetector has more than one native view as its children. This can happen if you are using a custom component that renders multiple views, like React.Fragment. You should wrap content of GestureDetector with a <View> or <Animated.View>.'
+-        );
+-      }
+ 
+-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+-      instance = instance.return;
+-    }
+-  }
+ }
+ 
+ const applyUserSelectProp = (
+@@ -639,11 +612,7 @@ interface GestureDetectorState {
+ }
+ export const GestureDetector = (props: GestureDetectorProps) => {
+   const rootViewContext = useContext(GestureHandlerRootViewContext);
+-  if (__DEV__ && !rootViewContext && !isJestEnv() && Platform.OS !== 'web') {
+-    throw new Error(
+-      'GestureDetector must be used as a descendant of GestureHandlerRootView. Otherwise the gestures will not be recognized. See https://docs.swmansion.com/react-native-gesture-handler/docs/installation for more details.'
+-    );
+-  }
++
+ 
+   const gestureConfig = props.gesture;
+ 
