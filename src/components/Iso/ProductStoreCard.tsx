@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import {
   AppColor,
@@ -58,7 +59,7 @@ const ProductStoreCard: React.FC<IsoProductStoreCardProps> = (props) => {
           value={query}
         />
         <View style={styles.searchBarIcoContainer}>
-          <FontAwesomeIcon on="search" color={colors.black} size={25} />
+          <FontAwesomeIcon icon={faSearch} color={colors.black} size={25} />
           <View
             style={{
               width: 1,

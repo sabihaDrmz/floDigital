@@ -25,6 +25,11 @@ const TabNavigation = () => {
     const scurrentSceneValue = useSharedValue(1);
     const [currentScene, setCurrentScene] = useState(1);
     const [selectedProcess, setSeletedProcess] = useState(false);
+    const path = useRoute().name;
+    useEffect(() => {
+
+        console.log('burda path: ', path)
+    }, []);
     const animatedContainerStyle = useAnimatedStyle(() => {
         const opacity = interpolate(transformY.value, [0, POPUP_WIDTH], [1, 0.8]);
         return {

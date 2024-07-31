@@ -20,6 +20,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
 
 import { VersionInfo } from "../constant/ApplicationVersionInfo";
 import AccountService from "../core/services/AccountService";
@@ -256,7 +257,7 @@ const FloDrawerComponent: React.FC = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <FontAwesomeIcon icon={"power-off"} color={"#8c8e90"} size={25} />
+                  <FontAwesomeIcon icon={faPowerOff} color={"#8c8e90"} size={25} />
                 </View>
               </TouchableOpacity>
               <Text

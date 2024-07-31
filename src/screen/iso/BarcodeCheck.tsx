@@ -1,5 +1,7 @@
+
+
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, Image, Platform} from "react-native";
 import FloHeaderNew from "../../components/Header/FloHeaderNew";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { translate } from "../../helper/localization/locaizationMain";
@@ -17,6 +19,7 @@ import { useAccountService } from "../../contexts/AccountService";
 import { useProductService } from "../../contexts/ProductService";
 import MainCamera from "../../components/MainCamera";
 import { useNavigation } from "@react-navigation/native";
+import DeviceInfo from "react-native-device-info";
 interface IsoBarcodeCheckProps {
 }
 
@@ -25,7 +28,7 @@ const IsoBarcodeCheck: React.FC<IsoBarcodeCheckProps> = (props) => {
   const navigation = useNavigation();
   const { getProduct } = useProductService();
   const [state, setState] = useState({
-    txtInput: __DEV__ ? "8680733650189" : "",
+    txtInput: DeviceInfo.isEmulator || Platform.OS ==='web' ? "8680733650189" : "",
     isGeneric: false,
   });
   const [isFind, setIsFind] = useState(false);

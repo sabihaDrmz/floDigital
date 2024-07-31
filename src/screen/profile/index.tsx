@@ -1,4 +1,4 @@
-import { useNavigation, DrawerActions } from "@react-navigation/native";
+import { useNavigation, DrawerActions,useRoute } from "@react-navigation/native";
 import { ProfilePictureBox } from "../../components/CustomIcons/MainPageIcons";
 import { VersionInfo } from "../../constant/ApplicationVersionInfo";
 import { useAccountService } from "../../contexts/AccountService";
@@ -16,13 +16,20 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors } from "../../theme/colors";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import {faArrowLeft, faPowerOff} from '@fortawesome/free-solid-svg-icons';
+
+import {useEffect} from "react";
 
 
 const Profile = () => {
     const { employeeInfo, logout } = useAccountService();
     const navigation = useNavigation();
     const insets = useSafeAreaInsets();
+  const path = useRoute().name;
+    useEffect(() => {
 
+        console.log('burda path: ', path)
+    }, []);
     const Info: React.FC<{ title: string; value: string; style?: any }> = (
         props
     ) => {
@@ -105,7 +112,7 @@ const Profile = () => {
                 <TouchableOpacity
                     onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
                 >
-                    <FontAwesomeIcon icon="arrow-left" color={"#fff"} size={25} />
+                    <FontAwesomeIcon icon={faArrowLeft} color={"#fff"} size={25} />
                 </TouchableOpacity>
             </View>
             <ScrollView bounces={false} showsVerticalScrollIndicator={false}>
@@ -207,7 +214,7 @@ const Profile = () => {
                         alignItems: "center",
                     }}
                 >
-                    <FontAwesomeIcon icon={"power-off"} color={"#8c8e90"} size={25} />
+                    <FontAwesomeIcon icon={faPowerOff} color={"#8c8e90"} size={25} />
                 </View>
             </TouchableOpacity>
             <Text

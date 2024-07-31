@@ -5,6 +5,7 @@ import AppTextBox, {
 } from "../../NewComponents/FormElements/AppTextBox";
 import { FloButton } from "../../components";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import AppComboSelect from "../../components/AppComboSelect";
 import FloCheckBox from "../../components/FloCheckBox";
@@ -75,7 +76,7 @@ const NewAddress: React.FC<any> = (props) => {
             marginRight: 20,
           }}
         >
-          <FontAwesomeIcon icon={"search"} size={24} />
+          <FontAwesomeIcon icon={faSearch} size={24} />
           <TextInputMask
             type={"cel-phone"}
             options={{

@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { translate } from "../helper/localization/locaizationMain";
 import { colors } from "../theme/colors";
@@ -72,7 +73,7 @@ class FloAutoComplete extends Component<FloAutoCompleteProps> {
       <View style={[styles.container, this.props.containerStyle]}>
         <View style={styles.textInputContainer}>
           <View style={styles.searchIcon}>
-            <FontAwesomeIcon icon="search" color={colors.black} size={28} />
+            <FontAwesomeIcon icon={faSearch} color={colors.black} size={28} />
             <View
               style={{
                 width: 1,

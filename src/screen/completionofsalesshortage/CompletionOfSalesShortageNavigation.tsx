@@ -10,6 +10,7 @@ const Stack = createNativeStackNavigator();
 
 
 const CompletionOfSalesShortageNavigation = () => {
+
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, title: 'FloDigital' }}>
             <Stack.Screen name="CompletionOfSalesShortage" component={CompletionOfSalesShortage} />

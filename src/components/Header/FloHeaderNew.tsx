@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, {ReactNode, useEffect} from "react";
 import {
   Dimensions,
   Image,
@@ -22,6 +22,7 @@ import BellIcon from "../../components/CustomIcons/BellIcon";
 import HeaderSliderMenu from "./HeaderSliderMenu";
 import { useFcmService } from "../../contexts/FcmService";
 import { useNavigation, useRoute } from '@react-navigation/native';
+import {faArrowLeft, faBars} from "@fortawesome/free-solid-svg-icons";
 
 const { width, height } = Dimensions.get("window");
 
@@ -167,7 +168,10 @@ const FloHeaderNew = (props: FloHeaderProps) => {
       }, // Ürün arama sayfasına git
       profile: () => navigation.navigate("ProfileScreen" as never), // Profil Sayfasına git
     };
+  useEffect(() => {
 
+    console.log('burda path: ', path)
+  }, []);
   const runButtonAction = (
     buttonType: "back" | "close" | "basket" | "findBarcode" | "profile"
   ) => {
@@ -269,7 +273,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
                 runButtonAction("back");
               }}
             >
-              <FontAwesomeIcon icon={"arrowleft"} size={27} color={"#fff"} />
+              <FontAwesomeIcon icon={faArrowLeft} size={27} color={"#fff"} />
             </TouchableOpacity>
           )}
           {!props.enableButtons?.includes("back") && (
@@ -279,23 +283,7 @@ const FloHeaderNew = (props: FloHeaderProps) => {
                 navigation.dispatch(DrawerActions.openDrawer());
               }}
             >
-              <View
-                style={{
-                  width: 26,
-                  height: 2,
-                  backgroundColor: "#fff",
-                  marginBottom: 6.5,
-                }}
-              />
-              <View
-                style={{
-                  width: 26,
-                  height: 2,
-                  backgroundColor: "#fff",
-                  marginBottom: 6.5,
-                }}
-              />
-              <View style={{ width: 13, height: 2, backgroundColor: "#fff" }} />
+              <FontAwesomeIcon icon={faBars} size={27} color={"#fff"} />
             </TouchableOpacity>
           )}
 

@@ -19,6 +19,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import { NavigationTree } from "../constant/NavigationTree";
 import { removeDuplicates } from "../helper/ArrayHelper";
@@ -106,7 +107,7 @@ const EventsearchComponent = (props: any) => {
           alignItems: "center",
         }}
       >
-        <FontAwesomeIcon icon={"search"} size={27} color={"rgba(191,191,191,1)"} />
+        <FontAwesomeIcon icon={faSearch} size={27} color={"rgba(191,191,191,1)"} />
         <TextInput
           onChangeText={(txt) => {
             onSearch(txt);

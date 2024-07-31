@@ -14,6 +14,8 @@ import {
 import { colors } from "../theme/colors";
 import { paddings } from "../theme/paddingConst";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+
 import { TextInputMask } from "react-native-masked-text";
 import { Keyboard } from "react-native";
 import { PerfectFontSize } from "../helper/PerfectPixel";
@@ -188,7 +190,7 @@ class FloTextBox extends Component<FloTextBoxProps> {
               }}
             >
               <FontAwesomeIcon
-                icon={this.state.overrideTextEntry ? "eye" : "eye-off"}
+                icon={this.state.overrideTextEntry ? faEye : faEyeSlash}
                 size={20}
                 // @ts-ignore
                 color={
