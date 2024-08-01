@@ -1,16 +1,14 @@
-// @ts-nocheck
 import React, { createContext, useContext, useEffect, useState } from "react";
-// TODO: EXPO MediaLibrary expo-media-library
-//import * as MediaLibrary from "expo-media-library";
+
 import linq from "linq";
-// TODO: EXPO VideoThumbnails expo-video-thumbnails  only test
 import createThumbnail from 'react-native-create-thumbnail';
 
-// TODO: EXPO Camera expo-camera ++++  only test
 import { check, request, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
 
 import { Linking, PermissionsAndroid, Platform } from "react-native";
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
+import RNFetchBlob from 'react-native-blob-util';
+
 type MediaSelectorProviderProps = {};
 
 type MediaType = "video" | "picture";
@@ -56,202 +54,233 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
 
   const openCamera = () => { };
 
-  const getMediaLibraryPreviewData = async (): Promise<
-    any
-  > => {
-    //TODO: EXPO MediaLibrary !!!!
-    //  const assets = await MediaLibrary.getAssetsAsync({ mediaType: "photo" });
-    const assets = {assets: []};
-
-    return linq.from(assets.assets).take(10).toArray();
+  const getMediaLibraryPreviewData = async (): Promise<any> => {
+    try {
+      const dirs = RNFetchBlob.fs.dirs;
+      const photosPath = Platform.OS === 'android' ? dirs.DCIMDir : dirs.DocumentDir;
+      const files = await RNFetchBlob.fs.ls(photosPath);
+      const photoFiles = files.filter(file => file.endsWith('.jpg') || file.endsWith('.png'));
+      return linq.from(photoFiles).take(10).toArray();
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   };
 
   useEffect(() => {
     const cameraPermission = async () => {
       if (Platform.OS === 'android') {
-        check(PERMISSIONS.ANDROID.CAMERA)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.ANDROID.CAMERA).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
+        try {
+          const result = await check(PERMISSIONS.ANDROID.CAMERA);
+          if (result === RESULTS.GRANTED) {
+            setIsPermitted(true);
+          } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+            MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+              yesButtonEvent: () => {
+                Linking.openSettings().then();
+              },
+            });
+            const requestResult = await request(PERMISSIONS.ANDROID.CAMERA);
+            setIsPermitted(requestResult === RESULTS.GRANTED);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      } else if (Platform.OS === 'ios') {
+        try {
+          const result = await check(PERMISSIONS.IOS.CAMERA);
+          if (result === RESULTS.GRANTED) {
+            setIsPermitted(true);
+          } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+            MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+              yesButtonEvent: () => {
+                Linking.openSettings().then();
+              },
+            });
+            const requestResult = await request(PERMISSIONS.IOS.CAMERA);
+            setIsPermitted(requestResult === RESULTS.GRANTED);
+          }
+        } catch (error) {
+          console.error(error);
+        }
       }
-      if (Platform.OS === 'ios') {
-        check(PERMISSIONS.IOS.CAMERA)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.IOS.CAMERA).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    };
-    const microphonePermission = async () => {
-      if (Platform.OS === 'android') {
-        check(PERMISSIONS.ANDROID.RECORD_AUDIO)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.ANDROID.RECORD_AUDIO).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-      if (Platform.OS === 'ios') {
-        check(PERMISSIONS.IOS.MICROPHONE)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.IOS.MICROPHONE).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    };
-
-    const mediaLibPermission = async () => {
-      if (Platform.OS === 'android') {
-        check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-
-        check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-      if (Platform.OS === 'ios') {
-        check(PERMISSIONS.IOS.MEDIA_LIBRARY)
-          .then(result => {
-            setIsPermitted(RESULTS.GRANTED === result)
-            if (RESULTS.DENIED === result || RESULTS.BLOCKED === result) {
-              MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
-                yesButtonEvent: () => {
-                  Linking.openSettings().then();
-                },
-              })
-              request(PERMISSIONS.IOS.MEDIA_LIBRARY).then((res) => setIsPermitted(RESULTS.GRANTED === result)).catch(error => {
-                console.error(error);
-              });
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-      }
-    };
-
-    const nearbyPermission = async () => {
-      const granted1 = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT, {
-        title: "Yakındaki cihaz izni",
-        message: "Yakındaki Cihazlara izin ver",
-        buttonPositive: "Tamam"
-      }
-      );
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.NEARBY_WIFI_DEVICES, {
-        title: "Yakındaki cihaz izni",
-        message: "Yakındaki Cihazlara izin ver",
-        buttonPositive: "Tamam"
-      }
-      );
-    }
-
-    const checkPermission = async () => {
-      try {
-        console.log('nearby permission');
-        await nearbyPermission();
-      } catch (err) {
-        console.log('nearby permission error:',err);
-      }
-      try {
-        console.log("mic");
-        await microphonePermission();
-      } catch (err) {
-        console.log('mic permission error:',err);
-      }
-
-      try {
-        await cameraPermission();
-      } catch (err) {
-        console.log('cam permission error:',err);
-      }
-
-      try {
-        await mediaLibPermission();
-      } catch (err) { }
     };
 
     checkPermission();
   }, []);
-
+  const cameraPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const result = await check(PERMISSIONS.ANDROID.CAMERA);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings().then();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.ANDROID.CAMERA);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (Platform.OS === 'ios') {
+      try {
+        const result = await check(PERMISSIONS.IOS.CAMERA);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings().then();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.IOS.CAMERA);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  const microphonePermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const result = await check(PERMISSIONS.ANDROID.RECORD_AUDIO);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.ANDROID.RECORD_AUDIO);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (Platform.OS === 'ios') {
+      try {
+        const result = await check(PERMISSIONS.IOS.MICROPHONE);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.IOS.MICROPHONE);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  
+  const mediaLibPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const result = await check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+  
+      try {
+        const result = await check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (Platform.OS === 'ios') {
+      try {
+        const result = await check(PERMISSIONS.IOS.MEDIA_LIBRARY);
+        if (result === RESULTS.GRANTED) {
+          setIsPermitted(true);
+        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+            yesButtonEvent: () => {
+              Linking.openSettings();
+            },
+          });
+          const requestResult = await request(PERMISSIONS.IOS.MEDIA_LIBRARY);
+          setIsPermitted(requestResult === RESULTS.GRANTED);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+  
+  const nearbyPermission = async () => {
+    try {
+      const granted1 = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT, {
+          title: "Yakındaki cihaz izni",
+          message: "Yakındaki Cihazlara izin ver",
+          buttonPositive: "Tamam"
+        }
+      );
+      const granted2 = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.NEARBY_WIFI_DEVICES, {
+          title: "Yakındaki cihaz izni",
+          message: "Yakındaki Cihazlara izin ver",
+          buttonPositive: "Tamam"
+        }
+      );
+    } catch (error) {
+      console.error("Nearby permission error:", error);
+    }
+  };
+  
+  const checkPermission = async () => {
+    try {
+      console.log('Checking nearby permission');
+      await nearbyPermission();
+    } catch (err) {
+      console.log('Nearby permission error:', err);
+    }
+  
+    try {
+      console.log("Checking microphone permission");
+      await microphonePermission();
+    } catch (err) {
+      console.log('Microphone permission error:', err);
+    }
+  
+    try {
+      console.log("Checking media library permission");
+      await mediaLibPermission();
+    } catch (err) {
+      console.log('Media library permission error:', err);
+    }
+  };
   const generateThumbnail = async (videoUri: string, time: number) => {
     try {
       const { path } = await createThumbnail({
@@ -270,7 +299,6 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
         if (m.find((x) => x.Url === media.Url)) {
           return m;
         }
-
         media.Thumb = media.Url;
         return [...m, media];
       });
@@ -280,12 +308,10 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
         if (m.find((x) => x.Url === media.Url)) {
           return m;
         }
-
         media.Thumb = thumb;
         return [...m, media];
       });
     }
-
     setIsShow(false);
   };
 
@@ -314,6 +340,12 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
     onAssetSelect,
     removeMedia,
     setMediasData,
+    checkPermission,
+    mediaLibPermission,
+    nearbyPermission,
+    microphonePermission,
+    cameraPermission,
+    isPermitted
   };
   return (
     <MediaSelectorContext.Provider value={contextValue}>
