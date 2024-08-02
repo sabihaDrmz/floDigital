@@ -26,7 +26,7 @@ import Animated, {
 } from "react-native-reanimated";
 import { Actions } from "react-native-router-flux";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import { translate } from "../../helper/localization/locaizationMain";
 import { PerfectFontSize } from "../../helper/PerfectPixel";
 import { BrokenProductIcon } from "../CustomIcons/BrokenProductIcon";
@@ -165,7 +165,7 @@ const TabBar = (props: any) => {
               {title}
             </Text>
           </View>
-          <FontAwesomeIcon icon={"right"} size={17} color={"#7D7E81"} />
+          <FontAwesomeIcon icon={faArrowRight} size={17} color={"#7D7E81"} />
         </TouchableWithoutFeedback>
         {showSperator && (
           <View
@@ -326,7 +326,7 @@ const TabBar = (props: any) => {
                   >
                     {translate("warehouseRequest.title")}
                   </AppText>
-                  <FontAwesomeIcon icon={"right"} size={17} color={"#7D7E81"} />
+                  <FontAwesomeIcon icon={faArrowRight} size={17} color={"#7D7E81"} />
                 </View>
               </TouchableOpacity>
             )}

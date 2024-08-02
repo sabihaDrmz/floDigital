@@ -30,6 +30,8 @@ import AccountService from "./AccountService";
 import MessageBox, { MessageBoxDetailType, MessageBoxType } from "./MessageBox";
 //TODO: EXPO exPrint
 // import * as exPrint from "expo-print";
+import RNPrint from 'react-native-print';
+
 import {
   BrokenProductSapResult,
   BrokenProductSearchModel,
@@ -848,12 +850,11 @@ class EasyReturnService {
       );
 
       if (result.data.state === FloResultCode.Successfully) {
-        // let printer = await exPrint.selectPrinterAsync();
-       /* exPrint.printAsync({
+       await RNPrint.print({
           html: result.data.model.expenseSlipUrl,
         });
 
-        */
+
 
         MessageBoxNew.show("Gider pusulası başarı ile oluşturuldu.");
         if (this.source === 2) Actions.popTo("erBrokenFindFiche");

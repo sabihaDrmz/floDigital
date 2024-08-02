@@ -28,6 +28,7 @@ import { useApplicationGlobalService } from "./contexts/ApplicationGlobalService
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { accountInfoKey, salesOrgKey } from "./core/StorageKeys";
 import { NavigationType } from "./StackNavigator";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 const OperationMenu = () => {
     const navigation = useNavigation<NavigationType>()
     const [modalVisible, setModalVisible] = useState(false);
@@ -117,7 +118,7 @@ const OperationMenu = () => {
                             {title}
                         </Text>
                     </View>
-                    <FontAwesomeIcon icon={"right"} size={17} color={"#7D7E81"} />
+                    <FontAwesomeIcon icon={faArrowRight} size={17} color={"#7D7E81"} />
                 </TouchableOpacity>
                 <View
                     style={{

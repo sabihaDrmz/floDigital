@@ -32,6 +32,8 @@ import { PaymentTypeDetailModel } from "./model/PaymentTypeDetailModel";
 import { TransactionLineDetailModel } from "./model/TransactionLineDetailModel";
 //TODO: EXPO exPrint
 // import * as exPrint from "expo-print";
+import RNPrint from 'react-native-print';
+
 import { useMessageBoxService } from "./MessageBoxService";
 import { SystemApi, useAccountService } from "./AccountService";
 import { useApplicationGlobalService } from "./ApplicationGlobalService";
@@ -946,14 +948,19 @@ export const useEasyReturnService = create<EasyReturnServiceModel>((set, get) =>
 
             let result = await SystemApi.post(saveUri);
 
+            const printDocument = async (uri) => {
+                try {
+                    await RNPrint.print({
+                        filePath: uri, // Yazdırılacak belgenin dosya yolu
+                    });
+                } catch (error) {
+                    console.error('Belge yazdırma hatası:', error);
+                }
+            };
+
+
             if (result.data.state === FloResultCode.Successfully) {
-                /*
-                exPrint.printAsync({
-
-                    html: result.data.model.expenseSlipUrl,
-                });
-
-                 */
+               await printDocument(result.data.model.expenseSlipUrl)
 
                 MessageBoxService.show("Gider pusulası başarı ile oluşturuldu.");
                 RootNavigation.goBack()

@@ -21,6 +21,8 @@ import {
 import Svg, { Path, SvgXml } from "react-native-svg";
 //TODO: EXPO exPrint
 // import * as exPrint from "expo-print";
+import RNPrint from 'react-native-print';
+
 import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";
 
 import { useMediaSelector } from "../../components/MediaSelector/MediaSelector";
@@ -968,13 +970,12 @@ const BrokenComplete: React.FC = ({ }: any) => {
                 // transparent
                 buttonColorType={ColorType.Brand}
                 onPress={async () => {
-                /*  Platform.OS === "web"
+                  Platform.OS === "web"
                     ? openDocument(brokenProductTemplate)
-                    : await exPrint.printAsync({
+                    : await RNPrint.print({
                       html: brokenProductTemplate,
                     });
 
-                 */
                 }}
               >
                 <FontAwesomeIcon icon="printer" size={20} color={"white"} />
