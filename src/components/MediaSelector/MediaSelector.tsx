@@ -68,44 +68,6 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
   };
 
   useEffect(() => {
-    const cameraPermission = async () => {
-      if (Platform.OS === 'android') {
-        try {
-          const result = await check(PERMISSIONS.ANDROID.CAMERA);
-          if (result === RESULTS.GRANTED) {
-            setIsPermitted(true);
-          } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-            MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
-              yesButtonEvent: () => {
-                Linking.openSettings().then();
-              },
-            });
-            const requestResult = await request(PERMISSIONS.ANDROID.CAMERA);
-            setIsPermitted(requestResult === RESULTS.GRANTED);
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      } else if (Platform.OS === 'ios') {
-        try {
-          const result = await check(PERMISSIONS.IOS.CAMERA);
-          if (result === RESULTS.GRANTED) {
-            setIsPermitted(true);
-          } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-            MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
-              yesButtonEvent: () => {
-                Linking.openSettings().then();
-              },
-            });
-            const requestResult = await request(PERMISSIONS.IOS.CAMERA);
-            setIsPermitted(requestResult === RESULTS.GRANTED);
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      }
-    };
-
     checkPermission();
   }, []);
   const cameraPermission = async () => {
@@ -115,7 +77,7 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
         if (result === RESULTS.GRANTED) {
           setIsPermitted(true);
         } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!', {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından kamera yetkisini aktif ediniz!CAMERA', {
             yesButtonEvent: () => {
               Linking.openSettings().then();
             },
@@ -152,7 +114,7 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
         if (result === RESULTS.GRANTED) {
           setIsPermitted(true);
         } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!', {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından mikrofon yetkisini aktif ediniz!RECORD_AUDIO', {
             yesButtonEvent: () => {
               Linking.openSettings();
             },
@@ -182,49 +144,15 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
       }
     }
   };
-  
+
   const mediaLibPermission = async () => {
-    if (Platform.OS === 'android') {
-      try {
-        const result = await check(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
-        if (result === RESULTS.GRANTED) {
-          setIsPermitted(true);
-        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
-            yesButtonEvent: () => {
-              Linking.openSettings();
-            },
-          });
-          const requestResult = await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
-          setIsPermitted(requestResult === RESULTS.GRANTED);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-  
-      try {
-        const result = await check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
-        if (result === RESULTS.GRANTED) {
-          setIsPermitted(true);
-        } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
-            yesButtonEvent: () => {
-              Linking.openSettings();
-            },
-          });
-          const requestResult = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
-          setIsPermitted(requestResult === RESULTS.GRANTED);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (Platform.OS === 'ios') {
+   if (Platform.OS === 'ios') {
       try {
         const result = await check(PERMISSIONS.IOS.MEDIA_LIBRARY);
         if (result === RESULTS.GRANTED) {
           setIsPermitted(true);
         } else if (result === RESULTS.DENIED || result === RESULTS.BLOCKED) {
-          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!', {
+          MessageBoxShow('Sayfaya yetkiniz bulunmamaktadır, telefon ayarlarından galeriye erişim iznini aktif ediniz!MEDIA_LIBRARY', {
             yesButtonEvent: () => {
               Linking.openSettings();
             },
@@ -237,7 +165,7 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
       }
     }
   };
-  
+
   const nearbyPermission = async () => {
     try {
       const granted1 = await PermissionsAndroid.request(
@@ -258,7 +186,7 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
       console.error("Nearby permission error:", error);
     }
   };
-  
+
   const checkPermission = async () => {
     try {
       console.log('Checking nearby permission');
@@ -266,14 +194,14 @@ export const MediaSelectorProvider: React.FC<any> = ({ children }: any) => {
     } catch (err) {
       console.log('Nearby permission error:', err);
     }
-  
+
     try {
       console.log("Checking microphone permission");
       await microphonePermission();
     } catch (err) {
       console.log('Microphone permission error:', err);
     }
-  
+
     try {
       console.log("Checking media library permission");
       await mediaLibPermission();
