@@ -73,13 +73,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.flodigital"
+    namespace "com.ziylan.flodijital"
     defaultConfig {
-        applicationId "com.flodigital"
+        applicationId "com.ziylan.flodijital"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "4.4.6"
     }
     signingConfigs {
         debug {

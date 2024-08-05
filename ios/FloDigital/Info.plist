@@ -35,11 +35,14 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-    <string>Barkod okutma ve ürün sorgulama için kamera erişimine izin vermelisiniz.</string>
-
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Our app uses bluetooth to find, connect and transfer data between different devices</string>
+	<string>Farklı cihazlar arasında veri bulmak, bağlanmak ve transfer etmek için Bluetooth kullanımına izin veriniz.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Cihazlar arasında veri transferi yapabilmek için Bluetooth'a izin vermelisiniz.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Barkod okutma ve ürün sorgulama için kamera erişimine izin vermelisiniz.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Galeriden fotoğraf veya video eklemek için izin vermelisiniz.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>
@@ -48,11 +51,19 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string></string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
