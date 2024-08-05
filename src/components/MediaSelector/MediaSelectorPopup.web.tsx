@@ -9,7 +9,6 @@ import {
   Platform,
 } from "react-native";
 import {useMediaSelector} from "./MediaSelector";
-import {Camera,getCameraDevice} from "react-native-vision-camera";
 import {
   AppColor,
   AppText,
@@ -36,9 +35,8 @@ import Animated,{
 } from "react-native-reanimated";
 import ImagePreview from "./ImagePreview";
 import {useStopwatch} from "react-timer-hook";;
-import Video from 'react-native-video';
+// import Video from 'react-native-video';
 
-import * as ImagePicker from 'react-native-image-picker';
 import {useMessageBoxService} from "../../contexts/MessageBoxService";
 import {PerfectFontSize} from "../../helper/PerfectPixel";
 interface MediaSelectorPopupProps {
@@ -53,7 +51,6 @@ const AnimatedTouchableOpacity=
   Animated.createAnimatedComponent(TouchableOpacity);
 const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
 
-  const devices=Camera.getAvailableCameraDevices();
   const [device,setDevice]=useState(getCameraDevice(devices,'back'));
   const {
     isShow,
@@ -76,7 +73,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
   const camera=useRef<any>(null);
   const [videoElapsedTime,setVideoElapsedTime]=useState(0);
   const timer=useStopwatch({autoStart: false});
-  const videoRef = useRef<Video>(null);
+  // const videoRef = useRef<Video>(null);
   const MessageBox=useMessageBoxService();
   useEffect(() => {
     // getMediaLibraryPreviewData()
@@ -158,7 +155,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
         exif: result.assets[0].exif,
       });
     } catch(err) {
-      console.log('error',err)
       setCameracapPicture(undefined);
     }
   };
@@ -258,14 +254,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
                       backgroundColor: "#fff",
                     }}
                   >
-                     <Camera
-                      ref={camera}
-                      style={StyleSheet.absoluteFillObject}
-                      device={usingCamera}
-                      video={true}
-                      photo={true}
-                      isActive={isShow}
-                    />
                     {isVideoStarted && (
                       <View
                         style={{
@@ -498,7 +486,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
               height,
             }}
           >
-            {
+            {/*
 
               <Video
                 onLoad={() => {
@@ -510,7 +498,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
                 repeat
                 resizeMode="contain"
               />
-            }
+            */}
             <TouchableOpacity
               style={{
                 width: 30,

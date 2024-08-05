@@ -31,7 +31,6 @@ import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScr
 import { FloButton } from "../../../src/components";
 import FloLoading from "../../components/FloLoading";
 import { useApplicationGlobalService } from "../../contexts/ApplicationGlobalService";
-import { Image as ImageCompressor} from 'react-native-compressor';
 import RNFetchBlob from 'react-native-blob-util';
 import { Portal } from "react-native-portalize";
 import { useCrmService } from "../../contexts/CrmService";
@@ -95,29 +94,7 @@ const CaseDetailScreen: React.FC = (props) => {
    
     for (let index = 0; index < medias.length; index++) {
       // Webde farklı bir şekilde çalışıyor
-      if (Platform.OS !== "web") {
-        if (medias[index].MediaType !== "video") {
-          const fileInfo = await RNFetchBlob.fs.stat(medias[index].Url);
-          const fileSizeInMB = fileInfo.size / (1024 * 1024);
-          if(fileSizeInMB > 0.5){
-            const manipulatedImage = await ImageCompressor.compress(medias[index].Url, {
-              compressionMethod: 'auto',
-              maxWidth: 720,
-              quality: compressionQuality(fileInfo.size),
-            });
-            const manfileInfo = await RNFetchBlob.fs.stat(manipulatedImage);
-            medias[index].Url = manipResult.uri;
-            
-          }
-            tmpMedias.push(medias[index]);
 
-        }
-        // Video eki eklemek isterse uyarı çıkarılıyor
-        else {
-          show("Lütfen video ekini kaldırın.");
-          return;
-        } 
-      } else {
         // web üzerinde herhani bir fotoğraf eklemek isterse
 
         // TODO web image manipulastion
@@ -131,7 +108,7 @@ const CaseDetailScreen: React.FC = (props) => {
         medias[index].Url = manipResult.uri;
         tmpMedias.push(medias[index]);
         */
-      }
+      
     }
 
     updateCase({
