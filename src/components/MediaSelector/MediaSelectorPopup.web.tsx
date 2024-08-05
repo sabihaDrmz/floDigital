@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
-  Platform,
 } from "react-native";
 import {useMediaSelector} from "./MediaSelector";
 import {
@@ -15,28 +14,16 @@ import {
   ColorType,
   FontSizes,
 } from "@flomagazacilik/flo-digital-components";
-
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faChevronUp,faChevronDown} from '@fortawesome/free-solid-svg-icons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import {Portal} from "react-native-portalize";
 import {ifIphoneX} from "react-native-iphone-x-helper";
 import Animated,{
-  Easing,
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
-  withRepeat,
-  withTiming,
 } from "react-native-reanimated";
 import ImagePreview from "./ImagePreview";
 import {useStopwatch} from "react-timer-hook";;
-// import Video from 'react-native-video';
-
 import {useMessageBoxService} from "../../contexts/MessageBoxService";
 import {PerfectFontSize} from "../../helper/PerfectPixel";
 interface MediaSelectorPopupProps {
@@ -51,7 +38,6 @@ const AnimatedTouchableOpacity=
   Animated.createAnimatedComponent(TouchableOpacity);
 const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
 
-  const [device,setDevice]=useState(getCameraDevice(devices,'back'));
   const {
     isShow,
     setIsShowData,
@@ -65,7 +51,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
   }=useMediaSelector();
   const [selectedVideo,setSelectedVideo]=useState("");
   const [assets,setAssets]=useState<any>([]);
-  const [usingCamera,setUsingCamera]=useState<any>(device);
   const [isVideoStarted,setIsVideoStarted]=useState(false);
   const color=useSharedValue(0);
   const [capturePicuture,setCameracapPicture]=
@@ -73,7 +58,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
   const camera=useRef<any>(null);
   const [videoElapsedTime,setVideoElapsedTime]=useState(0);
   const timer=useStopwatch({autoStart: false});
-  // const videoRef = useRef<Video>(null);
   const MessageBox=useMessageBoxService();
   useEffect(() => {
     // getMediaLibraryPreviewData()
@@ -136,27 +120,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
   };
 
   const openMediaLibrary=async () => {
-    try {
-      const options: ImagePicker.ImageLibraryOptions = {
-      mediaType: 'mixed',
-      quality: 1,
-    };
-    const result: ImagePicker.ImagePickerResponse =
-      await ImagePicker.launchImageLibrary(options);
-      console.log('resultssss',result)
-      if(result===null||result===undefined||result.canceled) return;
-
-      setCameracapPicture({
-        height: result.assets[0].height,
-        width: result.assets[0].width,
-        uri: result.assets[0].uri,
-        base64:
-          result.assets[0].base64==null? undefined:result.assets[0].base64,
-        exif: result.assets[0].exif,
-      });
-    } catch(err) {
-      setCameracapPicture(undefined);
-    }
   };
 
   return (
@@ -364,28 +327,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
                             },
                           ]}
                         ></AnimatedTouchableOpacity>
-                        <TouchableOpacity
-                          onPress={
-                            () => {
-                              const position = usingCamera?.position == 'front' ? 'back' : 'front';
-                              setUsingCamera(getCameraDevice(devices, position));
-                              }
-                          }
-                          style={{
-                            width: 70,
-                            height: 70,
-                            backgroundColor: "transparent",
-                            borderRadius: 35,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <FontAwesomeIcon
-                            icon="flip-camera-ios"
-                            size={35}
-                            color="white"
-                          />
-                        </TouchableOpacity>
                       </View>
                     </View>
                     <View
@@ -486,19 +427,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
               height,
             }}
           >
-            {/*
-
-              <Video
-                onLoad={() => {
-                  videoRef.current?.resume();
-                }}
-                ref={videoRef}
-                style={StyleSheet.absoluteFillObject}
-                source={{uri: selectedVideo}}
-                repeat
-                resizeMode="contain"
-              />
-            */}
             <TouchableOpacity
               style={{
                 width: 30,
