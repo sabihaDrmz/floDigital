@@ -158,6 +158,7 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
         exif: result.assets[0].exif,
       });
     } catch(err) {
+      console.log('error',err)
       setCameracapPicture(undefined);
     }
   };

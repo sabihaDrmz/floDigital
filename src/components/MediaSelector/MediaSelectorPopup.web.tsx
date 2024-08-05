@@ -24,8 +24,6 @@ import Animated,{
 } from "react-native-reanimated";
 import ImagePreview from "./ImagePreview";
 import {useStopwatch} from "react-timer-hook";;
-import Video from 'react-native-video';
-import * as ImagePicker from 'react-native-image-picker';
 import {useMessageBoxService} from "../../contexts/MessageBoxService";
 import {PerfectFontSize} from "../../helper/PerfectPixel";
 interface MediaSelectorPopupProps {
@@ -122,7 +120,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
   };
 
   const openMediaLibrary=async () => {
-
   };
 
   return (
@@ -220,7 +217,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
                       backgroundColor: "#fff",
                     }}
                   >
-
                     {isVideoStarted && (
                       <View
                         style={{
@@ -431,7 +427,6 @@ const MediaSelectorPopup: React.FC<MediaSelectorPopupProps>=(props) => {
               height,
             }}
           >
-
             <TouchableOpacity
               style={{
                 width: 30,
