@@ -4,8 +4,6 @@ import {
   AppText,
   ColorType,
 } from "@flomagazacilik/flo-digital-components";
-//TODO: EXPO expo-camera ++++ propları extend alınmıştı, manuel ekledim gerek kalmadı.
-// import { CameraCapturedPicture } from "expo-camera";
 
 import React from "react";
 import {

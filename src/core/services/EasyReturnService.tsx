@@ -1,6 +1,4 @@
 import axios from "axios";
-//TODO: EXPO expo-camera   +++++   type için kullanılmış sadece, any olarak setledim .
-// import { CameraCapturedPicture } from "expo-camera";
 import {
   action,
   makeAutoObservable,
@@ -28,8 +26,6 @@ import { GetServiceUri, ServiceUrlType } from "../Settings";
 import { chekcAuthError } from "../Util";
 import AccountService from "./AccountService";
 import MessageBox, { MessageBoxDetailType, MessageBoxType } from "./MessageBox";
-//TODO: EXPO exPrint
-// import * as exPrint from "expo-print";
 import RNPrint from 'react-native-print';
 
 import {

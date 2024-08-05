@@ -23,8 +23,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import { useMessageBoxService } from "../../contexts/MessageBoxService";
 import { MessageBoxType } from "../../contexts/model/MessageBoxOptions";
-//TODO: EXPO AV  expo-av  ++++++ only test
-// import { Audio } from 'expo-av';
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../theme/colors";
 import { translate } from "../../helper/localization/locaizationMain";
