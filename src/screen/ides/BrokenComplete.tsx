@@ -19,8 +19,7 @@ import {
   Platform,
 } from "react-native";
 import Svg, { Path, SvgXml } from "react-native-svg";
-//TODO: EXPO exPrint
-// import * as exPrint from "expo-print";
+
 import RNPrint from 'react-native-print';
 
 import KeyboardAwareScrollView from "../../components/KeyboardScroll/KeyboardScroll";

@@ -1,4 +1,4 @@
-package com.flodigital;
+package com.ziylan.flodijital;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

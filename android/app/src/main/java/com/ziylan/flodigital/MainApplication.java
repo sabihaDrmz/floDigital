@@ -1,4 +1,4 @@
-package com.flodigital;
+package com.ziylan.flodijital;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
