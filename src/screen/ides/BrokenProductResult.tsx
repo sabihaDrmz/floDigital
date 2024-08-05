@@ -18,8 +18,7 @@ import {
   Dimensions,
 } from "react-native";
 import { AppCardColorizeSvg } from "./BrokenComplete";
-//TODO: EXPO exPrint
-// import * as exPrint from "expo-print";
+
 import RNPrint from 'react-native-print';
 
 import FloHeaderNew from "../../components/Header/FloHeaderNew";

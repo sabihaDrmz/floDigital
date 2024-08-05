@@ -1,5 +1,3 @@
-//TODO: EXPO expo-camera   +++++   type için kullanılmış sadece, any olarak setledim .
-// import { CameraCapturedPicture } from "expo-camera";
 import { createContext, useContext, useEffect, useState } from "react";
 import { ErFiche, ErOrder } from "../core/models/ErFindFicheItem";
 import { OmcRejectCargoFindResult } from "../core/models/OmcRejectCargoFindResult";
@@ -30,8 +28,6 @@ import { GeniusFicheRequestDetailModel } from "./model/GeniusFicheRequestDetailM
 import { MessageBoxType } from "./model/MessageBoxOptions";
 import { PaymentTypeDetailModel } from "./model/PaymentTypeDetailModel";
 import { TransactionLineDetailModel } from "./model/TransactionLineDetailModel";
-//TODO: EXPO exPrint
-// import * as exPrint from "expo-print";
 import RNPrint from 'react-native-print';
 
 import { useMessageBoxService } from "./MessageBoxService";

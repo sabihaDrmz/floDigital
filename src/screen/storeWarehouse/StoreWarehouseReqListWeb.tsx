@@ -17,8 +17,6 @@ import { StoreWarehouseResModel } from "../../contexts/model/StoreWarehouseModal
 import FloLoading from "../../components/FloLoading";
 import { useAccountService } from "../../contexts/AccountService";
 import { AppButton, ColorType } from "@flomagazacilik/flo-digital-components";
-//TODO: EXPO AV expo-av  ++++++ only test
-// import { Audio } from 'expo-av';
 import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
 import { translate } from "../../helper/localization/locaizationMain";

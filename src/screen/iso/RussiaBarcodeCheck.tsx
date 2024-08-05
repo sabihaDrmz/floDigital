@@ -20,8 +20,6 @@ import { useNavigation } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-//TODO: EXPO AV expo-av ++++++ only test
-// import { Audio } from 'expo-av';
 import { NavigationType } from "./Navigation";
 import FloLoading from "../../components/FloLoading";
 
